@@ -17,4 +17,5 @@ public class Unite {
 	public void changementDeVieRelatif(int vieAChanger){
 		this.vie += vieAChanger;
 	}
+	
 }
