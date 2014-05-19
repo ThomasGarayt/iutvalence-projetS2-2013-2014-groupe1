@@ -7,11 +7,11 @@ public class Position {
 		
 		public int getX()
 		{
-			return this.PositionX
+			return this.PositionX;
 		}
 		
 		public int getY()
 		{
-			return this.PositionY
+			return this.PositionY;
 		}
 }

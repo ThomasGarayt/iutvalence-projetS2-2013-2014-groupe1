@@ -3,6 +3,7 @@ public class Unite {
 	int puissance;
 	int vie;
 	TypeUnite type;
+	Position positionUnité;
 	
 	public Unite(TypeUnite type) {
 		this.type = type;
@@ -16,5 +17,11 @@ public class Unite {
 	
 	public void changementDeVieRelatif(int vieAChanger){
 		this.vie += vieAChanger;
+	}
+	
+	public void deplacerUnité(Position nouvellePosition)
+	{
+		// TEST A FAIRE AVANT
+	this.positionUnité = nouvellePosition;
 	}
 }
