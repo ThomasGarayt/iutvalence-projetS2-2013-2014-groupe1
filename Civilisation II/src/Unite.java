@@ -3,7 +3,7 @@ public class Unite {
 	int puissance;
 	int vie;
 	TypeUnite type;
-	Position positionUnité;
+	Position positionUnite;
 	
 	public Unite(TypeUnite type) {
 		this.type = type;
@@ -19,9 +19,9 @@ public class Unite {
 		this.vie += vieAChanger;
 	}
 	
-	public void deplacerUnité(Position nouvellePosition)
+	public void deplacerUnite(Position nouvellePosition)
 	{
 		// TEST A FAIRE AVANT
-	this.positionUnité = nouvellePosition;
+	this.positionUnite = nouvellePosition;
 	}
 }
