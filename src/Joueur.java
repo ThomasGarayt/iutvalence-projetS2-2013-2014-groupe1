@@ -6,7 +6,7 @@ public class Joueur {
 	/**
 	 * Le nombre d'unité maximal que peut obtenir un joueur.
 	 */
-	public final static int NOMBRE_D_ARMEES_MAX = 0;
+	public final static int NOMBRE_D_UNITE_MAX = 0;
 
 	/**
 	 * La trésorerie de départ d'un joueur.
@@ -14,16 +14,16 @@ public class Joueur {
 	public final static int TRESORERIE_DE_DEPART = 1000;
 
 	int tresorerie;
-	Unite[] armees;
+	Unite[] unite;
 
 	/**
 	 * Crée un joueur avec une trésorerie par défaut et une liste d'unité vide.
 	 */
 	public Joueur() {
 		this.tresorerie = TRESORERIE_DE_DEPART;
-		this.armees = new Unite[NOMBRE_D_ARMEES_MAX];
-		for (int armeeCourante = 0; armeeCourante < NOMBRE_D_ARMEES_MAX; armeeCourante++)
-			this.armees[armeeCourante] = null;
+		this.unite = new Unite[NOMBRE_D_UNITE_MAX];
+		for (int armeeCourante = 0; armeeCourante < NOMBRE_D_UNITE_MAX; armeeCourante++)
+			this.unite[armeeCourante] = null;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class Joueur {
 		if (aUneUniteSurLaPosition(positionFutureDeLUnite))
 			; // Faire remonter une erreur ?
 		else {
-			armees[TrouverUneUniteParLaPosition(positionDeLuniteADeplacer)]
+			unite[TrouverUneUniteParLaPosition(positionDeLuniteADeplacer)]
 					.deplacerUnite(positionFutureDeLUnite);
 		}
 	}
@@ -53,8 +53,8 @@ public class Joueur {
 	 * @return Vrai si le joueur possède une unité sur la position. Faux sinon.
 	 */
 	public boolean aUneUniteSurLaPosition(Position positionATester) {
-		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_ARMEES_MAX; uniteCourante++)
-			if (this.armees[uniteCourante].occupeLaPosition(positionATester))
+		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_UNITE_MAX; uniteCourante++)
+			if (this.unite[uniteCourante].occupeLaPosition(positionATester))
 				return true;
 		return false;
 	}
@@ -68,8 +68,8 @@ public class Joueur {
 	 * @return la position de l'unité dans le tableau d'unités du joueur.
 	 */
 	public int TrouverUneUniteParLaPosition(Position positionDeLuniteATrouver) {
-		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_ARMEES_MAX; uniteCourante++)
-			if (this.armees[uniteCourante]
+		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_UNITE_MAX; uniteCourante++)
+			if (this.unite[uniteCourante]
 					.occupeLaPosition(positionDeLuniteATrouver))
 				return uniteCourante;
 
