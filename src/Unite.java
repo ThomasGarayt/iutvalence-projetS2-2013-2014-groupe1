@@ -33,7 +33,7 @@ public class Unite {
 	 * Changer la vie de l'unité par rapport à sa vie actuel.
 	 * 
 	 * @param vieAChanger
-	 *            le nombre de point de vie à changer, il sera négatif en cas de
+	 *            Le nombre de point de vie à changer, il sera négatif en cas de
 	 *            dommage.
 	 */
 	public void changementDeVieRelatif(int vieAChanger) {
@@ -44,7 +44,7 @@ public class Unite {
 	 * Changer la position de l'unité.
 	 * 
 	 * @param nouvellePosition
-	 *            la nouvelle position de l'unité.
+	 *            La nouvelle position de l'unité.
 	 */
 	public void deplacerUnite(Position nouvellePosition) {
 		// Test de la disponibilité de la case fait dans joueur.
