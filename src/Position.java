@@ -1,21 +1,46 @@
-
+/**
+ * @author Romain Une position sur une grille en deux dimensions.
+ */
 public class Position {
 
-		public int positionX;
-		public int positionY;
-		
-		public Position(int x, int y) {
-			this.positionX = x;
-			this.positionY = y;
-		}
-		
-		public int getX()
-		{
-			return this.positionX;
-		}
-		
-		public int getY()
-		{
-			return this.positionY;
-		}
+	/**
+	 * La position sur l'axe des abscisses.
+	 */
+	public int positionX;
+
+	/**
+	 * La position sur l'axe des ordonnées.
+	 */
+	public int positionY;
+
+	/**
+	 * Création d'une position sur la grille.
+	 * 
+	 * @param x
+	 *            La position sur l'axe des abscisses.
+	 * @param y
+	 *            La position sur l'axe des ordonnées.
+	 */
+	public Position(int x, int y) {
+		this.positionX = x;
+		this.positionY = y;
+	}
+
+	/**
+	 * Obtenir la position X.
+	 * 
+	 * @return La position X.
+	 */
+	public int getX() {
+		return this.positionX;
+	}
+
+	/**
+	 * Obtenir la position Y.
+	 * 
+	 * @return La position Y
+	 */
+	public int getY() {
+		return this.positionY;
+	}
 }
