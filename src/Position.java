@@ -1,17 +1,21 @@
 
 public class Position {
 
-		public int PositionX;
-		public int PositionY;
+		public int positionX;
+		public int positionY;
 		
+		public Position(int x, int y) {
+			this.positionX = x;
+			this.positionY = y;
+		}
 		
 		public int getX()
 		{
-			return this.PositionX;
+			return this.positionX;
 		}
 		
 		public int getY()
 		{
-			return this.PositionY;
+			return this.positionY;
 		}
 }
