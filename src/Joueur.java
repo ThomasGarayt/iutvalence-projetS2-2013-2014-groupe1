@@ -27,7 +27,8 @@ public class Joueur {
 	}
 
 	/**
-	 * Permet au joueur de déplacer une de ses unités.
+	 * Permet au joueur de déplacer une de ses unités. écrase les unités sur la
+	 * case d'arrivé.
 	 * 
 	 * @param positionDeLuniteADeplacer
 	 *            La position de l'unité que le joueur souhaite déplacer.
@@ -35,13 +36,9 @@ public class Joueur {
 	 *            La position à laquelle le joueur souhaite déplacer son unité.
 	 */
 	public void deplacerUnite(Position positionDeLuniteADeplacer,
-			Position positionFutureDeLUnite) { // TODO Ne vérifie qu'un joueur !
-		if (aUneUniteSurLaPosition(positionFutureDeLUnite))
-			; // Faire remonter une erreur ?
-		else {
-			unite[TrouverUneUniteParLaPosition(positionDeLuniteADeplacer)]
-					.deplacerUnite(positionFutureDeLUnite);
-		}
+			Position positionFutureDeLUnite) {
+		unite[trouverLaPositionDUneUniteParUnePosition(positionDeLuniteADeplacer)]
+				.deplacerUnite(positionFutureDeLUnite);
 	}
 
 	/**
@@ -67,7 +64,8 @@ public class Joueur {
 	 *            La position de l'unité que l'on souhaite trouvé.
 	 * @return la position de l'unité dans le tableau d'unités du joueur.
 	 */
-	public int TrouverUneUniteParLaPosition(Position positionDeLuniteATrouver) {
+	public int trouverLaPositionDUneUniteParUnePosition(
+			Position positionDeLuniteATrouver) {
 		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_UNITE_MAX; uniteCourante++)
 			if (this.unite[uniteCourante]
 					.occupeLaPosition(positionDeLuniteATrouver))
@@ -75,5 +73,22 @@ public class Joueur {
 
 		return 0; // TODO renvoyer une erreur plutôt ( et la gérer tant qu'à
 					// faire ).
+	}
+
+	/**
+	 * Sert a donner la reference d'une unite appartenant au joueur grâce à sa
+	 * position.
+	 * 
+	 * @param positionDeLUniteATrouver
+	 *            Une position sur la grille.
+	 * @return L'unité qui occupe la position. Null si non trouvé.
+	 */
+	public Unite obtenirUneUniteAvecSaPosition(Position positionDeLUniteATrouver) {
+		for (int uniteCourante = 0; uniteCourante < NOMBRE_D_UNITE_MAX; uniteCourante++)
+			if (this.unite[uniteCourante]
+					.occupeLaPosition(positionDeLUniteATrouver))
+				return this.unite[uniteCourante];
+
+		return null;
 	}
 }

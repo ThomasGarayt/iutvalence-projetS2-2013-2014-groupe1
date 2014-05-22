@@ -21,6 +21,16 @@ public class Unite {
 	}
 
 	/**
+	 * L'unité attaque une autre unité.
+	 * 
+	 * @param uniteAAttaquer
+	 *            L'unité qui va subir les dommages.
+	 */
+	public void attaquer(Unite uniteAAttaquer) {
+		uniteAAttaquer.changementDeVieRelatif(-puissance);
+	}
+
+	/**
 	 * Si l'unité a encore de la vie.
 	 * 
 	 * @return Vrai si l'unité a encore de la vie, faux sinon.
@@ -47,7 +57,7 @@ public class Unite {
 	 *            La nouvelle position de l'unité.
 	 */
 	public void deplacerUnite(Position nouvellePosition) {
-		// Test de la disponibilité de la case fait dans joueur.
+		// Le test de la disponibilité de la case est fait dans joueur.
 		this.positionUnite = nouvellePosition;
 	}
 
