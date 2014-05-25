@@ -18,7 +18,7 @@ public class PartieDeCivilisation {
 	public PartieDeCivilisation() {
 		for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
 			joueurs[joueurCourant] = new Joueur(
-					("Joueur " + Integer.toString(joueurCourant+1)));
+					("Joueur " + Integer.toString(joueurCourant + 1)));
 
 		Carte carteDuMonde = creationDeLaCarte();
 		this.carte = carteDuMonde;
@@ -28,7 +28,10 @@ public class PartieDeCivilisation {
 
 	public void attaquer(Joueur joueurAttaquant, Position positionAttaquant,
 			Position positionDefenseur) {
-		if (this.carte.obtenirLUniteDeLaCase(positionAttaquant).obtenirJoueur() == joueurAttaquant) {
+		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant)
+				.obtenirJoueur() == joueurAttaquant)
+				&& (this.carte.obtenirLUniteDeLaCase(positionDefenseur)
+						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])) {
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)

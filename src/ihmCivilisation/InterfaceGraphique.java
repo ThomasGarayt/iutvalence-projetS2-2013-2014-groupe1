@@ -38,45 +38,57 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		JComponent source = (JComponent) event.getSource();
 
 		// TODO Vérifier si c'est le bouton "Finir le Tour" qui à été pressé.
+		// Par ce que ça ça marche pas :/
 		if (source.getParent() == this.fenetreDeJeu.obtenirMenu()) {
 			this.finirLeTour();
 			this.joueurCourant = this.logiqueDuJeu
 					.obtenirJoueurDontCEstLeTour();
 			this.reinitialiserLeMenu();
+			return;
 		}
 
 		Position positionDeLaSelection = new Position(
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
 
+		// Aucune unité n'a été sélectionné.
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte()
 						.laCaseNecontientPasDUnite(positionDeLaSelection)))
 			return;
 
-		// ça pose probleme
-		if (this.positionDeLUniteSelectionner == positionDeLaSelection ) {
-			this.positionDeLUniteSelectionner = null;
-			return;
-		} else if (this.positionDeLUniteSelectionner == null) {
+		// Sélection de la premiere unité.
+		if (this.positionDeLUniteSelectionner == null) {
 			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLaSelection),
 					joueurCourant);
 			this.positionDeLUniteSelectionner = positionDeLaSelection;
-		} else {
-			if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
-					positionDeLaSelection))
-				this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
-						positionDeLUniteSelectionner, positionDeLaSelection);
-			else
-				// TODO bug un petit peu ...
-				this.logiqueDuJeu.attaquer(this.joueurCourant,
-						positionDeLUniteSelectionner, positionDeLaSelection);
-			this.mettreAJourLaCarte();
-			this.reinitialiserLeMenu();
-			this.positionDeLUniteSelectionner = null;
+			return;
 		}
+
+		// L'unité est selectionner et le joueur va effectuer une action.
+
+		// Le joueur re-sélectionne l'unité.
+		if (this.positionDeLUniteSelectionner.equals(positionDeLaSelection)) {
+			this.positionDeLUniteSelectionner = null;
+			this.reinitialiserLeMenu();
+			return;
+		}
+
+		// Le joueur déplace l'unité.
+		if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
+				positionDeLaSelection))
+			this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
+					positionDeLUniteSelectionner, positionDeLaSelection);
+
+		// Le joueur attaque une unité adverse.
+		else
+			this.logiqueDuJeu.attaquer(this.joueurCourant,
+					positionDeLUniteSelectionner, positionDeLaSelection);
+		this.mettreAJourLaCarte();
+		this.reinitialiserLeMenu();
+		this.positionDeLUniteSelectionner = null;
 
 	}
 
