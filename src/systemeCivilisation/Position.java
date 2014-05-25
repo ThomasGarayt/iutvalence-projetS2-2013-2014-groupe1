@@ -1,3 +1,4 @@
+package systemeCivilisation;
 /**
  * @author Romain Une position sur une grille en deux dimensions.
  */

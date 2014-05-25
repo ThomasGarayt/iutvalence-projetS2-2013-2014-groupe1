@@ -1,3 +1,4 @@
+package systemeCivilisation;
 /**
  * @author Romain Les types d'unité disponible dans le jeu.
  */
@@ -6,7 +7,7 @@ public enum TypeUnite {
 	/**
 	 * Un type d'unité puissant.
 	 */
-	Chars(50, 40),
+	Chars(500, 400),
 	/**
 	 * Un type d'unité faible.
 	 */
