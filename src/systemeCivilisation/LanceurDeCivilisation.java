@@ -1,3 +1,4 @@
+package systemeCivilisation;
 /**
  * @author Romain La classe qui lance le jeu de Civilisation.
  */

@@ -1,3 +1,4 @@
+package systemeCivilisation;
 /**
  * @author Romain Une unité qui possède une vie, une puissance et une position
  *         sur une carte. Elle peut attaquer d'autre unités et se déplacer.
@@ -6,18 +7,22 @@ public class Unite {
 
 	int puissance;
 	int vie;
+	int pointsDeMouvements;
 	TypeUnite type;
-	Position positionUnite;
+	
+	Joueur joueur;
 
 	/**
 	 * @param type
 	 *            Le type d'unité que l'on souhaite créé, cela définira sa vie
 	 *            et sa puissance.
 	 */
-	public Unite(TypeUnite type) {
+	public Unite(TypeUnite type, Joueur joueur) {
 		this.type = type;
 		this.vie = type.getVie();
 		this.puissance = type.getPuissance();
+		this.joueur = joueur;
+		this.pointsDeMouvements = 2;
 	}
 
 	/**
@@ -49,26 +54,16 @@ public class Unite {
 	public void changementDeVieRelatif(int vieAChanger) {
 		this.vie += vieAChanger;
 	}
-
-	/**
-	 * Changer la position de l'unité.
-	 * 
-	 * @param nouvellePosition
-	 *            La nouvelle position de l'unité.
-	 */
-	public void deplacerUnite(Position nouvellePosition) {
-		// Le test de la disponibilité de la case est fait dans joueur.
-		this.positionUnite = nouvellePosition;
+	
+	public Joueur obtenirJoueur() {
+		return this.joueur;
 	}
-
-	/**
-	 * Teste un position et la compare à la position actuelle de l'unité.
-	 * 
-	 * @param positionATester
-	 *            La position à comparer avec celle de l'unité.
-	 * @return Vrai si les position sont égale, faux sinon.
-	 */
-	public boolean occupeLaPosition(Position positionATester) {
-		return (positionATester == this.positionUnite);
+	
+	public int obtenirVie() {
+		return this.vie;
+	}
+	
+	public int obtenirPointDeMouvements() {
+		return this.pointsDeMouvements;
 	}
 }
