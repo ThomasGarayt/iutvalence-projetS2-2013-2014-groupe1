@@ -17,36 +17,28 @@ public class PartieDeCivilisation {
 	public PartieDeCivilisation() {
 		for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
 			joueurs[joueurCourant] = new Joueur();
-		// Carte
-		Carte carteDuMonde = new Carte();
-		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
-				TypeUnite.Soldats, null));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 7), new Unite(
-				TypeUnite.Soldats, null));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 1), new Unite(
-				TypeUnite.Soldats, null));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
-				TypeUnite.Soldats, null));
+
+		Carte carteDuMonde = creationDeLaCarte();
 		this.carte = carteDuMonde;
 	}
 
 	public void attaquer(Joueur joueurAttaquant, Position positionAttaquant,
 			Position positionDefenseur) {
-		if (this.carte.obtenirLUniteDeLaCase(positionAttaquant).obtenirJoueur() == joueurAttaquant) {
+		//if (this.carte.obtenirLUniteDeLaCase(positionAttaquant).obtenirJoueur() == joueurAttaquant) {
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)
 					.estVivante()))
 				this.carte.supprimerUneUnite(positionDefenseur);
-		}
+		//}
 
 	}
 
 	public void deplacerUneUnite(Joueur joueurCourant,
 			Position positionDeLUnite, Position positionFutureDeLUnite) {
-		if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurCourant)
-				&& (this.carte
-						.laCaseNecontientPasDUnite(positionFutureDeLUnite)))
+		//if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurCourant)
+		//		&& (this.carte
+		//				.laCaseNecontientPasDUnite(positionFutureDeLUnite)))
 			this.carte.deplacerUneUnite(positionDeLUnite,
 					positionFutureDeLUnite);
 	}
@@ -66,6 +58,19 @@ public class PartieDeCivilisation {
 		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite))
 			this.carte.ajouterUneUniteALaCase(positionDeLunite, new Unite(
 					typeDeLUnite, joueurConstructeur));
+	}
+	
+	private Carte creationDeLaCarte() {
+		Carte carteDuMonde = new Carte();
+		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
+				TypeUnite.Soldats, null));
+		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 7), new Unite(
+				TypeUnite.Chars, null));
+		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 1), new Unite(
+				TypeUnite.Chars, null));
+		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
+				TypeUnite.Soldats, null));
+		return carteDuMonde;
 	}
 
 	public Carte obtenirCarte() {

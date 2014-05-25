@@ -2,8 +2,8 @@ package systemeCivilisation;
 
 public class Carte {
 
-	public static final int NB_CASES_X = 30;
-	public static final int NB_CASES_Y = 30;
+	public static final int NB_CASES_X = 15;
+	public static final int NB_CASES_Y = 15;
 	
 	private Case[][] cases;
 	
