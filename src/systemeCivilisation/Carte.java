@@ -41,6 +41,10 @@ public class Carte {
 		this.cases[positionDeDepart.positionX][positionDeDepart.positionY].supprimerUnite();
 	}
 	
+	public void ajouterUneVille(Position positionDeLaVille, Ville villeAAjouter) {
+		this.cases[positionDeLaVille.positionX][positionDeLaVille.positionY].ajouterVille(villeAAjouter);
+	}
+	
 	public Ville obtenirLaVilleDeLaCase(Position positionDeLaVille) {
 		return  this.cases[positionDeLaVille.positionX][positionDeLaVille.positionY].obtenirVille();
 	}

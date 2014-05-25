@@ -35,6 +35,10 @@ public class Case {
 		this.unite = null;
 	}
 	
+	public void ajouterVille(Ville villeAAjouter) {
+		this.ville = villeAAjouter;
+	}
+	
 	public Ville obtenirVille() {
 		return this.ville;
 	}
