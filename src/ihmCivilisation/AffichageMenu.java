@@ -1,32 +1,33 @@
 package ihmCivilisation;
 
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import systemeCivilisation.TypeUnite;
+import systemeCivilisation.Joueur;
 import systemeCivilisation.Unite;
 
 public class AffichageMenu extends JPanel {
 	
-	public AffichageMenu() {
+	public AffichageMenu(Joueur joueur) {
 		super();
 		
-		this.setLayout(new GridLayout(3, 1));
-		this.add(new JLabel(" Joueur X"));
+		this.setLayout(new GridLayout(4, 1));
+		this.add(new JLabel(joueur.obtenirNom()) );
 		this.add(new JLabel(" Unité / Ville"));
 		this.add(new RecapUnite());
+		this.add(new JButton("Finir le tour"));
 	}
 	
-	public AffichageMenu(Unite unite) {
+	public AffichageMenu(Unite unite, Joueur joueur) {
 		super();
 		
-		this.setLayout(new GridLayout(3, 1));
-		this.add(new JLabel(" Joueur X") );
+		this.setLayout(new GridLayout(4, 1));
+		this.add(new JLabel(joueur.obtenirNom()) );
 		this.add(new JLabel(" Unité / Ville") );
 		this.add(new RecapUnite(unite) );
+		this.add(new JButton("Finir le tour"));
 	}
 	
 	public void miseAJourDuMenu() {

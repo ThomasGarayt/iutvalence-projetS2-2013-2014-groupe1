@@ -10,13 +10,23 @@ public class Joueur {
 	 */
 	public final static int TRESORERIE_DE_DEPART = 1000;
 
-	int tresorerie;
+	private int tresorerie;
+	
+	private String nom;
 
 	/**
 	 * Crée un joueur avec une trésorerie par défaut et une liste d'unité vide.
 	 */
-	public Joueur() {
+	public Joueur(String nom) {
+		this.nom = nom;
 		this.tresorerie = TRESORERIE_DE_DEPART;
 	}
 	
+	public String obtenirNom() {
+		return this.nom;
+	}
+	
+	public int obtenirTresorerie() {
+		return this.tresorerie;
+	}
 }
