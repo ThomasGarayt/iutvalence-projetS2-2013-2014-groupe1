@@ -1,3 +1,5 @@
+package systemeCivilisation;
+
 public class Case {
 	
 	private Unite unite;
@@ -20,6 +22,18 @@ public class Case {
 	
 	public boolean aUneVille() {
 		return (this.ville != null);
+	}
+	
+	public Unite obtenirUnite() {
+		return this.unite;
+	}
+	
+	public void ajouterUnite(Unite unite) {
+		this.unite = unite;
+	}
+	
+	public void supprimerUnite() {
+		this.unite = null;
 	}
 	
 	public Ville obtenirVille() {
