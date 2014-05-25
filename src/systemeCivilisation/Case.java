@@ -4,8 +4,7 @@ public class Case {
 	
 	private Unite unite;
 	
-	//TODO Remettre en private.
-	public Ville ville;
+	private Ville ville;
 	
 	public Case() {
 		this.unite = null;

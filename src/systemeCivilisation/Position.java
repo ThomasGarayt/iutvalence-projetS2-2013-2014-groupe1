@@ -44,4 +44,22 @@ public class Position {
 	public int getY() {
 		return this.positionY;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Position))
+			return false;
+		Position other = (Position) obj;
+		if (this.positionX != other.positionX)
+			return false;
+		if (this.positionY != other.positionY)
+			return false;
+		return true;
+	}
+	
+	
 }
