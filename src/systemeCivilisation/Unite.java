@@ -66,4 +66,8 @@ public class Unite {
 	public int obtenirPointDeMouvements() {
 		return this.pointsDeMouvements;
 	}
+	
+	public TypeUnite obtenirTypeUnite() {
+		return this.type;
+	}
 }

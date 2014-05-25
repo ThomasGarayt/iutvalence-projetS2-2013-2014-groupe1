@@ -49,8 +49,7 @@ public class FenetreCivilisation {
 	}
 
 	public void mettreAJourLaCarte(Carte carte) {
-		AffichageCarte carteDuMonde = new AffichageCarte(carte,
-				ecouteurDeBouton);
+		AffichageCarte carteDuMonde = new AffichageCarte(carte, ecouteurDeBouton);
 		this.splitPane.setRightComponent(carteDuMonde);
 	}
 
@@ -64,8 +63,8 @@ public class FenetreCivilisation {
 		this.splitPane.setLeftComponent(menu);
 	}
 
-	public AffichageMenu obtenirMenu() {
-		return this.menu;
+	public JSplitPane obtenirMenu() {
+		return this.splitPane;
 	}
 
 }

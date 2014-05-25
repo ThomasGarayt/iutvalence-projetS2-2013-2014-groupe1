@@ -16,10 +16,13 @@ public class PartieDeCivilisation {
 	private int joueurDontCEstLeTour;
 
 	public PartieDeCivilisation() {
-		for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
-			joueurs[joueurCourant] = new Joueur(
-					("Joueur " + Integer.toString(joueurCourant + 1)));
-
+//		for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
+//			joueurs[joueurCourant] = new Joueur(
+//					("Joueur " + Integer.toString(joueurCourant + 1)));
+		
+		joueurs[0] = new Joueur("Joueur1", SetDImages.imagesBleu);
+		joueurs[1] = new Joueur("Joueur2",SetDImages.imagesRouges);
+		
 		Carte carteDuMonde = creationDeLaCarte();
 		this.carte = carteDuMonde;
 
@@ -77,6 +80,8 @@ public class PartieDeCivilisation {
 				TypeUnite.Chars, this.joueurs[1]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
 				TypeUnite.Soldats, this.joueurs[1]));
+		carteDuMonde.ajouterUneVille(new Position(6,2), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(3,3), new Ville());
 		return carteDuMonde;
 	}
 
