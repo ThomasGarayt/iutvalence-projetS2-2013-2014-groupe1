@@ -37,12 +37,11 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		JComponent source = (JComponent) event.getSource();
 
-		// TODO Vérifier si c'est le bouton "Finir le Tour" qui à été pressé.
-		// Par ce que ça ça marche pas :/
+		// TODO V√©rifier si c'est le bouton "Finir le Tour" qui ÔøΩ ÔøΩtÔøΩ pressÔøΩ.
+		// Par ce que ÔøΩa ÔøΩa marche pas :/
 		if (source.getParent() == this.fenetreDeJeu.obtenirMenu()) {
 			this.finirLeTour();
-			this.joueurCourant = this.logiqueDuJeu
-					.obtenirJoueurDontCEstLeTour();
+			this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
 			this.reinitialiserLeMenu();
 			return;
 		}
@@ -51,13 +50,13 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
 
-		// Aucune unité n'a été sélectionné.
+		// Aucune unitÔøΩ n'a ÔøΩtÔøΩ sÔøΩlectionnÔøΩ.
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte()
 						.laCaseNecontientPasDUnite(positionDeLaSelection)))
 			return;
 
-		// Sélection de la premiere unité.
+		// SÔøΩlection de la premiere unitÔøΩ.
 		if (this.positionDeLUniteSelectionner == null) {
 			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
@@ -67,22 +66,22 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			return;
 		}
 
-		// L'unité est selectionner et le joueur va effectuer une action.
+		// L'unitÔøΩ est selectionner et le joueur va effectuer une action.
 
-		// Le joueur re-sélectionne l'unité.
+		// Le joueur re-sÔøΩlectionne l'unitÔøΩ.
 		if (this.positionDeLUniteSelectionner.equals(positionDeLaSelection)) {
 			this.positionDeLUniteSelectionner = null;
 			this.reinitialiserLeMenu();
 			return;
 		}
 
-		// Le joueur déplace l'unité.
+		// Le joueur dÔøΩplace l'unitÔøΩ.
 		if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 				positionDeLaSelection))
 			this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);
 
-		// Le joueur attaque une unité adverse.
+		// Le joueur attaque une unitÔøΩ adverse.
 		else
 			this.logiqueDuJeu.attaquer(this.joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);

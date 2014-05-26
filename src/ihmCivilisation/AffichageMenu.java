@@ -15,7 +15,7 @@ public class AffichageMenu extends JPanel {
 		
 		this.setLayout(new GridLayout(4, 1));
 		this.add(new JLabel(joueur.obtenirNom()) );
-		this.add(new JLabel(" Unité / Ville"));
+		this.add(new JLabel(" Unite / Ville"));
 		this.add(new RecapUnite());
 		this.add(new JButton("Finir le tour"));
 	}
@@ -25,7 +25,7 @@ public class AffichageMenu extends JPanel {
 		
 		this.setLayout(new GridLayout(4, 1));
 		this.add(new JLabel(joueur.obtenirNom()) );
-		this.add(new JLabel(" Unité / Ville") );
+		this.add(new JLabel(" Unite / Ville") );
 		this.add(new RecapUnite(unite) );
 		this.add(new JButton("Finir le tour"));
 	}

@@ -1,31 +1,31 @@
 package systemeCivilisation;
 /**
- * @author Romain Les types d'unité disponible dans le jeu.
+ * @author Romain Les types d'unitï¿½ disponible dans le jeu.
  */
 public enum TypeUnite {
 
 	/**
-	 * Un type d'unité puissant.
+	 * Un type d'unitï¿½ puissant.
 	 */
 	Chars(500, 400),
 	/**
-	 * Un type d'unité faible.
+	 * Un type d'unitï¿½ faible.
 	 */
 	Soldats(40, 20);
 
 	/**
-	 * Permet d'obtenir la vie de départ de l'unité.
+	 * Permet d'obtenir la vie de dï¿½part de l'unitï¿½.
 	 * 
-	 * @return La vie de départ de l'unité.
+	 * @return La vie de dï¿½part de l'unitï¿½.
 	 */
 	public int getVie() {
 		return vie;
 	}
 
 	/**
-	 * Permet d'obtenir la puissance de départ de l'unité.
+	 * Permet d'obtenir la puissance de dï¿½part de l'unitï¿½.
 	 * 
-	 * @return La puissance de départ de l'unité.
+	 * @return La puissance de dï¿½part de l'unitï¿½.
 	 */
 	public int getPuissance() {
 		return puissance;
@@ -34,8 +34,10 @@ public enum TypeUnite {
 	private int vie;
 	private int puissance;
 
+	
 	private TypeUnite(int vie, int puissance) {
 		this.vie = vie;
 		this.puissance = puissance;
 	}
+	
 }
