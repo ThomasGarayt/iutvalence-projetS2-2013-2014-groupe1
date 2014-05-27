@@ -44,7 +44,7 @@ public class RecapUnite extends JPanel {
 			this.setLayout(new GridLayout(3,2));
 			
 			this.add(new JLabel(" Niveau  "));
-			this.add(new JLabel(Integer.toString(ville.obtenirNiveau()) ) );
+			this.add(new JLabel(Integer.toString(ville.obtenirNiveau())) );
 		
 			this.add(new JLabel(" Vie  "));
 			this.add(new JLabel(" ") );

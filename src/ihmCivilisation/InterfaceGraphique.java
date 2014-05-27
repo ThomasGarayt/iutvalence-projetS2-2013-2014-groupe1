@@ -14,12 +14,14 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	private PartieDeCivilisation logiqueDuJeu;
 
 	private Position positionDeLUniteSelectionner;
+	private Position positionDeLaVilleSelectionner;
 	private Joueur joueurCourant;
 
 	public InterfaceGraphique() {
 		this.fenetreDeJeu = new FenetreCivilisation(this);
 		this.logiqueDuJeu = new PartieDeCivilisation();
 		this.positionDeLUniteSelectionner = null;
+		this.positionDeLaVilleSelectionner = null;
 		this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
 	}
 
@@ -36,8 +38,10 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
 		JComponent source = (JComponent) event.getSource();
 
+		// Bouton FinirTour
 		if (source.getName() == "FinirTour") {
 			this.finirLeTour();
 			this.joueurCourant = this.logiqueDuJeu
@@ -45,9 +49,19 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			this.reinitialiserLeMenu();
 			return;
 		}
-		
+
+		// Bouton AmeliorerVille
 		if (source.getName() == "AmeliorerVille") {
-			this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(positionDeLUniteSelectionner).ameliorer();
+			this.logiqueDuJeu.obtenirCarte()
+					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
+					.ameliorer();
+			this.fenetreDeJeu.mettreAJourLeMenu(
+					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
+							positionDeLaVilleSelectionner), 
+							this.joueurCourant,
+							this);
+			this.positionDeLaVilleSelectionner = null ;
+			this.reinitialiserLeMenu();
 			return;
 		}
 
@@ -55,6 +69,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
 
+			
 		// Aucune position n'a ete selectionne
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
@@ -72,14 +87,16 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			this.fenetreDeJeu.mettreAJourLeMenu(
 					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
 							positionDeLaSelection), joueurCourant, this);
-			this.positionDeLUniteSelectionner = positionDeLaSelection;
+			this.positionDeLaVilleSelectionner = positionDeLaSelection;
 			return;
 		}
 
 		// Selection de la premiere unite.
 		if ((this.positionDeLUniteSelectionner == null)
-				/*&& (this.logiqueDuJeu.obtenirCarte()
-						.laCaseNeContientPasDeVille(positionDeLaSelection))*/) {
+		/*
+		 * && (this.logiqueDuJeu.obtenirCarte()
+		 * .laCaseNeContientPasDeVille(positionDeLaSelection))
+		 */) {
 			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLaSelection),
@@ -95,7 +112,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			this.fenetreDeJeu.mettreAJourLeMenu(
 					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
 							positionDeLaSelection), joueurCourant, this);
-			// this.positionDeLUniteSelectionner = positionDeLaSelection;
+			this.positionDeLUniteSelectionner = positionDeLaSelection;
 			return;
 		}
 
@@ -124,10 +141,19 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 	}
 
+	/**
+	 * Permet de reinitialiser le menu de gauche
+	 * 
+	 */
 	private void reinitialiserLeMenu() {
 		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant, this);
 	}
 
+	
+	/**
+	 * Fini le tour en cours
+	 * 
+	 */
 	private void finirLeTour() {
 		this.logiqueDuJeu.finirLeTour();
 	}
