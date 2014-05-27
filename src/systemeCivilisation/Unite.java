@@ -110,9 +110,9 @@ public class Unite {
 	 * @param joueurCourant
 	 * 			Le joueur qui vient de terminer son tour
 	 */
-	public void reinitialiserPm(Joueur joueurCourant)
+	public void reinitialiserPm()
 	{
-		// TODO TROUVER UN MOYEN DE REINITIALISER TOUTES LES UNITES D'UN JOUEUR
+		this.pointsDeMouvements = this.type.getPm();
 	}
 		
 	

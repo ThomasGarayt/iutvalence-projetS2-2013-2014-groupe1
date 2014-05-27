@@ -44,10 +44,14 @@ public class RecapUnite extends JPanel {
 			this.setLayout(new GridLayout(3,2));
 			
 			this.add(new JLabel(" Niveau  "));
-			this.add(new JLabel(Integer.toString(ville.obtenirNiveau())) );
-		
-			this.add(new JLabel(" Vie  "));
-			this.add(new JLabel(" ") );
+			this.add(new JLabel(" " + Integer.toString(ville.obtenirNiveau())) );
+			
+			if (ville.obtenirJoueurProprietaire() != null) {
+			this.add(new JLabel(" Appartient à : "));
+			this.add(new JLabel(" " + ville.obtenirJoueurProprietaire().obtenirNom()) ); }
+			else {
+				this.add(new JLabel(" La ville est libre"));
+				this.add(new JLabel("")); }
 			
 			this.add(new JLabel(" Deplacement  "));
 			this.add(new JLabel(" " ) );

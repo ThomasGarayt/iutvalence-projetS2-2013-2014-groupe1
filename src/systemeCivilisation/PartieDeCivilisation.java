@@ -16,10 +16,6 @@ public class PartieDeCivilisation {
 	private int joueurDontCEstLeTour;
 
 	public PartieDeCivilisation() {
-		// for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR;
-		// joueurCourant++)
-		// joueurs[joueurCourant] = new Joueur(
-		// ("Joueur " + Integer.toString(joueurCourant + 1)));
 
 		joueurs[0] = new Joueur("Joueur1", SetDImages.imagesBleu);
 		joueurs[1] = new Joueur("Joueur2", SetDImages.imagesRouges);
@@ -45,13 +41,13 @@ public class PartieDeCivilisation {
 	 */
 	public void attaquer(Joueur joueurAttaquant, Position positionAttaquant,
 			Position positionDefenseur) {
-		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant).obtenirJoueur() == joueurAttaquant)
+		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant)
+				.obtenirJoueur() == joueurAttaquant)
 				&& (this.carte.obtenirLUniteDeLaCase(positionDefenseur)
 						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])
-				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee 
-						>= ((positionDefenseur.deltaX(positionAttaquant) 
-							+ positionDefenseur.deltaY(positionAttaquant))))) 
-		{
+				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee >= ((positionDefenseur
+						.deltaX(positionAttaquant) + positionDefenseur
+						.deltaY(positionAttaquant))))) {
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)
@@ -112,7 +108,7 @@ public class PartieDeCivilisation {
 		if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurAttaquant)
 				&& !(this.carte.laCaseNeContientPasDeVille(positionVille))
 				&& (this.carte.obtenirLaVilleDeLaCase(positionVille)
-						.obtenirJoueurProprietaire() == joueurAttaquant))
+						.obtenirJoueurProprietaire() != joueurAttaquant))
 			this.carte.obtenirLaVilleDeLaCase(positionVille)
 					.changerProprietaire(joueurAttaquant);
 	}
@@ -163,10 +159,23 @@ public class PartieDeCivilisation {
 	 */
 	public void finirLeTour() {
 		// RE-INITIALISER LES PM DES UNITES DU JOUEUR
+		reinitialiserPm();
+
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
 			this.joueurDontCEstLeTour = 0;
+	}
+
+	private void reinitialiserPm() {
+		for (int i = 0; i < Carte.NB_CASES_X; i++)
+			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+				Unite uniteCourante = this.carte
+						.obtenirLUniteDeLaCase(new Position(i, j));
+				if ((uniteCourante != null) && (uniteCourante.obtenirJoueur() == this
+						.obtenirJoueurDontCEstLeTour()))
+				uniteCourante.reinitialiserPm();
+			}
 	}
 
 	/**
