@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 public class LanceurDeCivilisation {
 
 	/**
-	 * Le main ...
+	 * Le "main" graphique de l'application
 	 * 
 	 * @param args
 	 *            Les arguments en entree du programme. ( Ici aucun )

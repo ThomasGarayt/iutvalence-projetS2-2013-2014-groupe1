@@ -11,10 +11,18 @@ public class Joueur {
 	 */
 	public final static int TRESORERIE_DE_DEPART = 1000;
 
+	
 	private int tresorerie;
 	
+	/**
+	 * Le nom du joueur
+	 */
 	private String nom;
 	
+	
+	/**
+	 * Le set d'image associé au joueur (en fonction de sa couleur)
+	 */
 	private SetDImages setDimagesDuJoueur;
 
 	/**
@@ -26,14 +34,34 @@ public class Joueur {
 		this.setDimagesDuJoueur = setDimagesDuJoueur;
 	}
 
+	/**
+	 * Fonction qui permet d'obtenir le nom d'un joueur
+	 * 
+	 * @return nom
+	 * 			Le nom du joueur
+	 */
 	public String obtenirNom() {
 		return this.nom;
 	}
 	
+	
+	/**
+	 * Fonction qui permet d'obtenir la tresorerie d'un joueur
+	 * 
+	 * @return tresorerie
+	 * 			La tresorerie du joueur
+	 */
 	public int obtenirTresorerie() {
 		return this.tresorerie;
 	}
 	
+	
+	/**
+	 * Fonction qui permet d'obtenir le set d'image d'un joueur
+	 * 
+	 * @return setDimagesDuJoueur
+	 * 			Le set d'imae associé au joueur
+	 */
 	public SetDImages obtenirLesetDimagesDuJoueur() {
 		return this.setDimagesDuJoueur;
 	}
