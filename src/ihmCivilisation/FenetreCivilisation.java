@@ -19,7 +19,7 @@ public class FenetreCivilisation {
 		this.ecouteurDeBouton = ecouteurDeBouton;
 	}
 
-	public void initialiserFenetreCivilisation(Carte carte, Joueur joueur) {
+	public void initialiserFenetreCivilisation(Carte carte, Joueur joueur, ActionListener ecouteurBouton) {
 		JFrame fenetre = new JFrame("Civilisation II");
 		fenetre.setSize(700, 600);
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -27,7 +27,7 @@ public class FenetreCivilisation {
 
 		JPanel carteDuJeu = new AffichageCarte(carte, ecouteurDeBouton);
 
-		menu = new AffichageMenu(joueur);
+		menu = new AffichageMenu(joueur, ecouteurBouton);
 
 		this.splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
@@ -48,18 +48,23 @@ public class FenetreCivilisation {
 
 	}
 
-	public void mettreAJourLaCarte(Carte carte) {
+	public void mettreAJourLaCarte(Carte carte, ActionListener ecouteurBouton) {
 		AffichageCarte carteDuMonde = new AffichageCarte(carte, ecouteurDeBouton);
 		this.splitPane.setRightComponent(carteDuMonde);
 	}
 
-	public void mettreAJourLeMenu(Unite unite, Joueur joueur) {
-		this.menu = new AffichageMenu(unite, joueur);
+	public void mettreAJourLeMenu(Unite unite, Joueur joueur, ActionListener ecouteurBouton) {
+		this.menu = new AffichageMenu(unite, joueur,ecouteurBouton);
+		this.splitPane.setLeftComponent(this.menu);
+	}
+	
+	public void mettreAJourLeMenu(Ville ville, Joueur joueur, ActionListener ecouteurBouton) {
+		this.menu = new AffichageMenu(ville, joueur,ecouteurBouton);
 		this.splitPane.setLeftComponent(this.menu);
 	}
 
-	public void mettreAJourLeMenu(Joueur joueur) {
-		this.menu = new AffichageMenu(joueur);
+	public void mettreAJourLeMenu(Joueur joueur, ActionListener ecouteurBouton) {
+		this.menu = new AffichageMenu(joueur,ecouteurBouton);
 		this.splitPane.setLeftComponent(menu);
 	}
 

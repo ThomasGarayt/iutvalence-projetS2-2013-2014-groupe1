@@ -24,25 +24,30 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	}
 
 	public void mettreAJourLaCarte() {
-		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte());
+		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte(),
+				this);
 	}
 
 	@Override
 	public void run() {
 		this.fenetreDeJeu.initialiserFenetreCivilisation(
-				this.logiqueDuJeu.obtenirCarte(), this.joueurCourant);
+				this.logiqueDuJeu.obtenirCarte(), this.joueurCourant, this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		JComponent source = (JComponent) event.getSource();
 
-		// TODO Vérifier si c'est le bouton "Finir le Tour" qui est presse.
-		// Par ce que ca ne marche pas :/
-		if (source.getParent() == this.fenetreDeJeu.obtenirMenu()) {
+		if (source.getName() == "FinirTour") {
 			this.finirLeTour();
-			this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
+			this.joueurCourant = this.logiqueDuJeu
+					.obtenirJoueurDontCEstLeTour();
 			this.reinitialiserLeMenu();
+			return;
+		}
+		
+		if (source.getName() == "AmeliorerVille") {
+			this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(positionDeLUniteSelectionner).ameliorer();
 			return;
 		}
 
@@ -50,19 +55,47 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
 
-		// Aucune unite n'a été selectionne.
+		// Aucune position n'a ete selectionne
 		if ((this.positionDeLUniteSelectionner == null)
-				&& (this.logiqueDuJeu.obtenirCarte()
-						.laCaseNecontientPasDUnite(positionDeLaSelection)))
+				&& (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
+						positionDeLaSelection) && (this.logiqueDuJeu
+						.obtenirCarte()
+						.laCaseNeContientPasDeVille(positionDeLaSelection))))
 			return;
 
+		// Selection d'une ville
+		if ((this.logiqueDuJeu.obtenirCarte()
+				.laCaseContientUneVille(positionDeLaSelection))
+				&& (this.positionDeLUniteSelectionner == null)
+				&& (this.logiqueDuJeu.obtenirCarte()
+						.laCaseNecontientPasDUnite(positionDeLaSelection))) {
+			this.fenetreDeJeu.mettreAJourLeMenu(
+					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
+							positionDeLaSelection), joueurCourant, this);
+			this.positionDeLUniteSelectionner = positionDeLaSelection;
+			return;
+		}
+
 		// Selection de la premiere unite.
-		if (this.positionDeLUniteSelectionner == null) {
+		if ((this.positionDeLUniteSelectionner == null)
+				/*&& (this.logiqueDuJeu.obtenirCarte()
+						.laCaseNeContientPasDeVille(positionDeLaSelection))*/) {
 			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLaSelection),
-					joueurCourant);
+					joueurCourant, this);
 			this.positionDeLUniteSelectionner = positionDeLaSelection;
+			return;
+		}
+
+		// Selection d'une ville
+		if ((this.logiqueDuJeu.obtenirCarte()
+				.laCaseContientUneVille(positionDeLaSelection))
+				&& (this.positionDeLUniteSelectionner == null)) {
+			this.fenetreDeJeu.mettreAJourLeMenu(
+					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
+							positionDeLaSelection), joueurCourant, this);
+			// this.positionDeLUniteSelectionner = positionDeLaSelection;
 			return;
 		}
 
@@ -75,7 +108,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			return;
 		}
 
-		// Le joueur  deplace l'unite
+		// Le joueur deplace l'unite
 		if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 				positionDeLaSelection))
 			this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
@@ -92,7 +125,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	}
 
 	private void reinitialiserLeMenu() {
-		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant);
+		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant, this);
 	}
 
 	private void finirLeTour() {

@@ -22,6 +22,10 @@ public class Carte {
 		return !(this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY].aUneVille() );
 	}
 	
+	public boolean laCaseContientUneVille(Position positionDeLaCase) {
+		return (this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY].aUneVille() );
+	}
+	
 	public Unite obtenirLUniteDeLaCase(Position positionDeLaCase) {
 		return this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY].obtenirUnite();
 	}

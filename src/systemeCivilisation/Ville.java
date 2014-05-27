@@ -32,7 +32,7 @@ public class Ville {
 	
 	
 	/**
-	 * Permet d'obtenier le joueur proprietaire de la ville
+	 * Permet d'obtenir le joueur proprietaire de la ville
 	 * 
 	 * @return proprietaire
 	 * 			Le joueur auquel la ville appartient
@@ -42,7 +42,7 @@ public class Ville {
 	}
 	
 	/**
-	 * Permet de changer la propietaire d'une ville
+	 * Permet de changer la proprietaire d'une ville
 	 * 
 	 * @param joueurProprietaire
 	 * 			Le nouveau joueur qui possede la ville
