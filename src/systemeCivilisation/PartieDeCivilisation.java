@@ -17,8 +17,8 @@ public class PartieDeCivilisation {
 
 	public PartieDeCivilisation() {
 
-		joueurs[0] = new Joueur("Joueur1", SetDImages.imagesBleu);
-		joueurs[1] = new Joueur("Joueur2", SetDImages.imagesRouges);
+		joueurs[0] = new Joueur("Joueur Bleu", SetDImages.imagesBleu);
+		joueurs[1] = new Joueur("Joueur Rouge", SetDImages.imagesRouges);
 
 		Carte carteDuMonde = creationDeLaCarte();
 		this.carte = carteDuMonde;
