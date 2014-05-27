@@ -45,13 +45,13 @@ public class PartieDeCivilisation {
 	 */
 	public void attaquer(Joueur joueurAttaquant, Position positionAttaquant,
 			Position positionDefenseur) {
-		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant)
-				.obtenirJoueur() == joueurAttaquant)
+		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant).obtenirJoueur() == joueurAttaquant)
 				&& (this.carte.obtenirLUniteDeLaCase(positionDefenseur)
 						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])
-				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee <= ((positionDefenseur
-						.deltaX(positionAttaquant) + positionDefenseur
-						.deltaY(positionAttaquant))))) {
+				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee 
+						>= ((positionDefenseur.deltaX(positionAttaquant) 
+							+ positionDefenseur.deltaY(positionAttaquant))))) 
+		{
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)

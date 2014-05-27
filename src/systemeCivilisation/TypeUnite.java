@@ -7,13 +7,13 @@ public enum TypeUnite {
 	/**
 	 * Un type d'unit� puissant.
 	 */
-	Chars(500, 400,2,6),
+	Chars(500,400,2,6),
 	
 	
 	/**
 	 * Un type d'unitee faible.
 	 */
-	Soldats(40, 20,4,5);
+	Soldats(40,20,4,5);
 
 	/**
 	 * Permet d'obtenir la vie de depart de l'unite.
