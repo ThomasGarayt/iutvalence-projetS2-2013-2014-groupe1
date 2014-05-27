@@ -8,25 +8,28 @@ public class Unite {
 	int puissance;
 	int vie;
 	int pointsDeMouvements;
+	int portee;
 	TypeUnite type;
 	
 	Joueur joueur;
 
 	/**
 	 * @param type
-	 *            Le type d'unit� que l'on souhaite cree, cela definira sa vie
+	 *            Le type d'unite que l'on souhaite cree, cela definira sa vie
 	 *            et sa puissance.
 	 */
 	public Unite(TypeUnite type, Joueur joueur) {
 		this.type = type;
 		this.vie = type.getVie();
 		this.puissance = type.getPuissance();
+		this.pointsDeMouvements = type.getPm();
+		this.portee = type.getPortee();
 		this.joueur = joueur;
-		this.pointsDeMouvements = 2;
 	}
 
+	
 	/**
-	 * L'unit� attaque une autre unite.
+	 * L'unite attaque une autre unite.
 	 * 
 	 * @param uniteAAttaquer
 	 *            L'unite qui va subir les dommages.
@@ -34,7 +37,7 @@ public class Unite {
 	public void attaquer(Unite uniteAAttaquer) {
 		uniteAAttaquer.changementDeVieRelatif(-puissance);
 	}
-
+	
 	/**
 	 * Teste si l'unite a encore de la vie.
 	 * 
@@ -44,6 +47,7 @@ public class Unite {
 		return (vie > 0);
 	}
 
+	
 	/**
 	 * Changer la vie de l'unite par rapport a sa vie actuel.
 	 * 
@@ -54,7 +58,8 @@ public class Unite {
 	public void changementDeVieRelatif(int vieAChanger) {
 		this.vie += vieAChanger;
 	}
-		
+	
+	
 	/**
 	 *  Permet d'obtenir le joueur d'une unité
 	 * 
@@ -64,7 +69,8 @@ public class Unite {
 	public Joueur obtenirJoueur() {
 		return this.joueur;
 	}
-		
+	
+	
 	/**
 	 * Permet d'obtenir la vie d'une unite
 	 * 
@@ -75,6 +81,7 @@ public class Unite {
 		return this.vie;
 	}
 	
+	
 	/**
 	 * Permet d'obtenier le nombre de points de mouvement d'une unité
 	 * 
@@ -84,7 +91,31 @@ public class Unite {
 	public int obtenirPointDeMouvements() {
 		return this.pointsDeMouvements;
 	}
+	
+	
+	/**
+	 * Permet d'enlever des Points de mouvement a une unite
+	 * 
+	 * @param PmEnMoins
+	 * 			Le nombre de Pm que l'unite doit perdre
+	 */
+	public void mettreAJourPointDeMouvements(int PmEnMoins){
+		this.pointsDeMouvements = this.pointsDeMouvements - PmEnMoins;
+	}
+	
+	
+	/**
+	 *  Re-initialise tous les Pm des unites d'un joueur à la fin de son tour
+	 * 
+	 * @param joueurCourant
+	 * 			Le joueur qui vient de terminer son tour
+	 */
+	public void reinitialiserPm(Joueur joueurCourant)
+	{
+		// TODO TROUVER UN MOYEN DE REINITIALISER TOUTES LES UNITES D'UN JOUEUR
+	}
 		
+	
 	/**
 	 * Permet d'obtenier le type de l'unité
 	 * 
@@ -94,4 +125,6 @@ public class Unite {
 	public TypeUnite obtenirTypeUnite() {
 		return this.type;
 	}
+	
+	
 }

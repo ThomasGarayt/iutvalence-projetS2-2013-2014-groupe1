@@ -16,39 +16,42 @@ public class PartieDeCivilisation {
 	private int joueurDontCEstLeTour;
 
 	public PartieDeCivilisation() {
-		//for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
-		//	joueurs[joueurCourant] = new Joueur(
-		//			("Joueur " + Integer.toString(joueurCourant + 1)));
-		
+		// for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR;
+		// joueurCourant++)
+		// joueurs[joueurCourant] = new Joueur(
+		// ("Joueur " + Integer.toString(joueurCourant + 1)));
+
 		joueurs[0] = new Joueur("Joueur1", SetDImages.imagesBleu);
-		joueurs[1] = new Joueur("Joueur2",SetDImages.imagesRouges);
-		
+		joueurs[1] = new Joueur("Joueur2", SetDImages.imagesRouges);
+
 		Carte carteDuMonde = creationDeLaCarte();
 		this.carte = carteDuMonde;
 
 		this.joueurDontCEstLeTour = 0;
 	}
 
-	
 	/**
 	 * Fonction permettant a un joueur d'attaquer un autre joueur
 	 * 
 	 * 
 	 * @param joueurAttaquant
-	 * 			Le joueur qui attaque
+	 *            Le joueur qui attaque
 	 * 
 	 * @param positionAttaquant
-	 * 			La position de l'unite attaquante
+	 *            La position de l'unite attaquante
 	 * 
 	 * @param positionDefenseur
-	 * 			La position de l'unite qui defend
+	 *            La position de l'unite qui defend
 	 */
 	public void attaquer(Joueur joueurAttaquant, Position positionAttaquant,
 			Position positionDefenseur) {
 		if ((this.carte.obtenirLUniteDeLaCase(positionAttaquant)
 				.obtenirJoueur() == joueurAttaquant)
 				&& (this.carte.obtenirLUniteDeLaCase(positionDefenseur)
-						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])) {
+						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])
+				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee <= ((positionDefenseur
+						.deltaX(positionAttaquant) + positionDefenseur
+						.deltaY(positionAttaquant))))) {
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)
@@ -58,42 +61,51 @@ public class PartieDeCivilisation {
 
 	}
 
-	
-	
 	/**
-	 *  Fonction permettant de deplacer une unite
+	 * Fonction permettant de deplacer une unite
 	 * 
 	 * 
 	 * @param joueurCourant
-	 * 			Le joueur courant, qui est en train de jouer
+	 *            Le joueur courant, qui est en train de jouer
 	 * 
 	 * @param positionDeLUnite
-	 * 			La position de l'unite qui va etre deplacer
+	 *            La position de l'unite qui va etre deplacer
 	 * 
 	 * @param positionFutureDeLUnite
-	 * 			La position voulue pour l'unite deplace
+	 *            La position voulue pour l'unite deplace
 	 */
 	public void deplacerUneUnite(Joueur joueurCourant,
 			Position positionDeLUnite, Position positionFutureDeLUnite) {
 		if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurCourant)
 				&& (this.carte
-						.laCaseNecontientPasDUnite(positionFutureDeLUnite)))
+						.laCaseNecontientPasDUnite(positionFutureDeLUnite))
+				&& (this.carte.obtenirLUniteDeLaCase(positionDeLUnite)
+						.obtenirPointDeMouvements() >= ((positionDeLUnite
+						.deltaX(positionFutureDeLUnite) + positionDeLUnite
+						.deltaY(positionFutureDeLUnite))))) {
+
+			this.carte.obtenirLUniteDeLaCase(positionDeLUnite)
+					.mettreAJourPointDeMouvements(
+							positionDeLUnite.deltaX(positionFutureDeLUnite)
+									+ positionDeLUnite
+											.deltaY(positionFutureDeLUnite));
+
 			this.carte.deplacerUneUnite(positionDeLUnite,
 					positionFutureDeLUnite);
+		}
 	}
 
-	
 	/**
 	 * Fonction permettant de prendre une ville
 	 * 
 	 * @param joueurAttaquant
-	 * 			Le joueur attaquant la ville
+	 *            Le joueur attaquant la ville
 	 * 
 	 * @param positionVille
-	 * 			La position de la ville attaquee
+	 *            La position de la ville attaquee
 	 * 
 	 * @param positionDeLUnite
-	 * 			La position de l'unite qui attaque
+	 *            La position de l'unite qui attaque
 	 */
 	public void prendreLaVille(Joueur joueurAttaquant, Position positionVille,
 			Position positionDeLUnite) {
@@ -105,19 +117,18 @@ public class PartieDeCivilisation {
 					.changerProprietaire(joueurAttaquant);
 	}
 
-	
 	/**
 	 * Fonction permettant d'ajouter une unite
 	 * 
 	 * 
 	 * @param joueurConstructeur
-	 * 			Le joueur qui souhaite ajouter une unitee
+	 *            Le joueur qui souhaite ajouter une unitee
 	 * 
 	 * @param positionDeLunite
-	 * 			La position ou l'unite va etre ajouter
+	 *            La position ou l'unite va etre ajouter
 	 * 
 	 * @param typeDeLUnite
-	 * 			Le type de l'unite ajoutee
+	 *            Le type de l'unite ajoutee
 	 */
 	public void ajouterUneUnite(Joueur joueurConstructeur,
 			Position positionDeLunite, TypeUnite typeDeLUnite) {
@@ -126,12 +137,10 @@ public class PartieDeCivilisation {
 					typeDeLUnite, joueurConstructeur));
 	}
 
-	
 	/**
 	 * Fonction créant la carte de jeu et mettant en place des unitees
 	 * 
-	 * @return carteDuMonde
-	 * 			La carte de jeu
+	 * @return carteDuMonde La carte de jeu
 	 */
 	private Carte creationDeLaCarte() {
 		Carte carteDuMonde = new Carte();
@@ -143,8 +152,8 @@ public class PartieDeCivilisation {
 				TypeUnite.Chars, this.joueurs[1]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
 				TypeUnite.Soldats, this.joueurs[1]));
-		carteDuMonde.ajouterUneVille(new Position(6,2), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(3,3), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(6, 2), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(3, 3), new Ville());
 		return carteDuMonde;
 	}
 
@@ -153,29 +162,26 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
+		// RE-INITIALISER LES PM DES UNITES DU JOUEUR
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
 			this.joueurDontCEstLeTour = 0;
 	}
 
-	
 	/**
 	 * Fonction permettant d'obtenir le joueur courant
 	 * 
-	 * @return joueurDontCEstLeTour
-	 * 			Le joueur qui est en train de jouer
+	 * @return joueurDontCEstLeTour Le joueur qui est en train de jouer
 	 */
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
 	}
 
-	
 	/**
 	 * Retourne la carte du jeu
 	 * 
-	 * @return carte
-	 * 			La carte du jeu
+	 * @return carte La carte du jeu
 	 */
 	public Carte obtenirCarte() {
 		return this.carte;

@@ -10,17 +10,17 @@ public class Position {
 	public int positionX;
 
 	/**
-	 * La position sur l'axe des ordonnées.
+	 * La position sur l'axe des ordonnees.
 	 */
 	public int positionY;
 
 	/**
-	 * Création d'une position sur la grille.
+	 * Creation d'une position sur la grille.
 	 * 
 	 * @param x
 	 *            La position sur l'axe des abscisses.
 	 * @param y
-	 *            La position sur l'axe des ordonnées.
+	 *            La position sur l'axe des ordonnees.
 	 */
 	public Position(int x, int y) {
 		this.positionX = x;
@@ -43,6 +43,17 @@ public class Position {
 	 */
 	public int getY() {
 		return this.positionY;
+	}
+	
+	public int deltaX(Position z)
+	{
+		return Math.abs((this.getX() - z.getX()));
+	}
+	
+
+	public int deltaY(Position z)
+	{
+		return Math.abs((this.getY() - z.getY()));
 	}
 
 	@Override
