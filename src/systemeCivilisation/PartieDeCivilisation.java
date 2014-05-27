@@ -1,7 +1,7 @@
 package systemeCivilisation;
 
 /**
- * @author Romain Décrie une partie de civilisation et les interaction entre les
+ * @author Romain Decrie une partie de civilisation et les interaction entre les
  *         joueurs.
  */
 public class PartieDeCivilisation {
@@ -16,9 +16,9 @@ public class PartieDeCivilisation {
 	private int joueurDontCEstLeTour;
 
 	public PartieDeCivilisation() {
-//		for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
-//			joueurs[joueurCourant] = new Joueur(
-//					("Joueur " + Integer.toString(joueurCourant + 1)));
+		//for (int joueurCourant = 0; joueurCourant < NOMBRE_DE_JOUEUR; joueurCourant++)
+		//	joueurs[joueurCourant] = new Joueur(
+		//			("Joueur " + Integer.toString(joueurCourant + 1)));
 		
 		joueurs[0] = new Joueur("Joueur1", SetDImages.imagesBleu);
 		joueurs[1] = new Joueur("Joueur2",SetDImages.imagesRouges);

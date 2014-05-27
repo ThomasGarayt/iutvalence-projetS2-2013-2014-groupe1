@@ -37,8 +37,8 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		JComponent source = (JComponent) event.getSource();
 
-		// TODO Vérifier si c'est le bouton "Finir le Tour" qui � �t� press�.
-		// Par ce que �a �a marche pas :/
+		// TODO Vérifier si c'est le bouton "Finir le Tour" qui est presse.
+		// Par ce que ca ne marche pas :/
 		if (source.getParent() == this.fenetreDeJeu.obtenirMenu()) {
 			this.finirLeTour();
 			this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
@@ -50,13 +50,13 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
 
-		// Aucune unit� n'a �t� s�lectionn�.
+		// Aucune unite n'a été selectionne.
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte()
 						.laCaseNecontientPasDUnite(positionDeLaSelection)))
 			return;
 
-		// S�lection de la premiere unit�.
+		// Selection de la premiere unite.
 		if (this.positionDeLUniteSelectionner == null) {
 			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
@@ -66,22 +66,22 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			return;
 		}
 
-		// L'unit� est selectionner et le joueur va effectuer une action.
+		// L'unite est selectionne et le joueur va effectuer une action.
 
-		// Le joueur re-s�lectionne l'unit�.
+		// Le joueur re-selectionne l'unite.
 		if (this.positionDeLUniteSelectionner.equals(positionDeLaSelection)) {
 			this.positionDeLUniteSelectionner = null;
 			this.reinitialiserLeMenu();
 			return;
 		}
 
-		// Le joueur d�place l'unit�.
+		// Le joueur  deplace l'unite
 		if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 				positionDeLaSelection))
 			this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);
 
-		// Le joueur attaque une unit� adverse.
+		// Le joueur attaque une unite adverse.
 		else
 			this.logiqueDuJeu.attaquer(this.joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);

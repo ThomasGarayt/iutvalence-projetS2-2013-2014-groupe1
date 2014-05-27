@@ -13,7 +13,7 @@ public class LanceurDeCivilisation {
 	 * Le main ...
 	 * 
 	 * @param args
-	 *            Les arguments en entrée du programme. ( Ici aucun )
+	 *            Les arguments en entree du programme. ( Ici aucun )
 	 */
 	public static void main(String[] args) {
 		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();

@@ -1,7 +1,7 @@
 package systemeCivilisation;
 /**
- * @author Romain Une unitÈ qui possËde une vie, une puissance et une position
- *         sur une carte. Elle peut attaquer d'autre unitÈs et se dÈplacer.
+ * @author Romain Une unitÔøΩ qui possÔøΩde une vie, une puissance et une position
+ *         sur une carte. Elle peut attaquer d'autre unitÔøΩs et se dÔøΩplacer.
  */
 public class Unite {
 
@@ -14,7 +14,7 @@ public class Unite {
 
 	/**
 	 * @param type
-	 *            Le type d'unitÈ que l'on souhaite crÈÈ, cela dÈfinira sa vie
+	 *            Le type d'unitÔøΩ que l'on souhaite cree, cela definira sa vie
 	 *            et sa puissance.
 	 */
 	public Unite(TypeUnite type, Joueur joueur) {
@@ -26,47 +26,71 @@ public class Unite {
 	}
 
 	/**
-	 * L'unitÈ attaque une autre unitÈ.
+	 * L'unitÔøΩ attaque une autre unite.
 	 * 
 	 * @param uniteAAttaquer
-	 *            L'unitÈ qui va subir les dommages.
+	 *            L'unite qui va subir les dommages.
 	 */
 	public void attaquer(Unite uniteAAttaquer) {
 		uniteAAttaquer.changementDeVieRelatif(-puissance);
 	}
 
 	/**
-	 * Si l'unitÈ a encore de la vie.
+	 * Teste si l'unite a encore de la vie.
 	 * 
-	 * @return Vrai si l'unitÈ a encore de la vie, faux sinon.
+	 * @return Vrai si l'unitÔøΩ a encore de la vie, faux sinon.
 	 */
 	public boolean estVivante() {
 		return (vie > 0);
 	}
 
 	/**
-	 * Changer la vie de l'unitÈ par rapport ‡ sa vie actuel.
+	 * Changer la vie de l'unite par rapport a sa vie actuel.
 	 * 
 	 * @param vieAChanger
-	 *            Le nombre de point de vie ‡ changer, il sera nÈgatif en cas de
+	 *            Le nombre de point de vie a changer, il sera negatif en cas de
 	 *            dommage.
 	 */
 	public void changementDeVieRelatif(int vieAChanger) {
 		this.vie += vieAChanger;
 	}
-	
+		
+	/**
+	 *  Permet d'obtenir le joueur d'une unit√©
+	 * 
+	 * @return joueur
+	 * 			Le joueur auquel appartient l'unite
+	 */
 	public Joueur obtenirJoueur() {
 		return this.joueur;
 	}
-	
+		
+	/**
+	 * Permet d'obtenir la vie d'une unite
+	 * 
+	 * @return vie
+	 * 			La vie actuelle de l'unite
+	 */
 	public int obtenirVie() {
 		return this.vie;
 	}
 	
+	/**
+	 * Permet d'obtenier le nombre de points de mouvement d'une unit√©
+	 * 
+	 * @return pointsDeMouvements
+	 * 			Les Pm d'une unit√©
+	 */
 	public int obtenirPointDeMouvements() {
 		return this.pointsDeMouvements;
 	}
-	
+		
+	/**
+	 * Permet d'obtenier le type de l'unit√©
+	 * 
+	 * @return type
+	 * 			Le type de l'unit√©
+	 */
 	public TypeUnite obtenirTypeUnite() {
 		return this.type;
 	}

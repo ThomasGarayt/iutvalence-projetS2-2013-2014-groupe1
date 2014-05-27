@@ -1,6 +1,6 @@
 package systemeCivilisation;
 /**
- * @author Romain Une ville qui à un niveau et une position.
+ * @author Romain Une ville qui ï¿½ un niveau et une position.
  */
 public class Ville {
 
@@ -30,10 +30,23 @@ public class Ville {
 		return this.niveau;
 	}
 	
+	
+	/**
+	 * Permet d'obtenier le joueur proprietaire de la ville
+	 * 
+	 * @return proprietaire
+	 * 			Le joueur auquel la ville appartient
+	 */
 	public Joueur obtenirJoueurProprietaire() {
 		return this.proprietaire;
 	}
 	
+	/**
+	 * Permet de changer la propietaire d'une ville
+	 * 
+	 * @param joueurProprietaire
+	 * 			Le nouveau joueur qui possede la ville
+	 */
 	public void changerProprietaire(Joueur joueurProprietaire) {
 		this.proprietaire = joueurProprietaire;
 	}
