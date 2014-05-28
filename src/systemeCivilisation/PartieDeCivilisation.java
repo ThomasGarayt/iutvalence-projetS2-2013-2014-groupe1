@@ -158,9 +158,10 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
-		// RE-INITIALISER LES PM DES UNITES DU JOUEUR
 		reinitialiserPm();
 
+		
+		
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
@@ -176,6 +177,24 @@ public class PartieDeCivilisation {
 						.obtenirJoueurDontCEstLeTour()))
 				uniteCourante.reinitialiserPm();
 			}
+	}
+	
+	private void miseAJourTresorerieFinTour()
+	{
+	int niveauVilleJoueur = 0;
+	for (int i = 0; i < Carte.NB_CASES_X; i++)
+		for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+			Ville villeCourante = this.carte
+					.obtenirLaVilleDeLaCase(new Position(i, j));
+			if ((villeCourante != null) && (villeCourante.obtenirJoueurProprietaire() == this
+					.obtenirJoueurDontCEstLeTour() ))
+			{
+				niveauVilleJoueur = niveauVilleJoueur;
+			}
+		}
+	this.obtenirJoueurDontCEstLeTour().modifierTresorie(niveauVilleJoueur);
+	
+	
 	}
 
 	/**

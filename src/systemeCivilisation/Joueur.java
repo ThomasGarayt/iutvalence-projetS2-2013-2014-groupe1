@@ -57,7 +57,7 @@ public class Joueur {
 	
 	public void modifierTresorie(int diffTresorerie)
 	{
-		this.tresorerie = this.tresorerie + diffTresorerie;
+		this.tresorerie += diffTresorerie;
 	}
 	
 	/**
