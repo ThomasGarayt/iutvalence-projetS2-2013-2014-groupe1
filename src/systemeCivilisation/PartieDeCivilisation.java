@@ -159,8 +159,7 @@ public class PartieDeCivilisation {
 	 */
 	public void finirLeTour() {
 		reinitialiserPm();
-
-		
+		miseAJourTresorerieFinTour();
 		
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
@@ -189,12 +188,10 @@ public class PartieDeCivilisation {
 			if ((villeCourante != null) && (villeCourante.obtenirJoueurProprietaire() == this
 					.obtenirJoueurDontCEstLeTour() ))
 			{
-				niveauVilleJoueur = niveauVilleJoueur;
+				niveauVilleJoueur = niveauVilleJoueur + villeCourante.obtenirNiveau();
 			}
 		}
-	this.obtenirJoueurDontCEstLeTour().modifierTresorie(niveauVilleJoueur);
-	
-	
+	this.obtenirJoueurDontCEstLeTour().modifierTresorie(niveauVilleJoueur*50);
 	}
 
 	/**
