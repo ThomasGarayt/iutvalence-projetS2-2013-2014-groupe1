@@ -9,6 +9,7 @@ public class Unite {
 	int vie;
 	int pointsDeMouvements;
 	int portee;
+	int niveau;
 	TypeUnite type;
 	
 	Joueur joueur;
@@ -24,6 +25,7 @@ public class Unite {
 		this.puissance = type.getPuissance();
 		this.pointsDeMouvements = type.getPm();
 		this.portee = type.getPortee();
+		this.niveau = type.getNiveau();
 		this.joueur = joueur;
 	}
 
@@ -117,13 +119,23 @@ public class Unite {
 		
 	
 	/**
-	 * Permet d'obtenier le type de l'unité
+	 * Permet d'obtenir le type de l'unité
 	 * 
 	 * @return type
 	 * 			Le type de l'unité
 	 */
 	public TypeUnite obtenirTypeUnite() {
 		return this.type;
+	}
+	
+	/**
+	 * Permet d'obtenir le niveau de l'unité
+	 * 
+	 * @return niveau
+	 * 			Le niveau de l'unité
+	 */
+	public int obtenirNiveau() {
+		return this.niveau;
 	}
 	
 	

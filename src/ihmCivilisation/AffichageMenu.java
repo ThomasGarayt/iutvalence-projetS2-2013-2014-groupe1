@@ -17,10 +17,15 @@ public class AffichageMenu extends JPanel {
 	public AffichageMenu(Joueur joueur, ActionListener ecouteurBouton) {
 		super();
 
-		this.setLayout(new GridLayout(4, 1));
-		this.add(new JLabel(joueur.obtenirNom()));
+		this.setLayout(new GridLayout(6, 1));
+
+		this.add(new RecapUnite(joueur));
+		
 		this.add(new JLabel(" Unite / Ville"));
 		this.add(new RecapUnite());
+		
+		this.add(new JLabel(" "));
+		this.add(new JLabel(" "));
 
 		JButton finirTour = new JButton("Finir le tour");
 		finirTour.setName("FinirTour");
@@ -32,11 +37,17 @@ public class AffichageMenu extends JPanel {
 	public AffichageMenu(Unite unite, Joueur joueur,
 			ActionListener ecouteurBouton) {
 		super();
+		
+		this.setLayout(new GridLayout(6, 1));
+		
+		
+		this.add(new RecapUnite(joueur));
 
-		this.setLayout(new GridLayout(4, 1));
-		this.add(new JLabel(joueur.obtenirNom()));
 		this.add(new JLabel(" Unite"));
 		this.add(new RecapUnite(unite));
+		
+		this.add(new JLabel(" "));
+		this.add(new JLabel(" "));
 
 		JButton finirTour = new JButton("Finir le tour");
 		finirTour.setName("FinirTour");
@@ -50,17 +61,21 @@ public class AffichageMenu extends JPanel {
 		super();
 
 		this.setLayout(new GridLayout(6, 1));
-		this.add(new JLabel(joueur.obtenirNom()));
+		
+		this.add(new RecapUnite(joueur));
+		
 		this.add(new JLabel(new ImageIcon("Images/ville.jpg")));
 		this.add(new RecapUnite(ville));
 
 		if (joueur == ville.obtenirJoueurProprietaire()) {
-			JButton ameliorerChar = new JButton("Améliorer char ");
+			JButton ameliorerChar = new JButton("Ameliorer char ");
 			ameliorerChar.setName("AmeliorerChar");
 			ameliorerChar.addActionListener(ecouteurBouton);
 
-			JButton ameliorerVille = new JButton("Améliorer au niveau "
-					+ (ville.obtenirNiveau() + 1));
+			JButton ameliorerVille = new JButton("Ameliorer au niveau : "
+					+ (ville.obtenirNiveau() + 1)
+					+ "   "
+					+ Integer.toString(((ville.obtenirNiveau() + 1)*200)));
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 
