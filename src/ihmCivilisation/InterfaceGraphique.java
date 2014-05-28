@@ -43,25 +43,36 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 		// Bouton FinirTour
 		if (source.getName() == "FinirTour") {
-			this.finirLeTour();
-			this.joueurCourant = this.logiqueDuJeu
-					.obtenirJoueurDontCEstLeTour();
-			this.reinitialiserLeMenu();
+			finirLeTour();
+			joueurCourant = logiqueDuJeu.obtenirJoueurDontCEstLeTour();
+			reinitialiserLeMenu();
 			return;
 		}
 
 		// Bouton AmeliorerVille
 		if (source.getName() == "AmeliorerVille") {
-			this.logiqueDuJeu.obtenirCarte()
-					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
-					.ameliorer();
-			this.fenetreDeJeu.mettreAJourLeMenu(
-					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
-							positionDeLaVilleSelectionner), this.joueurCourant,
-					this);
-			this.positionDeLaVilleSelectionner = null;
-			this.reinitialiserLeMenu();
-			return;
+			if (joueurCourant.obtenirTresorerie() >= ((logiqueDuJeu
+					.obtenirCarte().obtenirLaVilleDeLaCase(
+							positionDeLaVilleSelectionner).coutNiveauUp()))) 
+			{
+				joueurCourant.modifierTresorie(-(logiqueDuJeu.obtenirCarte()
+						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
+						.coutNiveauUp()));
+
+				logiqueDuJeu.obtenirCarte()
+						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
+						.ameliorer();
+
+				fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
+						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner),
+						joueurCourant, this);
+
+				this.positionDeLaVilleSelectionner = null;
+				reinitialiserLeMenu();
+				return;
+			} else {
+				return;
+			}
 		}
 
 		Position positionDeLaSelection = new Position(

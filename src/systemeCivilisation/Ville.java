@@ -30,6 +30,11 @@ public class Ville {
 		return this.niveau;
 	}
 	
+	public int coutNiveauUp()
+	{
+		return ((this.niveau+1)*200);
+	}
+	
 	
 	/**
 	 * Permet d'obtenir le joueur proprietaire de la ville

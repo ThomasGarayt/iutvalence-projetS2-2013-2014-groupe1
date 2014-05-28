@@ -75,7 +75,7 @@ public class AffichageMenu extends JPanel {
 			JButton ameliorerVille = new JButton("Ameliorer au niveau : "
 					+ (ville.obtenirNiveau() + 1)
 					+ "   "
-					+ Integer.toString(((ville.obtenirNiveau() + 1)*200)));
+					+ Integer.toString(ville.coutNiveauUp()));
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 

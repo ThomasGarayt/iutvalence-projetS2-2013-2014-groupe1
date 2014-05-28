@@ -55,6 +55,10 @@ public class Joueur {
 		return this.tresorerie;
 	}
 	
+	public void modifierTresorie(int diffTresorerie)
+	{
+		this.tresorerie = this.tresorerie + diffTresorerie;
+	}
 	
 	/**
 	 * Fonction qui permet d'obtenir le set d'image d'un joueur
