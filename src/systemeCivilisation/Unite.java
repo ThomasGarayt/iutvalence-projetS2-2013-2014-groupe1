@@ -1,7 +1,9 @@
 package systemeCivilisation;
+
 /**
- * @author Romain Une unit� qui poss�de une vie, une puissance et une position
- *         sur une carte. Elle peut attaquer d'autre unit�s et se d�placer.
+ * @author Romain Une unit� qui poss�de une vie, une puissance et une
+ *         position sur une carte. Elle peut attaquer d'autre unit�s et se
+ *         d�placer.
  */
 public class Unite {
 
@@ -11,13 +13,15 @@ public class Unite {
 	int portee;
 	int niveau;
 	TypeUnite type;
-	
+
 	Joueur joueur;
 
 	/**
 	 * @param type
 	 *            Le type d'unite que l'on souhaite cree, cela definira sa vie
 	 *            et sa puissance.
+	 * @param joueur
+	 *            Le joueur a qui appartient l'unite.
 	 */
 	public Unite(TypeUnite type, Joueur joueur) {
 		this.type = type;
@@ -29,7 +33,6 @@ public class Unite {
 		this.joueur = joueur;
 	}
 
-	
 	/**
 	 * L'unite attaque une autre unite.
 	 * 
@@ -39,7 +42,7 @@ public class Unite {
 	public void attaquer(Unite uniteAAttaquer) {
 		uniteAAttaquer.changementDeVieRelatif(-puissance);
 	}
-	
+
 	/**
 	 * Teste si l'unite a encore de la vie.
 	 * 
@@ -49,7 +52,6 @@ public class Unite {
 		return (vie > 0);
 	}
 
-	
 	/**
 	 * Changer la vie de l'unite par rapport a sa vie actuel.
 	 * 
@@ -60,83 +62,67 @@ public class Unite {
 	public void changementDeVieRelatif(int vieAChanger) {
 		this.vie += vieAChanger;
 	}
-	
-	
+
 	/**
-	 *  Permet d'obtenir le joueur d'une unité
+	 * Permet d'obtenir le joueur d'une unité
 	 * 
-	 * @return joueur
-	 * 			Le joueur auquel appartient l'unite
+	 * @return joueur Le joueur auquel appartient l'unite
 	 */
 	public Joueur obtenirJoueur() {
 		return this.joueur;
 	}
-	
-	
+
 	/**
 	 * Permet d'obtenir la vie d'une unite
 	 * 
-	 * @return vie
-	 * 			La vie actuelle de l'unite
+	 * @return vie La vie actuelle de l'unite
 	 */
 	public int obtenirVie() {
 		return this.vie;
 	}
-	
-	
+
 	/**
 	 * Permet d'obtenier le nombre de points de mouvement d'une unité
 	 * 
-	 * @return pointsDeMouvements
-	 * 			Les Pm d'une unité
+	 * @return pointsDeMouvements Les Pm d'une unité
 	 */
 	public int obtenirPointDeMouvements() {
 		return this.pointsDeMouvements;
 	}
-	
-	
+
 	/**
 	 * Permet d'enlever des Points de mouvement a une unite
 	 * 
 	 * @param PmEnMoins
-	 * 			Le nombre de Pm que l'unite doit perdre
+	 *            Le nombre de Pm que l'unite doit perdre
 	 */
-	public void mettreAJourPointDeMouvements(int PmEnMoins){
+	public void mettreAJourPointDeMouvements(int PmEnMoins) {
 		this.pointsDeMouvements = this.pointsDeMouvements - PmEnMoins;
 	}
-	
-	
+
 	/**
-	 *  Re-initialise tous les Pm des unites d'un joueur à la fin de son tour
-	 * 
-	 * @param joueurCourant
-	 * 			Le joueur qui vient de terminer son tour
+	 * Re-initialise tous les Pm des unites d'un joueur a la fin de son tour
 	 */
-	public void reinitialiserPm()
-	{
+	public void reinitialiserPm() {
 		this.pointsDeMouvements = this.type.getPm();
 	}
-		
-	
+
 	/**
 	 * Permet d'obtenir le type de l'unité
 	 * 
-	 * @return type
-	 * 			Le type de l'unité
+	 * @return type Le type de l'unité
 	 */
 	public TypeUnite obtenirTypeUnite() {
 		return this.type;
 	}
-	
+
 	/**
 	 * Permet d'obtenir le niveau de l'unité
 	 * 
-	 * @return niveau
-	 * 			Le niveau de l'unité
+	 * @return niveau Le niveau de l'unité
 	 */
 	public int obtenirNiveau() {
 		return this.niveau;
 	}
-	
-	
+
 }

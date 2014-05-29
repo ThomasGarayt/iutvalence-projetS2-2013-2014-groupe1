@@ -15,6 +15,9 @@ public class PartieDeCivilisation {
 	private Carte carte = new Carte();
 	private int joueurDontCEstLeTour;
 
+	/**
+	 * Une nouvelle partie de civilisation.
+	 */
 	public PartieDeCivilisation() {
 
 		joueurs[0] = new Joueur("Joueur Bleu", SetDImages.imagesBleu);

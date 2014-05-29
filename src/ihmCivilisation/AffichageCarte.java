@@ -10,8 +10,19 @@ import systemeCivilisation.Carte;
 import systemeCivilisation.Position;
 import systemeCivilisation.TypeUnite;
 
+/**
+ * @author Romain Affiche la carte passe en parametre dans un JPanel.
+ */
 public class AffichageCarte extends JPanel {
 
+	/**
+	 * Affiche la carte graphiquement.
+	 * 
+	 * @param carte
+	 *            La carte ‡ afficher.
+	 * @param auditeurBoutons
+	 *            l'auditeur des boutons de la carte.
+	 */
 	public AffichageCarte(Carte carte, ActionListener auditeurBoutons) {
 		super();
 
@@ -44,10 +55,11 @@ public class AffichageCarte extends JPanel {
 						this.add(boutonCourant);
 					}
 				}
-				// La case contient une unité.
+				// La case contient une unite.
 				else {
 					boutonCourant = new BoutonCarte(caseCouranteX,
-								caseCouranteY, obtenirLImageDeLUnite(positionActuel, carte),auditeurBoutons);
+							caseCouranteY, obtenirLImageDeLUnite(
+									positionActuel, carte), auditeurBoutons);
 					this.add(boutonCourant);
 				}
 
@@ -60,10 +72,9 @@ public class AffichageCarte extends JPanel {
 			return new ImageIcon(carte.obtenirLUniteDeLaCase(position)
 					.obtenirJoueur().obtenirLesetDimagesDuJoueur()
 					.obtenirLImageDuSoldat());
-		else
-			return new ImageIcon(carte.obtenirLUniteDeLaCase(position)
-					.obtenirJoueur().obtenirLesetDimagesDuJoueur()
-					.obtenirLImageDuChar());
+		return new ImageIcon(carte.obtenirLUniteDeLaCase(position)
+				.obtenirJoueur().obtenirLesetDimagesDuJoueur()
+				.obtenirLImageDuChar());
 	}
 
 }

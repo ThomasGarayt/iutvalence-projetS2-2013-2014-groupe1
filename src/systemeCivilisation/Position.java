@@ -45,12 +45,21 @@ public class Position {
 		return this.positionY;
 	}
 	
+	/**
+	 * Obtenir le delta X de deux position.
+	 * @param z La deuxieme position.
+	 * @return Le delta x.
+	 */
 	public int deltaX(Position z)
 	{
 		return Math.abs((this.getX() - z.getX()));
 	}
 	
-
+	/**
+	 * Obtenir le delta Y de deux position.
+	 * @param z La deuxieme position.
+	 * @return Le delta Y.
+	 */
 	public int deltaY(Position z)
 	{
 		return Math.abs((this.getY() - z.getY()));

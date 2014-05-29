@@ -10,6 +10,10 @@ import systemeCivilisation.PartieDeCivilisation;
 import systemeCivilisation.Position;
 import systemeCivilisation.TypeUnite;
 
+/**
+ * @author Romain
+ * La classe qui gere le lien entre l'interface graphique et le moteur du jeu.
+ */
 public class InterfaceGraphique implements Runnable, ActionListener {
 
 	private FenetreCivilisation fenetreDeJeu;
@@ -19,8 +23,11 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	private Position positionDeLaVilleSelectionner;
 	private Joueur joueurCourant;
 
+	/**
+	 * Constructeur qui initialise les priencipaux element du jeu.
+	 */
 	public InterfaceGraphique() {
-		this.fenetreDeJeu = new FenetreCivilisation(this);
+		this.fenetreDeJeu = new FenetreCivilisation();
 		this.logiqueDuJeu = new PartieDeCivilisation();
 		this.positionDeLUniteSelectionner = null;
 		this.positionDeLaVilleSelectionner = null;
@@ -156,6 +163,9 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant, this);
 	}
 	
+	/**
+	 * Permet de mettre a jour la carte.
+	 */
 	public void mettreAJourLaCarte() {
 		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte(),
 				this);

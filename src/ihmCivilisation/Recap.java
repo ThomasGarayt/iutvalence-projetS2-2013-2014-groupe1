@@ -9,14 +9,25 @@ import systemeCivilisation.Joueur;
 import systemeCivilisation.Unite;
 import systemeCivilisation.Ville;
 
+/**
+ * @author Romain
+ * Le recapitulatif d'un joueur d'une unite ou d'une ville.
+ */
 public class Recap extends JPanel {
 
+	/**
+	 * Recapitulatif vide.
+	 */
 	public Recap() {
 		super();
 
 		this.add(new JLabel(""));
 	}
 
+	/**
+	 * Recapitulatif d'un joueur
+	 * @param joueur Le joueur dont on veux obtenir le recapitulatif.
+	 */
 	public Recap(Joueur joueur)
 	{
 		super();
@@ -33,6 +44,10 @@ public class Recap extends JPanel {
 	}
 	
 	
+	/**
+	 * Recapitulatif d'une unite.
+	 * @param unite L'unite dont on souhaite obtenir le recapitulatif.
+	 */
 	public Recap(Unite unite) {
 		super();
 
@@ -47,6 +62,10 @@ public class Recap extends JPanel {
 		this.add(new JLabel(Integer.toString(unite.obtenirPointDeMouvements())));
 	}
 
+	/**
+	 * Recapitulatif d'une ville.
+	 * @param ville La ville dont on souhaite obtenir le recapitulatif.
+	 */
 	public Recap(Ville ville) {
 		super();
 
@@ -62,8 +81,8 @@ public class Recap extends JPanel {
 		} 
 		else 
 		{
-			this.add(new JLabel(" Ville libre         "));
-			this.add(new JLabel("                        "));
+			this.add(new JLabel(" Ville libre"));
+			this.add(new JLabel(" "));
 		}
 
 		this.add(new JLabel(" "));

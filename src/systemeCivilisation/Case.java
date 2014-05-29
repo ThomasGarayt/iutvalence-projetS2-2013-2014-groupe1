@@ -1,13 +1,21 @@
 package systemeCivilisation;
 
+/**
+ * @author Romain
+ * Une case de la carte qui peut etre occuper par une unite et par une ville.
+ */
 public class Case {
 	
 	private Unite unite;
 	
 	private Ville ville;
 	
+	/**
+	 * Constructeur de case vide.
+	 */
 	public Case() {
 		this.unite = null;
+		this.ville = null;
 	}
 	
 	/**
@@ -32,10 +40,10 @@ public class Case {
 	
 	
 	/**
-	 * Fonction testan si une case a une ville
+	 * Fonction testant si une case a une ville.
 	 * 
-	 * @return true si ville presente
-	 * 		   false si vide
+	 * @return true si une ville est presente.
+	 * 		   false si la case est vide.
 	 */
 	public boolean aUneVille() {
 		return (this.ville != null);
@@ -43,7 +51,7 @@ public class Case {
 	
 	
 	/**
-	 * Fonction permettant d'obtenir l'unité présente sur une case
+	 * Fonction permettant d'obtenir l'unite presente sur une case
 	 * 
 	 * @return unite
 	 * 			L'unite presente sur la case
@@ -54,7 +62,7 @@ public class Case {
 	
 	
 	/**
-	 * Fonction permettant d'ajouter une unite à une case
+	 * Fonction permettant d'ajouter une unite a une case
 	 * 
 	 * @param unite
 	 * 			L'unite que l'on souhaite ajouter sur la case
