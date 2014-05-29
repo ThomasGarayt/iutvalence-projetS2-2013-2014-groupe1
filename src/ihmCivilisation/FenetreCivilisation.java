@@ -18,7 +18,7 @@ public class FenetreCivilisation {
 
 	private JSplitPane splitPane;
 	private AffichageMenu menu;
-	private ActionListener ecouteurDeBouton;
+	//private ActionListener ecouteurDeBouton;
 
 	/**
 	 * Initialisation de la fenetre de jeu.
@@ -37,7 +37,7 @@ public class FenetreCivilisation {
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		fenetre.setResizable(false);
 
-		JPanel carteDuJeu = new AffichageCarte(carte, ecouteurDeBouton);
+		JPanel carteDuJeu = new AffichageCarte(carte, ecouteurBouton);
 
 		menu = new AffichageMenu(joueur, ecouteurBouton);
 
@@ -72,7 +72,7 @@ public class FenetreCivilisation {
 	 */
 	public void mettreAJourLaCarte(Carte carte, ActionListener ecouteurBouton) {
 		AffichageCarte carteDuMonde = new AffichageCarte(carte,
-				ecouteurDeBouton);
+				ecouteurBouton);
 		this.splitPane.setRightComponent(carteDuMonde);
 		this.splitPane.setDividerLocation(TAILLE_MENU);
 	}
