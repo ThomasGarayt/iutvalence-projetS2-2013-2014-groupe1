@@ -12,6 +12,10 @@ public class BoutonCarte extends JButton {
 	
 	public BoutonCarte(int x, int y, ImageIcon image, ActionListener auditeurBoutons) {
 		super(image);
+		this.setFocusPainted( false );
+		this.setBorderPainted(false);
+		this.setOpaque( false );
+		this.setContentAreaFilled(false);
 		this.x = x;
 		this.y = y;
 		

@@ -31,6 +31,9 @@ public class AffichageMenu extends JPanel {
 		finirTour.setName("FinirTour");
 		finirTour.addActionListener(ecouteurBouton);
 
+		//finirTour.addActionListener(new boutonFinirTour());
+
+		
 		this.add(finirTour);
 	}
 
@@ -66,7 +69,7 @@ public class AffichageMenu extends JPanel {
 		
 		this.add(new JLabel(new ImageIcon("Images/ville.jpg")));
 		this.add(new RecapUnite(ville));
-
+		
 		if (joueur == ville.obtenirJoueurProprietaire()) {
 			JButton ameliorerChar = new JButton("Ameliorer char ");
 			ameliorerChar.setName("AmeliorerChar");
@@ -74,7 +77,7 @@ public class AffichageMenu extends JPanel {
 
 			JButton ameliorerVille = new JButton("Ameliorer au niveau : "
 					+ (ville.obtenirNiveau() + 1)
-					+ "   "
+					+  " "
 					+ Integer.toString(ville.coutNiveauUp()));
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);

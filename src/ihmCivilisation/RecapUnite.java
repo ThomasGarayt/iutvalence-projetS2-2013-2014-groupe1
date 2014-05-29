@@ -64,7 +64,7 @@ public class RecapUnite extends JPanel {
 		this.add(new JLabel(" " + Integer.toString(ville.obtenirNiveau())));
 
 		if (ville.obtenirJoueurProprietaire() != null) {
-			this.add(new JLabel(" Appartient a : "));
+			this.add(new JLabel(" Propriétaire : "));
 			this.add(new JLabel(" "
 					+ ville.obtenirJoueurProprietaire().obtenirNom()));
 		} 
