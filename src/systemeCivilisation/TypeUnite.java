@@ -33,6 +33,12 @@ public enum TypeUnite {
 		return puissance;
 	}
 	
+	/**
+	 * Permet d'obtenir les Pm d'une unité
+	 * 
+	 * @return int pm
+	 * 			Les pm d'une unité
+	 */			
 	public int getPm() {
 		return pm;
 	}
