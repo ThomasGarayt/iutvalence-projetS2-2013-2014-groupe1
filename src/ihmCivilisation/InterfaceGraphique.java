@@ -45,6 +45,8 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		if (source.getName() == "FinirTour") {
 			finirLeTour();
 			joueurCourant = logiqueDuJeu.obtenirJoueurDontCEstLeTour();
+			this.positionDeLaVilleSelectionner = null;
+			this.positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
 			return;
 		}
@@ -82,21 +84,31 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		// Aucune position n'a ete selectionne
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
-						positionDeLaSelection) && (this.logiqueDuJeu
-						.obtenirCarte()
-						.laCaseNeContientPasDeVille(positionDeLaSelection))))
-			return;
+						positionDeLaSelection)
+						&& (this.logiqueDuJeu.obtenirCarte()
+								.laCaseNeContientPasDeVille(positionDeLaSelection)) 
+						&& (this.positionDeLaVilleSelectionner == null))) 
+		{ return; }
 
 		// Selection d'une ville
 		if ((this.logiqueDuJeu.obtenirCarte()
 				.laCaseContientUneVille(positionDeLaSelection))
 				&& (this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte()
-						.laCaseNecontientPasDUnite(positionDeLaSelection))) {
+						.laCaseNecontientPasDUnite(positionDeLaSelection))
+				&& (this.positionDeLaVilleSelectionner == null)) {
 			this.fenetreDeJeu.mettreAJourLeMenu(
 					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
 							positionDeLaSelection), joueurCourant, this);
 			this.positionDeLaVilleSelectionner = positionDeLaSelection;
+			return;
+		}
+
+		// Deselection d'une ville
+		if ((this.positionDeLaVilleSelectionner != null)
+				|| (this.positionDeLaVilleSelectionner == positionDeLaSelection)) {
+			this.positionDeLaVilleSelectionner = null;
+			this.fenetreDeJeu.mettreAJourLeMenu(joueurCourant, this);
 			return;
 		}
 
@@ -106,17 +118,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 					.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLaSelection),
 					joueurCourant, this);
-			this.positionDeLUniteSelectionner = positionDeLaSelection;
-			return;
-		}
-
-		// Selection d'une ville
-		if ((this.logiqueDuJeu.obtenirCarte()
-				.laCaseContientUneVille(positionDeLaSelection))
-				&& (this.positionDeLUniteSelectionner == null)) {
-			this.fenetreDeJeu.mettreAJourLeMenu(
-					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
-							positionDeLaSelection), joueurCourant, this);
 			this.positionDeLUniteSelectionner = positionDeLaSelection;
 			return;
 		}
