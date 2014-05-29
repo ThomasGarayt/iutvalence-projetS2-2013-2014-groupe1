@@ -2,8 +2,8 @@ package systemeCivilisation;
 
 public enum SetDImages {
 
-	imagesRouges("Images/Char_rouge.jpg", "Images/Soldat_rouge.png"),
-	imagesBleu("Images/Char_bleu.jpeg", "Images/Soldat_bleu.png");
+	imagesRouges("Images/Char_rouge.png", "Images/Soldat_rouge.png"),
+	imagesBleu("Images/Char_bleu.png", "Images/Soldat_bleu.png");
 	
 	private String imageDuChar;
 	private String imageDuSoldat;
