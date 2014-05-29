@@ -9,29 +9,21 @@ import systemeCivilisation.Joueur;
 import systemeCivilisation.Unite;
 import systemeCivilisation.Ville;
 
-public class RecapUnite extends JPanel {
+public class Recap extends JPanel {
 
-	public RecapUnite() {
+	public Recap() {
 		super();
 
-		this.setLayout(new GridLayout(3, 2));
-		this.add(new JLabel("Argent : "));
-		this.add(new JLabel(" "));
-
-		this.add(new JLabel(" Vie : "));
-		this.add(new JLabel(" "));
-
-		this.add(new JLabel(" Deplacement : "));
-		this.add(new JLabel(" "));
+		this.add(new JLabel(""));
 	}
 
-	public RecapUnite(Joueur joueur)
+	public Recap(Joueur joueur)
 	{
 		super();
 
 		this.setLayout(new GridLayout(2, 2));
 
-		this.add(new JLabel(" Joueur : "));
+		this.add(new JLabel(" Tour de :"));
 		this.add(new JLabel(joueur.obtenirNom()));
 		
 		
@@ -41,7 +33,7 @@ public class RecapUnite extends JPanel {
 	}
 	
 	
-	public RecapUnite(Unite unite) {
+	public Recap(Unite unite) {
 		super();
 
 		this.setLayout(new GridLayout(3, 2));
@@ -55,7 +47,7 @@ public class RecapUnite extends JPanel {
 		this.add(new JLabel(Integer.toString(unite.obtenirPointDeMouvements())));
 	}
 
-	public RecapUnite(Ville ville) {
+	public Recap(Ville ville) {
 		super();
 
 		this.setLayout(new GridLayout(3, 2));

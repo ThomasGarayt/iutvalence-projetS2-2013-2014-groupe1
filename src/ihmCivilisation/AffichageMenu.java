@@ -19,10 +19,10 @@ public class AffichageMenu extends JPanel {
 
 		this.setLayout(new GridLayout(6, 1));
 
-		this.add(new RecapUnite(joueur));
+		this.add(new Recap(joueur));
 		
-		this.add(new JLabel(" Unite / Ville"));
-		this.add(new RecapUnite());
+		this.add(new JLabel(" Rien n'est selectionner"));
+		this.add(new Recap());
 		
 		this.add(new JLabel(" "));
 		this.add(new JLabel(" "));
@@ -31,9 +31,6 @@ public class AffichageMenu extends JPanel {
 		finirTour.setName("FinirTour");
 		finirTour.addActionListener(ecouteurBouton);
 
-		//finirTour.addActionListener(new boutonFinirTour());
-
-		
 		this.add(finirTour);
 	}
 
@@ -44,10 +41,10 @@ public class AffichageMenu extends JPanel {
 		this.setLayout(new GridLayout(6, 1));
 		
 		
-		this.add(new RecapUnite(joueur));
+		this.add(new Recap(joueur));
 
 		this.add(new JLabel(" Unite"));
-		this.add(new RecapUnite(unite));
+		this.add(new Recap(unite));
 		
 		this.add(new JLabel(" "));
 		this.add(new JLabel(" "));
@@ -65,10 +62,10 @@ public class AffichageMenu extends JPanel {
 
 		this.setLayout(new GridLayout(6, 1));
 		
-		this.add(new RecapUnite(joueur));
+		this.add(new Recap(joueur));
 		
 		this.add(new JLabel(new ImageIcon("Images/ville.jpg")));
-		this.add(new RecapUnite(ville));
+		this.add(new Recap(ville));
 		
 		if (joueur == ville.obtenirJoueurProprietaire()) {
 			JButton ameliorerChar = new JButton("Ameliorer char ");

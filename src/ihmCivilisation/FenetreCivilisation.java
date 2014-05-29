@@ -11,6 +11,8 @@ import systemeCivilisation.*;
 
 public class FenetreCivilisation {
 
+	private int TAILLE_MENU = 200;
+	
 	private JSplitPane splitPane;
 	private AffichageMenu menu;
 	private ActionListener ecouteurDeBouton;
@@ -40,11 +42,13 @@ public class FenetreCivilisation {
 		this.splitPane.setBorder(null);
 
 		this.splitPane.setDividerSize(0);
-
+		
 		this.splitPane.setResizeWeight(0);
 
 		fenetre.add(splitPane);
 		fenetre.setVisible(true);
+		
+		this.splitPane.setDividerLocation(TAILLE_MENU);
 
 	}
 
@@ -56,20 +60,19 @@ public class FenetreCivilisation {
 	public void mettreAJourLeMenu(Unite unite, Joueur joueur, ActionListener ecouteurBouton) {
 		this.menu = new AffichageMenu(unite, joueur,ecouteurBouton);
 		this.splitPane.setLeftComponent(this.menu);
+		this.splitPane.setDividerLocation(TAILLE_MENU);
 	}
 	
 	public void mettreAJourLeMenu(Ville ville, Joueur joueur, ActionListener ecouteurBouton) {
 		this.menu = new AffichageMenu(ville, joueur,ecouteurBouton);
 		this.splitPane.setLeftComponent(this.menu);
+		this.splitPane.setDividerLocation(200);
 	}
 
 	public void mettreAJourLeMenu(Joueur joueur, ActionListener ecouteurBouton) {
 		this.menu = new AffichageMenu(joueur,ecouteurBouton);
 		this.splitPane.setLeftComponent(menu);
-	}
-
-	public JSplitPane obtenirMenu() {
-		return this.splitPane;
+		this.splitPane.setDividerLocation(TAILLE_MENU);
 	}
 
 }
