@@ -68,8 +68,8 @@ public class AffichageMenu extends JPanel {
 		this.add(new Recap(ville));
 		
 		if (joueur == ville.obtenirJoueurProprietaire()) {
-			JButton ameliorerChar = new JButton("Ameliorer char ");
-			ameliorerChar.setName("AmeliorerChar");
+			JButton ameliorerChar = new JButton("Creer une Unite ");
+			ameliorerChar.setName("CreerUnite");
 			ameliorerChar.addActionListener(ecouteurBouton);
 
 			JButton ameliorerVille = new JButton("Ameliorer au niveau : "

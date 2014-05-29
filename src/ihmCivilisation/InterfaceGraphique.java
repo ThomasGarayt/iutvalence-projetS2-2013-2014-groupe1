@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
+
 import systemeCivilisation.Joueur;
 import systemeCivilisation.PartieDeCivilisation;
 import systemeCivilisation.Position;
+import systemeCivilisation.TypeUnite;
 
 public class InterfaceGraphique implements Runnable, ActionListener {
 
@@ -23,11 +25,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		this.positionDeLUniteSelectionner = null;
 		this.positionDeLaVilleSelectionner = null;
 		this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
-	}
-
-	public void mettreAJourLaCarte() {
-		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte(),
-				this);
 	}
 
 	@Override
@@ -66,10 +63,18 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			return;
 		}
 
+		// Bouton CreerUnite
+		if (source.getName() == "CreerUnite") {
+			this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Soldats);
+			this.mettreAJourLaCarte();
+			return;
+		}
+				
+				
 		Position positionDeLaSelection = new Position(
 				((BoutonCarte) source).obtenirX(),
 				((BoutonCarte) source).obtenirY());
-
+		
 		// Aucune position n'a ete selectionne
 		if ((this.positionDeLUniteSelectionner == null)
 				&& (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
@@ -149,6 +154,11 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	 */
 	private void reinitialiserLeMenu() {
 		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant, this);
+	}
+	
+	public void mettreAJourLaCarte() {
+		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte(),
+				this);
 	}
 
 	/**

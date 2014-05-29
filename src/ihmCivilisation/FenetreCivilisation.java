@@ -55,6 +55,7 @@ public class FenetreCivilisation {
 	public void mettreAJourLaCarte(Carte carte, ActionListener ecouteurBouton) {
 		AffichageCarte carteDuMonde = new AffichageCarte(carte, ecouteurDeBouton);
 		this.splitPane.setRightComponent(carteDuMonde);
+		this.splitPane.setDividerLocation(TAILLE_MENU);
 	}
 
 	public void mettreAJourLeMenu(Unite unite, Joueur joueur, ActionListener ecouteurBouton) {
