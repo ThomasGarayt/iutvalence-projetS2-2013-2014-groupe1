@@ -53,28 +53,17 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 		// Bouton AmeliorerVille
 		if (source.getName() == "AmeliorerVille") {
-			if (joueurCourant.obtenirTresorerie() >= ((logiqueDuJeu
-					.obtenirCarte().obtenirLaVilleDeLaCase(
-							positionDeLaVilleSelectionner).coutNiveauUp()))) 
-			{
-				joueurCourant.modifierTresorie(-(logiqueDuJeu.obtenirCarte()
-						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
-						.coutNiveauUp()));
+			this.logiqueDuJeu.obtenirCarte()
+					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
+					.ameliorer(this.joueurCourant);
 
-				logiqueDuJeu.obtenirCarte()
-						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
-						.ameliorer();
+			this.fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
+					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner),
+					joueurCourant, this);
 
-				fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
-						.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner),
-						joueurCourant, this);
-
-				this.positionDeLaVilleSelectionner = null;
-				reinitialiserLeMenu();
-				return;
-			} else {
-				return;
-			}
+			this.positionDeLaVilleSelectionner = null;
+			reinitialiserLeMenu();
+			return;
 		}
 
 		Position positionDeLaSelection = new Position(

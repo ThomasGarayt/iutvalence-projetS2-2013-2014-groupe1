@@ -16,8 +16,11 @@ public class Ville {
 	/**
 	 * Augmenter le niveau de la ville de 1 point.
 	 */
-	public void ameliorer() {
-		this.niveau++;
+	public void ameliorer(Joueur joueur) {
+		if (joueur.obtenirTresorerie() >= this.coutNiveauUp() ) {
+			joueur.modifierTresorie(-this.coutNiveauUp());
+			this.niveau++;
+		}
 	}
 
 
