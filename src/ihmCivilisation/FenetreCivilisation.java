@@ -18,7 +18,6 @@ public class FenetreCivilisation {
 
 	private JSplitPane splitPane;
 	private AffichageMenu menu;
-	//private ActionListener ecouteurDeBouton;
 
 	/**
 	 * Initialisation de la fenetre de jeu.
