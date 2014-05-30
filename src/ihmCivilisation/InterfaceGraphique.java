@@ -195,6 +195,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		}
 
 		// Le joueur prend une ville
+		// BUG SPOTTED
 		if (logiqueDuJeu.obtenirCarte().laCaseContientUneVille(
 				positionDeLaSelection)
 				&& logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
