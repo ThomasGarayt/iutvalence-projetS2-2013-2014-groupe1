@@ -210,14 +210,38 @@ public class PartieDeCivilisation {
 				niveauVilleJoueur * 50);
 	}
 	
-	/*private void finPartie()
+	/**
+	 * Teste si le joueur non courant a encore des unités en vie
+	 * 
+	 * @return true si le joueur non courant n'a plus rien, false sinon
+	 */
+	private boolean testFinPartie()
 	{
 		int nombreUniteJoueurNonCourant = 0;
+		int nombreVilleJoueurNonCourant = 0;
 		for (int i = 0; i < Carte.NB_CASES_X; i++)
 			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+				Unite uniteCourante = this.carte
+						.obtenirLUniteDeLaCase(new Position(i, j));
+				Ville villeCourante = this.carte
+						.obtenirLaVilleDeLaCase(new Position(i, j));
 				
+			if(uniteCourante.obtenirJoueur() != this.obtenirJoueurDontCEstLeTour())
+			{
+				nombreUniteJoueurNonCourant++;
 			}
-	}*/
+			if(villeCourante.obtenirJoueurProprietaire() != this.obtenirJoueurDontCEstLeTour())
+			{
+				nombreVilleJoueurNonCourant++;
+			}						
+			}
+		
+		if((nombreUniteJoueurNonCourant == 0) && (nombreVilleJoueurNonCourant == 0))
+		{
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Fonction permettant d'obtenir le joueur courant
