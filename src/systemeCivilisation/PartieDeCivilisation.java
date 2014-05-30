@@ -129,12 +129,19 @@ public class PartieDeCivilisation {
 	 * 
 	 * @param typeDeLUnite
 	 *            Le type de l'unite ajoutee
+	 *            
+	 * @return true si l'unite a été ajoute, false sinon
 	 */
-	public void ajouterUneUnite(Joueur joueurConstructeur,
-			Position positionDeLunite, TypeUnite typeDeLUnite) {
+	public boolean ajouterUneUnite(Joueur joueurConstructeur,Position positionDeLunite, TypeUnite typeDeLUnite) 
+	{
 		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite))
+		{
 			this.carte.ajouterUneUniteALaCase(positionDeLunite, new Unite(
 					typeDeLUnite, joueurConstructeur));
+			return true;
+		}
+		return false;
+
 	}
 
 	/**

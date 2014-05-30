@@ -88,18 +88,22 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 		// Bouton CreerUnite
 		if (source.getName() == "CreerUnite") {
-			this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Soldats);
+			if(this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Soldats))
+			{
 			this.logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Soldats.getCoutCreation());
 			this.mettreAJourLaCarte();
+			}
 			return;
 		}
 		
 		
 		// Bouton CreerChar
 		if (source.getName() == "CreerChar") {
-			this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Chars);
+			if(this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Chars))
+			{
 			this.logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Chars.getCoutCreation());
 			this.mettreAJourLaCarte();
+			}
 			return;
 		}
 		
