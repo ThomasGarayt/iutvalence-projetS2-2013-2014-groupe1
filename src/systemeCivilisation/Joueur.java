@@ -45,6 +45,11 @@ public class Joueur {
 	public String obtenirNom() {
 		return this.nom;
 	}
+	
+	public void setNom(String nom)
+	{
+		this.nom = nom;
+	}
 
 	/**
 	 * Fonction qui permet d'obtenir la tresorerie d'un joueur

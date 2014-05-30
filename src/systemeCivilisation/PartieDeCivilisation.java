@@ -220,4 +220,10 @@ public class PartieDeCivilisation {
 	public Carte obtenirCarte() {
 		return this.carte;
 	}
+	
+	public void changerPseudoJoueur(String Pseudo1, String Pseudo2)
+	{
+		this.joueurs[0].setNom(Pseudo1);
+		this.joueurs[1].setNom(Pseudo2);
+	}
 }

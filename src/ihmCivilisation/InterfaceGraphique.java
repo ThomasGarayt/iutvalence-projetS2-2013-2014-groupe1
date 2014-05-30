@@ -47,6 +47,8 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		
 		jPseudo2 = new JOptionPane();
 		String pseudo2 = (String)jPseudo2.showInputDialog(null, "Pseudo du Joueur 2", "Joueur 2", JOptionPane.INFORMATION_MESSAGE);
+		
+		this.logiqueDuJeu.changerPseudoJoueur(pseudo1, pseudo2);
 				
 
 		this.fenetreDeJeu.initialiserFenetreCivilisation(
