@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import systemeCivilisation.Joueur;
 import systemeCivilisation.PartieDeCivilisation;
@@ -36,6 +38,17 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 	@Override
 	public void run() {
+		
+		JOptionPane jPseudo1, jPseudo2;
+		 
+		//Boîtes des messages d'informations
+		jPseudo1 = new JOptionPane();
+		String pseudo1 = (String)jPseudo1.showInputDialog(null, "Pseudo du Joueur 1", "Joueur 1", JOptionPane.INFORMATION_MESSAGE);
+		
+		jPseudo2 = new JOptionPane();
+		String pseudo2 = (String)jPseudo2.showInputDialog(null, "Pseudo du Joueur 2", "Joueur 2", JOptionPane.INFORMATION_MESSAGE);
+				
+
 		this.fenetreDeJeu.initialiserFenetreCivilisation(
 				this.logiqueDuJeu.obtenirCarte(), this.joueurCourant, this);
 	}
