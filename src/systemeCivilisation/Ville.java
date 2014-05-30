@@ -5,8 +5,14 @@ package systemeCivilisation;
  */
 public class Ville {
 
+	/**
+	 * Le niveau de la ville
+	 */
 	private int niveau;
 
+	/**
+	 * Le joueur qui possède la ville
+	 */
 	private Joueur proprietaire;
 
 	/**

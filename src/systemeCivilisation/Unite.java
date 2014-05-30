@@ -1,9 +1,9 @@
 package systemeCivilisation;
 
 /**
- * @author Romain Une unitï¿½ qui possï¿½de une vie, une puissance et une
- *         position sur une carte. Elle peut attaquer d'autre unitï¿½s et se
- *         dï¿½placer.
+ * @author Romain Une unité qui est défini par un type, une puissance, une vie, des points de mouvements,
+ * 			un niveau, un nombre d'attaque par tour et un cout de création.
+ * 			 Elle peut attaquer d'autre unité, se déplacer et prendre des villes
  */
 public class Unite {
 
@@ -19,9 +19,10 @@ public class Unite {
 	Joueur joueur;
 
 	/**
+	 * Fonction permettant de créer une unité de différent type, ayant des attributs de base
+	 * 
 	 * @param type
-	 *            Le type d'unite que l'on souhaite cree, cela definira sa vie
-	 *            et sa puissance.
+	 *            Le type d'unite que l'on souhaite cree
 	 * @param joueur
 	 *            Le joueur a qui appartient l'unite.
 	 */
@@ -183,13 +184,23 @@ public class Unite {
 		return this.coutCreation;
 	}
 	
-	public void upNiveau(Joueur joueur) {
+	
+	/**
+	 * Fonction permettant de passer au niveau supérieur une unité
+	 * 
+	 */
+	public void upNiveau() {
 		if (joueur.obtenirTresorerie() >= this.coutNiveauUp()) {
 			joueur.modifierTresorie(-this.coutNiveauUp());
 			this.niveau++;
 		}
 	}
 	
+	
+	/**
+	 * Fonction permettant d'améliorer une unité, en augmentant sa vie et sa puissance
+	 * 
+	 */
 	public void ameliorerUnite()
 	{
 		if (this.type == type.Soldats)
@@ -205,7 +216,12 @@ public class Unite {
 		}
 	}
 
-
+	
+	/**
+	 * Fonction permettant d'obtenir le cout pour passe au niveau supérieur sur un soldat ou un char
+	 * 
+	 * @return int Le cout pour level up l'unité
+	 */
 	public int coutNiveauUp() {
 		if (this.type == type.Soldats)
 		{

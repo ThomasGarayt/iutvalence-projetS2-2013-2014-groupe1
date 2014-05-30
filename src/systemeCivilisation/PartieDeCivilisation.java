@@ -197,6 +197,11 @@ public class PartieDeCivilisation {
 			}
 	}
 
+	
+	/**
+	 * Fonction mettant à jour la trésorerie du joueur qui vient de jouer en fonction du nombre de ville possédée
+	 * 
+	 */
 	private void miseAJourTresorerieFinTour() {
 		int niveauVilleJoueur = 0;
 		for (int i = 0; i < Carte.NB_CASES_X; i++)

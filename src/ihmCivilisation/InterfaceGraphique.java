@@ -100,7 +100,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		if (source.getName() == "AmeliorerUnite") {
 			logiqueDuJeu.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLUniteSelectionner)
-					.upNiveau(joueurCourant);
+					.upNiveau();
 
 			logiqueDuJeu.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLUniteSelectionner)
