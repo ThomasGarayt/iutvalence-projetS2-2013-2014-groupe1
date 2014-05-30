@@ -67,6 +67,16 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			positionDeLaVilleSelectionner = null;
 			positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
+			
+			if (logiqueDuJeu.testFinPartie()) 
+			{
+				JOptionPane jFinPartie;
+				
+				// Boite de dialogue de fin de partie
+				jFinPartie = new JOptionPane();
+				jFinPartie.showMessageDialog(null, "Bien joué à " + this.joueurCourant, "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+			} 
+			
 			return;
 		}
 
@@ -220,14 +230,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		reinitialiserLeMenu();
 		positionDeLUniteSelectionner = null;
 
-		/* if (logiqueDuJeu.testFinPartie()) 
-		{
-			JOptionPane jFinPartie;
-			
-			// Boite de dialogue de fin de partie
-			jFinPartie = new JOptionPane();
-			jFinPartie.showMessageDialog(null, "Bien joué à " + this.joueurCourant, "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
-		} */
 	}
 
 	/**

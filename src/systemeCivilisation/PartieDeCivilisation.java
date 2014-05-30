@@ -112,9 +112,10 @@ public class PartieDeCivilisation {
 		if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurAttaquant)
 				&& !(this.carte.laCaseNeContientPasDeVille(positionVille))
 				&& (this.carte.obtenirLaVilleDeLaCase(positionVille)
-						.obtenirJoueurProprietaire() != joueurAttaquant))
+						.obtenirJoueurProprietaire() != joueurAttaquant)) {
 			this.carte.obtenirLaVilleDeLaCase(positionVille)
 					.changerProprietaire(joueurAttaquant);
+		}
 	}
 
 	/**
@@ -217,11 +218,16 @@ public class PartieDeCivilisation {
 	 */
 	public boolean testFinPartie()
 	{
-		if (this.obtenirJoueurDontCEstNEstPasLeTour().nbArmee + this.obtenirJoueurDontCEstNEstPasLeTour().nbVille == 0)
-		{
-			return true;
+		for (int i = 0; i < Carte.NB_CASES_X; i++)
+			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+				if (this.carte.laCaseContientUneVille(new Position(i,j)))
+					if (this.carte.obtenirLaVilleDeLaCase(new Position(i,j)).obtenirJoueurProprietaire() == this.obtenirJoueurDontCEstLeTour())
+						return false;
+				if (!this.carte.laCaseNecontientPasDUnite(new Position(i,j)))
+					if (this.carte.obtenirLUniteDeLaCase(new Position(i,j)).obtenirJoueur() == this.obtenirJoueurDontCEstLeTour())
+						return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
