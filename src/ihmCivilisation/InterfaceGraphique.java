@@ -35,6 +35,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 

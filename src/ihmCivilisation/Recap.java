@@ -16,6 +16,11 @@ import systemeCivilisation.Ville;
 public class Recap extends JPanel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Recapitulatif vide.
 	 */
 	public Recap() {
