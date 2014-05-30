@@ -70,17 +70,23 @@ public class AffichageMenu extends JPanel {
 		this.add(new JLabel(" "));
 		this.add(new JLabel(" "));
 		
+		if (joueur == unite.obtenirJoueur()) {
 		JButton ameliorerUnite = new JButton("Ameliorer au niveau "
 				+ (unite.obtenirNiveau() + 1) + " : "
 				+ Integer.toString(unite.coutNiveauUp()));
 		ameliorerUnite.setName("AmeliorerUnite");
 		ameliorerUnite.addActionListener(ecouteurBouton);
 
+		this.add(ameliorerUnite);
+		}
+		
+		else
+		{
+			this.add(new JLabel(""));
+		}
 		JButton finirTour = new JButton("Finir le tour");
 		finirTour.setName("FinirTour");
 		finirTour.addActionListener(ecouteurBouton);
-
-		this.add(ameliorerUnite);
 		this.add(finirTour);
 	}
 
