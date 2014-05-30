@@ -13,6 +13,7 @@ public class Unite {
 	int portee;
 	int niveau;
 	int nombreAttaqueParTour;
+	int coutCreation;
 	TypeUnite type;
 
 	Joueur joueur;
@@ -32,6 +33,7 @@ public class Unite {
 		this.portee = type.getPortee();
 		this.niveau = type.getNiveau();
 		this.nombreAttaqueParTour = type.getNombreAttaqueParTour();
+		this.coutCreation = type.getCoutCreation();
 		this.joueur = joueur;
 	}
 
@@ -146,6 +148,11 @@ public class Unite {
 	public int obtenirNombreAttaqueParTour()
 	{
 		return this.nombreAttaqueParTour;
+	}
+	
+	public int obtenirCoutCreation()
+	{
+		return this.coutCreation;
 	}
 
 

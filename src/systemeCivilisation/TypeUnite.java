@@ -8,12 +8,12 @@ public enum TypeUnite {
 	/**
 	 * Un type d'unite puissant.
 	 */
-	Chars(500, 400, 2, 6, 1, 1),
+	Chars(500, 400, 2, 6, 1, 1, 500),
 
 	/**
 	 * Un type d'unitee faible.
 	 */
-	Soldats(40, 20, 4, 5, 1, 2);
+	Soldats(40, 20, 4, 5, 1, 2, 100);
 
 	/**
 	 * Permet d'obtenir la vie de depart de l'unite.
@@ -68,6 +68,16 @@ public enum TypeUnite {
 	public int getNiveau() {
 		return niveau;
 	}
+	
+	/**
+	 * Obtenier le cout de creation d'une unite 
+	 *
+	 * @return Le cout de creation de l'unite
+	 */
+	public int getCoutCreation()
+	{
+		return coutCreation;
+	}
 
 	private int vie;
 	private int puissance;
@@ -75,14 +85,16 @@ public enum TypeUnite {
 	private int portee;
 	private int niveau;
 	private int nombreAttaqueParTour;
+	private int coutCreation;
 
-	private TypeUnite(int vie, int puissance, int pm, int portee, int niveau,int nombreAttaqueParTour) {
+	private TypeUnite(int vie, int puissance, int pm, int portee, int niveau,int nombreAttaqueParTour, int coutCreation) {
 		this.vie = vie;
 		this.puissance = puissance;
 		this.pm = pm;
 		this.portee = portee;
 		this.niveau = niveau;
 		this.nombreAttaqueParTour = nombreAttaqueParTour;
+		this.coutCreation = coutCreation;
 	}
 
 }
