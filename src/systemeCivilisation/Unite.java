@@ -12,6 +12,7 @@ public class Unite {
 	int pointsDeMouvements;
 	int portee;
 	int niveau;
+	int nombreAttaqueParTour;
 	TypeUnite type;
 
 	Joueur joueur;
@@ -30,8 +31,10 @@ public class Unite {
 		this.pointsDeMouvements = type.getPm();
 		this.portee = type.getPortee();
 		this.niveau = type.getNiveau();
+		this.nombreAttaqueParTour = type.getNombreAttaqueParTour();
 		this.joueur = joueur;
 	}
+
 
 	/**
 	 * L'unite attaque une autre unite.
@@ -41,6 +44,7 @@ public class Unite {
 	 */
 	public void attaquer(Unite uniteAAttaquer) {
 		uniteAAttaquer.changementDeVieRelatif(-puissance);
+		this.nombreAttaqueParTour = this.nombreAttaqueParTour - 1;
 	}
 
 	/**
@@ -101,10 +105,18 @@ public class Unite {
 	}
 
 	/**
-	 * Re-initialise tous les Pm des unites d'un joueur a la fin de son tour
+	 * Re-initialise tous les pm d'une unite
 	 */
 	public void reinitialiserPm() {
 		this.pointsDeMouvements = this.type.getPm();
+	}
+	
+	/**
+	 * Re-initialise le nombre d'attaque par tour d'une unite
+	 */
+	public void reinitialiserNombreAttaqueParTour()
+	{
+		this.nombreAttaqueParTour = this.type.getNombreAttaqueParTour();
 	}
 
 	/**
@@ -124,5 +136,17 @@ public class Unite {
 	public int obtenirNiveau() {
 		return this.niveau;
 	}
+	
+	
+	/**
+	 * Permet d'obtenir le nombre d'attaque par tour d'une unité
+	 * 
+	 * @return nombreAttaqueParTour Le nombre d'attaque qu'une unité peut effectuer
+	 */
+	public int obtenirNombreAttaqueParTour()
+	{
+		return this.nombreAttaqueParTour;
+	}
+
 
 }

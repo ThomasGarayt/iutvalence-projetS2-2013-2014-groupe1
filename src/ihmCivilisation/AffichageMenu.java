@@ -32,7 +32,7 @@ public class AffichageMenu extends JPanel {
 
 		this.add(new Recap(joueur));
 
-		this.add(new JLabel(" Rien n'est selectionner"));
+		this.add(new JLabel(" Rien n'est selectionné"));
 		this.add(new Recap());
 
 		this.add(new JLabel(" "));

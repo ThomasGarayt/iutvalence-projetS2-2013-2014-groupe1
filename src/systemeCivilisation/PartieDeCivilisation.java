@@ -48,9 +48,10 @@ public class PartieDeCivilisation {
 				.obtenirJoueur() == joueurAttaquant)
 				&& (this.carte.obtenirLUniteDeLaCase(positionDefenseur)
 						.obtenirJoueur() != this.joueurs[this.joueurDontCEstLeTour])
-				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee >= ((positionDefenseur
+				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).portee >= (positionDefenseur
 						.deltaX(positionAttaquant) + positionDefenseur
-						.deltaY(positionAttaquant))))) {
+						.deltaY(positionAttaquant)))
+				&& (this.carte.obtenirLUniteDeLaCase(positionAttaquant).nombreAttaqueParTour > 0)) {
 			this.carte.obtenirLUniteDeLaCase(positionAttaquant).attaquer(
 					this.carte.obtenirLUniteDeLaCase(positionDefenseur));
 			if (!(this.carte.obtenirLUniteDeLaCase(positionDefenseur)
@@ -161,40 +162,45 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
-		reinitialiserPm();
+		reinitialiserUnite();
 		miseAJourTresorerieFinTour();
-		
+
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
 			this.joueurDontCEstLeTour = 0;
 	}
 
-	private void reinitialiserPm() {
+	private void reinitialiserUnite() {
 		for (int i = 0; i < Carte.NB_CASES_X; i++)
 			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
 				Unite uniteCourante = this.carte
 						.obtenirLUniteDeLaCase(new Position(i, j));
-				if ((uniteCourante != null) && (uniteCourante.obtenirJoueur() == this
-						.obtenirJoueurDontCEstLeTour()))
-				uniteCourante.reinitialiserPm();
+				if ((uniteCourante != null)
+						&& (uniteCourante.obtenirJoueur() == this
+								.obtenirJoueurDontCEstLeTour())) {
+					uniteCourante.reinitialiserPm();
+					uniteCourante.reinitialiserNombreAttaqueParTour();
+				}
+
 			}
 	}
-	
-	private void miseAJourTresorerieFinTour()
-	{
-	int niveauVilleJoueur = 0;
-	for (int i = 0; i < Carte.NB_CASES_X; i++)
-		for (int j = 0; j < Carte.NB_CASES_Y; j++) {
-			Ville villeCourante = this.carte
-					.obtenirLaVilleDeLaCase(new Position(i, j));
-			if ((villeCourante != null) && (villeCourante.obtenirJoueurProprietaire() == this
-					.obtenirJoueurDontCEstLeTour() ))
-			{
-				niveauVilleJoueur = niveauVilleJoueur + villeCourante.obtenirNiveau();
+
+	private void miseAJourTresorerieFinTour() {
+		int niveauVilleJoueur = 0;
+		for (int i = 0; i < Carte.NB_CASES_X; i++)
+			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+				Ville villeCourante = this.carte
+						.obtenirLaVilleDeLaCase(new Position(i, j));
+				if ((villeCourante != null)
+						&& (villeCourante.obtenirJoueurProprietaire() == this
+								.obtenirJoueurDontCEstLeTour())) {
+					niveauVilleJoueur = niveauVilleJoueur
+							+ villeCourante.obtenirNiveau();
+				}
 			}
-		}
-	this.obtenirJoueurDontCEstLeTour().modifierTresorie(niveauVilleJoueur*50);
+		this.obtenirJoueurDontCEstLeTour().modifierTresorie(
+				niveauVilleJoueur * 50);
 	}
 
 	/**
