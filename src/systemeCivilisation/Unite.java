@@ -86,6 +86,17 @@ public class Unite {
 	public int obtenirVie() {
 		return this.vie;
 	}
+	
+	/**
+	 * Permet d'obtenir la puissance d'une unite
+	 * 
+	 * @retur puissance La puissance de l'unite
+	 */
+	public int obtenirPuissance() {
+		return this.puissance;
+	}
+	
+	
 
 	/**
 	 * Permet d'obtenier le nombre de points de mouvement d'une unitÃ©
@@ -148,6 +159,17 @@ public class Unite {
 	public int obtenirNombreAttaqueParTour()
 	{
 		return this.nombreAttaqueParTour;
+	}
+	
+	
+	/**
+	 * Permet d'obtenier la porte d'attaque d'une unité
+	 * 
+	 * @return porte La porte d'attaque de l'unité
+	 */
+	public int obtenierPorte()
+	{
+		return this.portee;
 	}
 	
 	public int obtenirCoutCreation()

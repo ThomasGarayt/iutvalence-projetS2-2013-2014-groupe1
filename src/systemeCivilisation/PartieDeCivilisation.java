@@ -202,6 +202,15 @@ public class PartieDeCivilisation {
 		this.obtenirJoueurDontCEstLeTour().modifierTresorie(
 				niveauVilleJoueur * 50);
 	}
+	
+	/*private void finPartie()
+	{
+		int nombreUniteJoueurNonCourant = 0;
+		for (int i = 0; i < Carte.NB_CASES_X; i++)
+			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
+				
+			}
+	}*/
 
 	/**
 	 * Fonction permettant d'obtenir le joueur courant

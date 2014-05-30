@@ -51,15 +51,24 @@ public class Recap extends JPanel {
 	public Recap(Unite unite) {
 		super();
 
-		this.setLayout(new GridLayout(3, 2));
+		this.setLayout(new GridLayout(6, 2));
 		this.add(new JLabel(" Niveau : "));
 		this.add(new JLabel(Integer.toString(unite.obtenirNiveau())));
 
 		this.add(new JLabel(" Vie : "));
 		this.add(new JLabel(Integer.toString(unite.obtenirVie())));
-
+		
+		this.add(new JLabel(" Puissance : "));
+		this.add(new JLabel(Integer.toString(unite.obtenirPuissance())));
+		
 		this.add(new JLabel(" Deplacement : "));
 		this.add(new JLabel(Integer.toString(unite.obtenirPointDeMouvements())));
+		
+		this.add(new JLabel(" Attaques restantes : "));
+		this.add(new JLabel(Integer.toString(unite.obtenirNombreAttaqueParTour())));
+		
+		this.add(new JLabel(" Porté : "));
+		this.add(new JLabel(Integer.toString(unite.obtenierPorte())));
 	}
 
 	/**

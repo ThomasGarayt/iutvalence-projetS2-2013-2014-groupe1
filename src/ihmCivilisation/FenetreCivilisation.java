@@ -31,6 +31,8 @@ public class FenetreCivilisation {
 	 */
 	public void initialiserFenetreCivilisation(Carte carte, Joueur joueur,
 			ActionListener ecouteurBouton) {
+		
+		
 		JFrame fenetre = new JFrame("Civilisation II");
 		fenetre.setSize(700, 600);
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
