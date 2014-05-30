@@ -207,7 +207,17 @@ public class Unite {
 
 
 	public int coutNiveauUp() {
-		return ((this.niveau + 1) * 100);
+		if (this.type == type.Soldats)
+		{
+			return (int)((this.niveau + 1) * 100);
+		}
+		
+		if(this.type == type.Chars)
+		{
+			return (int)((this.niveau + 1) * 150);
+		}
+		else return 0;
+
 	}
 
 
