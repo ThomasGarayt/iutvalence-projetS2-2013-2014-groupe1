@@ -199,7 +199,11 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		if (logiqueDuJeu.obtenirCarte().laCaseContientUneVille(
 				positionDeLaSelection)
 				&& logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
-						positionDeLaSelection)) 
+						positionDeLaSelection)
+						
+				
+				
+				) 
 		{
 			logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierNbVille(1);
 			if (logiqueDuJeu.obtenirCarte()

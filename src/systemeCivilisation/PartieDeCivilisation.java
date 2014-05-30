@@ -112,7 +112,11 @@ public class PartieDeCivilisation {
 		if ((this.carte.obtenirLUniteDeLaCase(positionDeLUnite).obtenirJoueur() == joueurAttaquant)
 				&& !(this.carte.laCaseNeContientPasDeVille(positionVille))
 				&& (this.carte.obtenirLaVilleDeLaCase(positionVille)
-						.obtenirJoueurProprietaire() != joueurAttaquant)) {
+						.obtenirJoueurProprietaire() != joueurAttaquant)
+							&& (this.carte.obtenirLUniteDeLaCase(positionDeLUnite)
+						.obtenirPointDeMouvements() >= ((positionDeLUnite
+						.deltaX(positionVille) + positionDeLUnite
+						.deltaY(positionVille))))) {
 			this.carte.obtenirLaVilleDeLaCase(positionVille)
 					.changerProprietaire(joueurAttaquant);
 		}
@@ -130,13 +134,12 @@ public class PartieDeCivilisation {
 	 * 
 	 * @param typeDeLUnite
 	 *            Le type de l'unite ajoutee
-	 *            
+	 * 
 	 * @return true si l'unite a été ajoute, false sinon
 	 */
-	public boolean ajouterUneUnite(Joueur joueurConstructeur,Position positionDeLunite, TypeUnite typeDeLUnite) 
-	{
-		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite))
-		{
+	public boolean ajouterUneUnite(Joueur joueurConstructeur,
+			Position positionDeLunite, TypeUnite typeDeLUnite) {
+		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite)) {
 			this.carte.ajouterUneUniteALaCase(positionDeLunite, new Unite(
 					typeDeLUnite, joueurConstructeur));
 			return true;
@@ -210,23 +213,26 @@ public class PartieDeCivilisation {
 		this.obtenirJoueurDontCEstLeTour().modifierTresorie(
 				niveauVilleJoueur * 50);
 	}
-	
+
 	/**
 	 * Teste si le joueur non courant a encore des unités et villes en vie
 	 * 
 	 * @return true si le joueur non courant n'a plus rien, false sinon
 	 */
-	public boolean testFinPartie()
-	{
+	public boolean testFinPartie() {
 		for (int i = 0; i < Carte.NB_CASES_X; i++)
 			for (int j = 0; j < Carte.NB_CASES_Y; j++) {
-				if (this.carte.laCaseContientUneVille(new Position(i,j)))
-					if (this.carte.obtenirLaVilleDeLaCase(new Position(i,j)).obtenirJoueurProprietaire() == this.obtenirJoueurDontCEstLeTour())
+				if (this.carte.laCaseContientUneVille(new Position(i, j)))
+					if (this.carte.obtenirLaVilleDeLaCase(new Position(i, j))
+							.obtenirJoueurProprietaire() == this
+							.obtenirJoueurDontCEstLeTour())
 						return false;
-				if (!this.carte.laCaseNecontientPasDUnite(new Position(i,j)))
-					if (this.carte.obtenirLUniteDeLaCase(new Position(i,j)).obtenirJoueur() == this.obtenirJoueurDontCEstLeTour())
+				if (!this.carte.laCaseNecontientPasDUnite(new Position(i, j)))
+					if (this.carte.obtenirLUniteDeLaCase(new Position(i, j))
+							.obtenirJoueur() == this
+							.obtenirJoueurDontCEstLeTour())
 						return false;
-		}
+			}
 		return true;
 	}
 
@@ -238,7 +244,7 @@ public class PartieDeCivilisation {
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
 	}
-	
+
 	/**
 	 * Fonction permettant d'obtenir le joueur qui ne joue pas
 	 * 
@@ -250,7 +256,7 @@ public class PartieDeCivilisation {
 		else
 			return joueurs[1];
 	}
-	
+
 	/**
 	 * Retourne la carte du jeu
 	 * 
@@ -259,9 +265,8 @@ public class PartieDeCivilisation {
 	public Carte obtenirCarte() {
 		return this.carte;
 	}
-	
-	public void changerPseudoJoueur(String Pseudo1, String Pseudo2)
-	{
+
+	public void changerPseudoJoueur(String Pseudo1, String Pseudo2) {
 		this.joueurs[0].setNom(Pseudo1);
 		this.joueurs[1].setNom(Pseudo2);
 	}
