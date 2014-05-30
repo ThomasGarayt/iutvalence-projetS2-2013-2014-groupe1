@@ -60,7 +60,7 @@ public class AffichageMenu extends JPanel {
 			ActionListener ecouteurBouton) {
 		super();
 
-		this.setLayout(new GridLayout(6, 1));
+		this.setLayout(new GridLayout(7, 1));
 
 		this.add(new Recap(joueur));
 
@@ -69,11 +69,18 @@ public class AffichageMenu extends JPanel {
 
 		this.add(new JLabel(" "));
 		this.add(new JLabel(" "));
+		
+		JButton ameliorerUnite = new JButton("Ameliorer au niveau "
+				+ (unite.obtenirNiveau() + 1) + " : "
+				+ Integer.toString(unite.coutNiveauUp()));
+		ameliorerUnite.setName("AmeliorerUnite");
+		ameliorerUnite.addActionListener(ecouteurBouton);
 
 		JButton finirTour = new JButton("Finir le tour");
 		finirTour.setName("FinirTour");
 		finirTour.addActionListener(ecouteurBouton);
 
+		this.add(ameliorerUnite);
 		this.add(finirTour);
 	}
 

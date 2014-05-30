@@ -65,30 +65,51 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		if (source.getName() == "FinirTour") {
 			finirLeTour();
 			joueurCourant = logiqueDuJeu.obtenirJoueurDontCEstLeTour();
-			this.positionDeLaVilleSelectionner = null;
-			this.positionDeLUniteSelectionner = null;
+			positionDeLaVilleSelectionner = null;
+			positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
 			return;
 		}
 
 		// Bouton AmeliorerVille
-		if (source.getName() == "AmeliorerVille") {
-			this.logiqueDuJeu.obtenirCarte()
+		if (source.getName() == "AmeliorerVille") 
+		{
+			logiqueDuJeu.obtenirCarte()
 					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner)
-					.ameliorer(this.joueurCourant);
+					.ameliorer(joueurCourant);
 
-			this.fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
+			
+			fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
 					.obtenirLaVilleDeLaCase(positionDeLaVilleSelectionner),
 					joueurCourant, this);
 
-			this.positionDeLaVilleSelectionner = null;
+			positionDeLaVilleSelectionner = null;
+			reinitialiserLeMenu();
+			return;
+		}
+		
+		// Bouton AmeliorerUnite
+		if (source.getName() == "AmeliorerUnite") 
+		{
+			logiqueDuJeu.obtenirCarte()
+					.obtenirLUniteDeLaCase(positionDeLUniteSelectionner)
+					.upNiveau(this.joueurCourant);
+
+			logiqueDuJeu.obtenirCarte()
+			.obtenirLUniteDeLaCase(positionDeLUniteSelectionner).ameliorerUnite();
+			
+			fenetreDeJeu.mettreAJourLeMenu(logiqueDuJeu.obtenirCarte()
+					.obtenirLUniteDeLaCase(positionDeLUniteSelectionner),
+					joueurCourant, this);
+
+			positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
 			return;
 		}
 
 		// Bouton CreerUnite
 		if (source.getName() == "CreerUnite") {
-			if(this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Soldats))
+			if(logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Soldats))
 			{
 			this.logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Soldats.getCoutCreation());
 			this.mettreAJourLaCarte();
@@ -99,10 +120,10 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		
 		// Bouton CreerChar
 		if (source.getName() == "CreerChar") {
-			if(this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Chars))
+			if(logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Chars))
 			{
-			this.logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Chars.getCoutCreation());
-			this.mettreAJourLaCarte();
+			logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Chars.getCoutCreation());
+			mettreAJourLaCarte();
 			}
 			return;
 		}
@@ -116,76 +137,76 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				((BoutonCarte) source).obtenirY());
 		
 		// Aucune position n'a ete selectionne
-		if ((this.positionDeLUniteSelectionner == null)
-				&& (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
+		if ((positionDeLUniteSelectionner == null)
+				&& (logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 						positionDeLaSelection)
-						&& (this.logiqueDuJeu.obtenirCarte()
+						&& (logiqueDuJeu.obtenirCarte()
 								.laCaseNeContientPasDeVille(positionDeLaSelection)) 
-						&& (this.positionDeLaVilleSelectionner == null))) 
+						&& (positionDeLaVilleSelectionner == null))) 
 		{ return; }
 
 		// Selection d'une ville
-		if ((this.logiqueDuJeu.obtenirCarte()
+		if ((logiqueDuJeu.obtenirCarte()
 				.laCaseContientUneVille(positionDeLaSelection))
-				&& (this.positionDeLUniteSelectionner == null)
-				&& (this.logiqueDuJeu.obtenirCarte()
+				&& (positionDeLUniteSelectionner == null)
+				&& (logiqueDuJeu.obtenirCarte()
 						.laCaseNecontientPasDUnite(positionDeLaSelection))
-				&& (this.positionDeLaVilleSelectionner == null)) {
-			this.fenetreDeJeu.mettreAJourLeMenu(
-					this.logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
+				&& (positionDeLaVilleSelectionner == null)) {
+			fenetreDeJeu.mettreAJourLeMenu(
+					logiqueDuJeu.obtenirCarte().obtenirLaVilleDeLaCase(
 							positionDeLaSelection), joueurCourant, this);
-			this.positionDeLaVilleSelectionner = positionDeLaSelection;
+			positionDeLaVilleSelectionner = positionDeLaSelection;
 			return;
 		}
 
 		// Deselection d'une ville
-		if ((this.positionDeLaVilleSelectionner != null)
-				|| (this.positionDeLaVilleSelectionner == positionDeLaSelection)) {
-			this.positionDeLaVilleSelectionner = null;
-			this.fenetreDeJeu.mettreAJourLeMenu(joueurCourant, this);
+		if ((positionDeLaVilleSelectionner != null)
+				|| (positionDeLaVilleSelectionner == positionDeLaSelection)) {
+			positionDeLaVilleSelectionner = null;
+			fenetreDeJeu.mettreAJourLeMenu(joueurCourant, this);
 			return;
 		}
 
 		// Selection de la premiere unite.
-		if ((this.positionDeLUniteSelectionner == null)) {
-			this.fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
+		if ((positionDeLUniteSelectionner == null)) {
+			fenetreDeJeu.mettreAJourLeMenu(this.logiqueDuJeu
 					.obtenirCarte()
 					.obtenirLUniteDeLaCase(positionDeLaSelection),
 					joueurCourant, this);
-			this.positionDeLUniteSelectionner = positionDeLaSelection;
+			positionDeLUniteSelectionner = positionDeLaSelection;
 			return;
 		}
 
 		// L'unite est selectionne et le joueur va effectuer une action.
 
 		// Le joueur re-selectionne l'unite.
-		if (this.positionDeLUniteSelectionner.equals(positionDeLaSelection)) {
-			this.positionDeLUniteSelectionner = null;
-			this.reinitialiserLeMenu();
+		if (positionDeLUniteSelectionner.equals(positionDeLaSelection)) {
+			positionDeLUniteSelectionner = null;
+			reinitialiserLeMenu();
 			return;
 		}
 
 		// Le joueur prend une ville
-		if (this.logiqueDuJeu.obtenirCarte().laCaseContientUneVille(
+		if (logiqueDuJeu.obtenirCarte().laCaseContientUneVille(
 				positionDeLaSelection)
-				&& this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
+				&& logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 						positionDeLaSelection))
-			this.logiqueDuJeu.prendreLaVille(joueurCourant,
+			logiqueDuJeu.prendreLaVille(joueurCourant,
 					positionDeLaSelection, positionDeLUniteSelectionner);
 
 		// Le joueur deplace l'unite
-		if (this.logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
+		if (logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
 				positionDeLaSelection))
-			this.logiqueDuJeu.deplacerUneUnite(joueurCourant,
+			logiqueDuJeu.deplacerUneUnite(joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);
 
 		// Le joueur attaque une unite adverse.
 		else
-			this.logiqueDuJeu.attaquer(this.joueurCourant,
+			logiqueDuJeu.attaquer(joueurCourant,
 					positionDeLUniteSelectionner, positionDeLaSelection);
-		this.mettreAJourLaCarte();
-		this.reinitialiserLeMenu();
-		this.positionDeLUniteSelectionner = null;
+		mettreAJourLaCarte();
+		reinitialiserLeMenu();
+		positionDeLUniteSelectionner = null;
 		
 		/*if(logiqueDuJeu.testFinPartie())
 		{
@@ -203,14 +224,14 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	 * Permet de reinitialiser le menu de gauche
 	 */
 	private void reinitialiserLeMenu() {
-		this.fenetreDeJeu.mettreAJourLeMenu(this.joueurCourant, this);
+		fenetreDeJeu.mettreAJourLeMenu(joueurCourant, this);
 	}
 	
 	/**
 	 * Permet de mettre a jour la carte.
 	 */
 	public void mettreAJourLaCarte() {
-		this.fenetreDeJeu.mettreAJourLaCarte(this.logiqueDuJeu.obtenirCarte(),
+		fenetreDeJeu.mettreAJourLaCarte(logiqueDuJeu.obtenirCarte(),
 				this);
 	}
 
@@ -218,7 +239,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	 * Fini le tour en cours
 	 */
 	private void finirLeTour() {
-		this.logiqueDuJeu.finirLeTour();
+		logiqueDuJeu.finirLeTour();
 	}
 
 }

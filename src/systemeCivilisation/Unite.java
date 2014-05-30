@@ -163,18 +163,51 @@ public class Unite {
 	
 	
 	/**
-	 * Permet d'obtenier la porte d'attaque d'une unité
+	 * Permet d'obtenir la porte d'attaque d'une unité
 	 * 
 	 * @return porte La porte d'attaque de l'unité
 	 */
-	public int obtenierPorte()
+	public int obtenirPorte()
 	{
 		return this.portee;
 	}
 	
+	
+	/**
+	 * Permet d'obtenir le cout de création d'une unité
+	 * 
+	 * @return coutCreation Le cout de création de l'unité
+	 */
 	public int obtenirCoutCreation()
 	{
 		return this.coutCreation;
+	}
+	
+	public void upNiveau(Joueur joueur) {
+		if (joueur.obtenirTresorerie() >= this.coutNiveauUp()) {
+			joueur.modifierTresorie(-this.coutNiveauUp());
+			this.niveau++;
+		}
+	}
+	
+	public void ameliorerUnite()
+	{
+		if (this.type == type.Soldats)
+		{
+			this.vie = this.vie + 50 ;
+			this.puissance = this.puissance +20;
+		}
+		
+		if(this.type == type.Chars)
+		{
+			this.vie = this.vie + 200 ;
+			this.puissance = this.puissance +50;
+		}
+	}
+
+
+	public int coutNiveauUp() {
+		return ((this.niveau + 1) * 100);
 	}
 
 

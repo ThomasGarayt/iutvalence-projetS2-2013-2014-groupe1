@@ -68,7 +68,7 @@ public class Recap extends JPanel {
 		this.add(new JLabel(Integer.toString(unite.obtenirNombreAttaqueParTour())));
 		
 		this.add(new JLabel(" Portée : "));
-		this.add(new JLabel(Integer.toString(unite.obtenierPorte())));
+		this.add(new JLabel(Integer.toString(unite.obtenirPorte())));
 	}
 
 	/**
