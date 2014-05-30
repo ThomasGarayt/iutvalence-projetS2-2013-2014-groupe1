@@ -1,5 +1,7 @@
 package systemeCivilisation;
 
+import java.security.SecureRandom;
+
 /**
  * @author Romain Decrie une partie de civilisation et les interaction entre les
  *         joueurs.
@@ -163,8 +165,9 @@ public class PartieDeCivilisation {
 				TypeUnite.Chars, this.joueurs[1]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
 				TypeUnite.Soldats, this.joueurs[1]));
-		carteDuMonde.ajouterUneVille(new Position(6, 2), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(3, 3), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(12, 13), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(2, 1), new Ville());
+		
 		return carteDuMonde;
 	}
 
