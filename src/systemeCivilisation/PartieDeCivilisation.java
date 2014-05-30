@@ -211,39 +211,18 @@ public class PartieDeCivilisation {
 	}
 	
 	/**
-	 * Teste si le joueur non courant a encore des unités en vie
+	 * Teste si le joueur non courant a encore des unités et villes en vie
 	 * 
 	 * @return true si le joueur non courant n'a plus rien, false sinon
 	 */
-	/*
 	public boolean testFinPartie()
 	{
-		int nombreUniteJoueurNonCourant = 0;
-		int nombreVilleJoueurNonCourant = 0;
-		for (int i = 0; i < Carte.NB_CASES_X; i++)
-			for (int j = 0; j < Carte.NB_CASES_Y; j++) 
-			{
-			Unite uniteCourante = this.carte.obtenirLUniteDeLaCase(new Position(i, j));
-			Ville villeCourante = this.carte.obtenirLaVilleDeLaCase(new Position(i, j));
-				
-			if(uniteCourante.obtenirJoueur() != this.obtenirJoueurDontCEstLeTour())
-			{
-				nombreUniteJoueurNonCourant++;
-			}
-			
-			if(villeCourante.obtenirJoueurProprietaire() != this.obtenirJoueurDontCEstLeTour())
-			{
-				nombreVilleJoueurNonCourant++;
-			}
-			
-			}
-		
-		if((nombreUniteJoueurNonCourant == 0) && (nombreVilleJoueurNonCourant == 0))
+		if (this.obtenirJoueurDontCEstNEstPasLeTour().nbArmee + this.obtenirJoueurDontCEstNEstPasLeTour().nbVille == 0)
 		{
 			return true;
 		}
 		return false;
-	}*/
+	}
 
 	/**
 	 * Fonction permettant d'obtenir le joueur courant
@@ -253,7 +232,19 @@ public class PartieDeCivilisation {
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
 	}
-
+	
+	/**
+	 * Fonction permettant d'obtenir le joueur qui ne joue pas
+	 * 
+	 * @return joueursDontCeNEstPasLeTour Le joueur qui ne joue pas
+	 */
+	public Joueur obtenirJoueurDontCEstNEstPasLeTour() {
+		if (joueurDontCEstLeTour == 1)
+			return joueurs[0];
+		else
+			return joueurs[1];
+	}
+	
 	/**
 	 * Retourne la carte du jeu
 	 * 

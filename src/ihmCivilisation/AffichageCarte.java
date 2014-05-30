@@ -15,6 +15,9 @@ import systemeCivilisation.TypeUnite;
  */
 public class AffichageCarte extends JPanel {
 
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Affiche la carte graphiquement.
 	 * 

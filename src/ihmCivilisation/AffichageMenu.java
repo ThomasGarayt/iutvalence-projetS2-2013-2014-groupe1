@@ -18,6 +18,8 @@ import systemeCivilisation.Ville;
  */
 public class AffichageMenu extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Crée un menu.
 	 * 

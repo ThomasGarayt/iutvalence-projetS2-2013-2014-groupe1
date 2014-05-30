@@ -11,7 +11,7 @@ import systemeCivilisation.Ville;
 
 /**
  * @author Romain
- * Le recapitulatif d'un joueur d'une unite ou d'une ville.
+ * Le recapitulatif grahpique d'un joueur d'une unite ou d'une ville.
  */
 public class Recap extends JPanel {
 
