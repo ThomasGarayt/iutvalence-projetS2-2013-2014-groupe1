@@ -77,6 +77,18 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			this.mettreAJourLaCarte();
 			return;
 		}
+		
+		
+		// Bouton CreerChar
+		if (source.getName() == "CreerChar") {
+			this.logiqueDuJeu.ajouterUneUnite(joueurCourant, positionDeLaVilleSelectionner, TypeUnite.Chars);
+			this.logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(-TypeUnite.Chars.getCoutCreation());
+			this.mettreAJourLaCarte();
+			return;
+		}
+		
+		
+		
 				
 				
 		Position positionDeLaSelection = new Position(

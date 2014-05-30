@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import systemeCivilisation.Joueur;
+import systemeCivilisation.TypeUnite;
 import systemeCivilisation.Unite;
 import systemeCivilisation.Ville;
 
@@ -75,7 +76,7 @@ public class AffichageMenu extends JPanel {
 
 		this.add(finirTour);
 	}
-	
+
 	/**
 	 * Crée un menu.
 	 * 
@@ -90,7 +91,7 @@ public class AffichageMenu extends JPanel {
 			ActionListener ecouteurBouton) {
 		super();
 
-		this.setLayout(new GridLayout(6, 1));
+		this.setLayout(new GridLayout(7, 1));
 
 		this.add(new Recap(joueur));
 
@@ -98,20 +99,31 @@ public class AffichageMenu extends JPanel {
 		this.add(new Recap(ville));
 
 		if (joueur == ville.obtenirJoueurProprietaire()) {
-			JButton ameliorerChar = new JButton("Creer une Unite ");
-			ameliorerChar.setName("CreerUnite");
-			ameliorerChar.addActionListener(ecouteurBouton);
-
-			JButton ameliorerVille = new JButton("Ameliorer au niveau : "
-					+ (ville.obtenirNiveau() + 1) + " "
+			JButton creerUnite = new JButton("Creer un Soldat : " 
+					+ TypeUnite.Soldats.getCoutCreation());
+			creerUnite.setName("CreerUnite");
+			creerUnite.addActionListener(ecouteurBouton);
+			
+			JButton creerChar = new JButton("Creer un Char : " 
+					+ TypeUnite.Chars.getCoutCreation());
+			creerChar.setName("CreerChar");
+			creerChar.addActionListener(ecouteurBouton);
+			
+			
+			JButton ameliorerVille = new JButton("Ameliorer au niveau "
+					+ (ville.obtenirNiveau() + 1) + " : "
 					+ Integer.toString(ville.coutNiveauUp()));
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 
-			this.add(ameliorerChar);
+			this.add(creerUnite);
+			this.add(creerChar);
 			this.add(ameliorerVille);
 
-		} else {
+		} 
+		
+		else 
+		{
 			this.add(new JLabel(""));
 			this.add(new JLabel(""));
 		}
@@ -121,5 +133,4 @@ public class AffichageMenu extends JPanel {
 
 		this.add(finirTour);
 	}
-
 }
