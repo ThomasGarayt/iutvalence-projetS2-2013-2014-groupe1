@@ -35,18 +35,12 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		this.joueurCourant = this.logiqueDuJeu.obtenirJoueurDontCEstLeTour();
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 
-		JOptionPane jPseudo1, jPseudo2;
-
 		// Boîtes de dialogues pour obtenir les pseudos des joueurs
-		jPseudo1 = new JOptionPane();
-		String pseudo1 = (String) jPseudo1.showInputDialog(null,"Pseudo du Joueur 1", "Joueur 1",JOptionPane.INFORMATION_MESSAGE);
-
-		jPseudo2 = new JOptionPane();
-		String pseudo2 = (String) jPseudo2.showInputDialog(null,"Pseudo du Joueur 2", "Joueur 2",JOptionPane.INFORMATION_MESSAGE);
+		String pseudo1 = (String) JOptionPane.showInputDialog(null,"Pseudo du Joueur 1", "Joueur 1",JOptionPane.INFORMATION_MESSAGE);
+		String pseudo2 = (String) JOptionPane.showInputDialog(null,"Pseudo du Joueur 2", "Joueur 2",JOptionPane.INFORMATION_MESSAGE);
 
 		// Changement des pseudos des 2 joueurs
 		this.logiqueDuJeu.changerPseudoJoueur(pseudo1, pseudo2);
@@ -55,7 +49,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				this.logiqueDuJeu.obtenirCarte(), this.joueurCourant, this);
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void actionPerformed(ActionEvent event) {
 
@@ -71,11 +64,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			
 			if (logiqueDuJeu.testFinPartie()) 
 			{
-				JOptionPane jFinPartie;
-				
-				// Boite de dialogue de fin de partie
-				jFinPartie = new JOptionPane();
-				jFinPartie.showMessageDialog(null, "Bien joué à " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Bien joué à " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
 			} 
 			
 			return;
@@ -122,8 +111,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(
 						-TypeUnite.Soldats.getCoutCreation());
 				mettreAJourLaCarte();
-				logiqueDuJeu.obtenirJoueurDontCEstLeTour()
-						.modifierNombreArme(1);
 			}
 			return;
 		}
@@ -135,8 +122,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(
 						-TypeUnite.Chars.getCoutCreation());
 				mettreAJourLaCarte();
-				logiqueDuJeu.obtenirJoueurDontCEstLeTour()
-						.modifierNombreArme(1);
 			}
 			return;
 		}
@@ -205,15 +190,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 				
 				) 
 		{
-			logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierNbVille(1);
-			if (logiqueDuJeu.obtenirCarte()
-					.obtenirLaVilleDeLaCase(positionDeLaSelection)
-					.obtenirJoueurProprietaire() == logiqueDuJeu
-					.obtenirJoueurDontCEstNEstPasLeTour()) 
-			{
-				logiqueDuJeu.obtenirJoueurDontCEstNEstPasLeTour()
-						.modifierNbVille(-1);
-			}
 			logiqueDuJeu.prendreLaVille(joueurCourant, positionDeLaSelection,
 					positionDeLUniteSelectionner);
 		}

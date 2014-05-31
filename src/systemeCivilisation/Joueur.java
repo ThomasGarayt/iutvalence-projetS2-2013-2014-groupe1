@@ -12,17 +12,6 @@ public class Joueur {
 	public final static int TRESORERIE_DE_DEPART = 1000;
 
 	private int tresorerie;
-	
-	/**
-	 * Le nombre de soldat et char possédé par le joueur
-	 * 
-	 */
-	public int nbArmee = 2;
-	
-	/**
-	 * Le nombre de ville possédée par le joueur
-	 */
-	public int nbVille = 0;
 
 	/**
 	 * Le nom du joueur
@@ -80,27 +69,6 @@ public class Joueur {
 	 */
 	public void modifierTresorie(int diffTresorerie) {
 		this.tresorerie += diffTresorerie;
-	}
-	
-	
-	public void modifierNombreArme(int diffArmee)
-	{
-		this.nbArmee += diffArmee;
-	}
-	
-	public void modifierNbVille(int diffVille)
-	{
-		this.nbVille += diffVille;
-	}
-
-	public int getNombreArme()
-	{
-		return this.nbArmee;
-	}
-	
-	public int getNombreVille()
-	{
-		return this.nbVille;
 	}
 	
 	/**

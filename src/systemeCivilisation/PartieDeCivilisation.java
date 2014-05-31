@@ -1,7 +1,5 @@
 package systemeCivilisation;
 
-import java.security.SecureRandom;
-
 /**
  * @author Romain Decrie une partie de civilisation et les interaction entre les
  *         joueurs.
@@ -251,18 +249,6 @@ public class PartieDeCivilisation {
 	 */
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
-	}
-
-	/**
-	 * Fonction permettant d'obtenir le joueur qui ne joue pas
-	 * 
-	 * @return joueursDontCeNEstPasLeTour Le joueur qui ne joue pas
-	 */
-	public Joueur obtenirJoueurDontCEstNEstPasLeTour() {
-		if (joueurDontCEstLeTour == 1)
-			return joueurs[0];
-		else
-			return joueurs[1];
 	}
 
 	/**

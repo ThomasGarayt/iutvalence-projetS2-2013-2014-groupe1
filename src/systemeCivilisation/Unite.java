@@ -203,13 +203,13 @@ public class Unite {
 	 */
 	public void ameliorerUnite()
 	{
-		if (this.type == type.Soldats)
+		if (this.type == TypeUnite.Soldats)
 		{
 			this.vie = this.vie + 50 ;
 			this.puissance = this.puissance +20;
 		}
 		
-		if(this.type == type.Chars)
+		if(this.type == TypeUnite.Chars)
 		{
 			this.vie = this.vie + 200 ;
 			this.puissance = this.puissance +50;
@@ -223,12 +223,12 @@ public class Unite {
 	 * @return int Le cout pour level up l'unité
 	 */
 	public int coutNiveauUp() {
-		if (this.type == type.Soldats)
+		if (this.type == TypeUnite.Soldats)
 		{
 			return (int)((this.niveau + 1) * 100);
 		}
 		
-		if(this.type == type.Chars)
+		if(this.type == TypeUnite.Chars)
 		{
 			return (int)((this.niveau + 1) * 150);
 		}
