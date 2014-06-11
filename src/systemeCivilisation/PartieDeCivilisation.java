@@ -1,7 +1,5 @@
 package systemeCivilisation;
 
-import javax.swing.JOptionPane;
-
 /**
  * @author Romain Decrie une partie de civilisation et les interaction entre les
  *         joueurs.
