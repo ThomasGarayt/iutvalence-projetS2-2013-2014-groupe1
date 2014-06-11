@@ -21,7 +21,7 @@ public class AffichageMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Crée un menu.
+	 * Crï¿½e un menu.
 	 * 
 	 * @param joueur
 	 *            Le joueur dont c'est le tour.
@@ -35,7 +35,7 @@ public class AffichageMenu extends JPanel {
 
 		this.add(new Recap(joueur));
 
-		this.add(new JLabel(" Rien n'est selectionné"));
+		this.add(new JLabel(" Rien n'est selectionne"));
 		this.add(new Recap());
 
 		this.add(new JLabel(" "));
@@ -49,10 +49,10 @@ public class AffichageMenu extends JPanel {
 	}
 
 	/**
-	 * Crée un menu.
+	 * Crï¿½e un menu.
 	 * 
 	 * @param unite
-	 *            L'unité qui est selectionne.
+	 *            L'unitï¿½ qui est selectionne.
 	 * @param joueur
 	 *            Le joueur dont c'est le tour.
 	 * @param ecouteurBouton
@@ -93,7 +93,7 @@ public class AffichageMenu extends JPanel {
 	}
 
 	/**
-	 * Crée un menu.
+	 * Crï¿½e un menu.
 	 * 
 	 * @param ville
 	 *            La ville qui est selectionne.

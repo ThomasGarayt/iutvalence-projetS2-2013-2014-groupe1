@@ -1,5 +1,7 @@
 package systemeCivilisation;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author Romain Decrie une partie de civilisation et les interaction entre les
  *         joueurs.
@@ -174,7 +176,12 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
-		testFinPartie();
+		
+		if (testFinPartie()) 
+		{
+			JOptionPane.showMessageDialog(null, "Bien joue a " + this.obtenirJoueurDontCEstLeTour().obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+		} 
+	
 		reinitialiserUnite();
 		miseAJourTresorerieFinTour();
 		
@@ -251,6 +258,8 @@ public class PartieDeCivilisation {
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
 	}
+	
+
 
 	/**
 	 * Retourne la carte du jeu

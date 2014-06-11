@@ -62,10 +62,10 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
 			
-			if (logiqueDuJeu.testFinPartie()) 
+			/*if (logiqueDuJeu.testFinPartie()) 
 			{
 				JOptionPane.showMessageDialog(null, "Bien jou� � " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
-			} 
+			} */
 			
 			return;
 		}
