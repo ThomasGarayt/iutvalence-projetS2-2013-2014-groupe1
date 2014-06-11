@@ -135,7 +135,7 @@ public class PartieDeCivilisation {
 	 * @param typeDeLUnite
 	 *            Le type de l'unite ajoutee
 	 * 
-	 * @return true si l'unite a été ajoute, false sinon
+	 * @return true si l'unite a ï¿½tï¿½ ajoute, false sinon
 	 */
 	public boolean ajouterUneUnite(Joueur joueurConstructeur,
 			Position positionDeLunite, TypeUnite typeDeLUnite) {
@@ -174,9 +174,10 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
+		testFinPartie();
 		reinitialiserUnite();
 		miseAJourTresorerieFinTour();
-
+		
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
@@ -200,7 +201,7 @@ public class PartieDeCivilisation {
 
 	
 	/**
-	 * Fonction mettant à jour la trésorerie du joueur qui vient de jouer en fonction du nombre de ville possédée
+	 * Fonction mettant ï¿½ jour la trï¿½sorerie du joueur qui vient de jouer en fonction du nombre de ville possï¿½dï¿½e
 	 * 
 	 */
 	private void miseAJourTresorerieFinTour() {
@@ -221,7 +222,7 @@ public class PartieDeCivilisation {
 	}
 
 	/**
-	 * Teste si le joueur non courant a encore des unités et villes en vie
+	 * Teste si le joueur non courant a encore des unitï¿½s et villes en vie
 	 * 
 	 * @return true si le joueur non courant n'a plus rien, false sinon
 	 */

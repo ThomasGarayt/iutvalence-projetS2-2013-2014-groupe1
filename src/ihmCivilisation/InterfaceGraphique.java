@@ -38,7 +38,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 	@Override
 	public void run() {
 
-		// Boîtes de dialogues pour obtenir les pseudos des joueurs
+		// Boï¿½tes de dialogues pour obtenir les pseudos des joueurs
 		String pseudo1 = (String) JOptionPane.showInputDialog(null,"Pseudo du Joueur 1", "Joueur 1",JOptionPane.INFORMATION_MESSAGE);
 		String pseudo2 = (String) JOptionPane.showInputDialog(null,"Pseudo du Joueur 2", "Joueur 2",JOptionPane.INFORMATION_MESSAGE);
 
@@ -64,7 +64,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			
 			if (logiqueDuJeu.testFinPartie()) 
 			{
-				JOptionPane.showMessageDialog(null, "Bien joué à " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Bien jouï¿½ ï¿½ " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
 			} 
 			
 			return;
@@ -180,7 +180,6 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		}
 
 		// Le joueur prend une ville
-		// BUG SPOTTED
 		if (logiqueDuJeu.obtenirCarte().laCaseContientUneVille(
 				positionDeLaSelection)
 				&& logiqueDuJeu.obtenirCarte().laCaseNecontientPasDUnite(
