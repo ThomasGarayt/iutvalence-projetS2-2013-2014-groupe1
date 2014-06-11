@@ -115,7 +115,7 @@ public class PartieDeCivilisation {
 				&& !(this.carte.laCaseNeContientPasDeVille(positionVille))
 				&& (this.carte.obtenirLaVilleDeLaCase(positionVille)
 						.obtenirJoueurProprietaire() != joueurAttaquant)
-							&& (this.carte.obtenirLUniteDeLaCase(positionDeLUnite)
+				&& (this.carte.obtenirLUniteDeLaCase(positionDeLUnite)
 						.obtenirPointDeMouvements() >= ((positionDeLUnite
 						.deltaX(positionVille) + positionDeLUnite
 						.deltaY(positionVille))))) {
@@ -141,11 +141,12 @@ public class PartieDeCivilisation {
 	 */
 	public boolean ajouterUneUnite(Joueur joueurConstructeur,
 			Position positionDeLunite, TypeUnite typeDeLUnite) {
-		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite)) {
-			this.carte.ajouterUneUniteALaCase(positionDeLunite, new Unite(
-					typeDeLUnite, joueurConstructeur));
-			return true;
-		}
+		if (this.carte.laCaseNecontientPasDUnite(positionDeLunite))
+			if (creationPossible(typeDeLUnite)) {
+				this.carte.ajouterUneUniteALaCase(positionDeLunite, new Unite(
+						typeDeLUnite, joueurConstructeur));
+				return true;
+			}
 		return false;
 
 	}
@@ -157,17 +158,28 @@ public class PartieDeCivilisation {
 	 */
 	private Carte creationDeLaCarte() {
 		Carte carteDuMonde = new Carte();
-		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
+
+		// Armee de depart du Joueur Bleu
+		carteDuMonde.ajouterUneUniteALaCase(new Position(13, 12), new Unite(
 				TypeUnite.Soldats, this.joueurs[0]));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 7), new Unite(
-				TypeUnite.Chars, this.joueurs[0]));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(5, 1), new Unite(
-				TypeUnite.Chars, this.joueurs[1]));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 5), new Unite(
+		carteDuMonde.ajouterUneUniteALaCase(new Position(12, 13), new Unite(
+				TypeUnite.Soldats, this.joueurs[0]));
+
+		// Armee de depart du Joueur Rouge
+		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 2), new Unite(
 				TypeUnite.Soldats, this.joueurs[1]));
-		carteDuMonde.ajouterUneVille(new Position(12, 13), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(2, 1), new Ville());
-		
+		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 1), new Unite(
+				TypeUnite.Soldats, this.joueurs[1]));
+
+		carteDuMonde.ajouterUneVille(new Position(13, 13), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(1, 1), new Ville());
+
+		carteDuMonde.ajouterUneVille(new Position(6, 5), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(8, 8), new Ville());
+
+		carteDuMonde.ajouterUneVille(new Position(12, 1), new Ville());
+		carteDuMonde.ajouterUneVille(new Position(2, 13), new Ville());
+
 		return carteDuMonde;
 	}
 
@@ -176,15 +188,16 @@ public class PartieDeCivilisation {
 	 * 
 	 */
 	public void finirLeTour() {
-		
-		if (testFinPartie()) 
-		{
-			JOptionPane.showMessageDialog(null, "Bien joue a " + this.obtenirJoueurDontCEstLeTour().obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
-		} 
-	
+
+		if (testFinPartie()) {
+			JOptionPane.showMessageDialog(null, "Bien joue a "
+					+ this.obtenirJoueurDontCEstLeTour().obtenirNom(),
+					"Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+		}
+
 		reinitialiserUnite();
 		miseAJourTresorerieFinTour();
-		
+
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
@@ -206,9 +219,9 @@ public class PartieDeCivilisation {
 			}
 	}
 
-	
 	/**
-	 * Fonction mettant � jour la tr�sorerie du joueur qui vient de jouer en fonction du nombre de ville poss�d�e
+	 * Fonction mettant � jour la tr�sorerie du joueur qui vient de jouer en
+	 * fonction du nombre de ville poss�d�e
 	 * 
 	 */
 	private void miseAJourTresorerieFinTour() {
@@ -258,8 +271,6 @@ public class PartieDeCivilisation {
 	public Joueur obtenirJoueurDontCEstLeTour() {
 		return this.joueurs[this.joueurDontCEstLeTour];
 	}
-	
-
 
 	/**
 	 * Retourne la carte du jeu
@@ -273,5 +284,13 @@ public class PartieDeCivilisation {
 	public void changerPseudoJoueur(String Pseudo1, String Pseudo2) {
 		this.joueurs[0].setNom(Pseudo1);
 		this.joueurs[1].setNom(Pseudo2);
+	}
+
+	public boolean creationPossible(TypeUnite typeUnite) {
+		if (this.joueurs[joueurDontCEstLeTour].obtenirTresorerie() >= (typeUnite
+				.getCoutCreation())) {
+			return true;
+		}
+		return false;
 	}
 }

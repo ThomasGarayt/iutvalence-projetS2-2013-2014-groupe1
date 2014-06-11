@@ -61,12 +61,7 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 			positionDeLaVilleSelectionner = null;
 			positionDeLUniteSelectionner = null;
 			reinitialiserLeMenu();
-			
-			/*if (logiqueDuJeu.testFinPartie()) 
-			{
-				JOptionPane.showMessageDialog(null, "Bien jou� � " + joueurCourant.obtenirNom(), "Fin de partie",JOptionPane.INFORMATION_MESSAGE);
-			} */
-			
+						
 			return;
 		}
 
@@ -107,22 +102,25 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 		// Bouton CreerUnite
 		if (source.getName() == "CreerUnite") {
 			if (logiqueDuJeu.ajouterUneUnite(joueurCourant,
-					positionDeLaVilleSelectionner, TypeUnite.Soldats)) {
+					positionDeLaVilleSelectionner, TypeUnite.Soldats))
+				{
 				logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(
 						-TypeUnite.Soldats.getCoutCreation());
 				mettreAJourLaCarte();
-			}
+				}
 			return;
 		}
 
 		// Bouton CreerChar
 		if (source.getName() == "CreerChar") {
 			if (logiqueDuJeu.ajouterUneUnite(joueurCourant,
-					positionDeLaVilleSelectionner, TypeUnite.Chars)) {
+					positionDeLaVilleSelectionner, TypeUnite.Chars))
+				if(logiqueDuJeu.creationPossible(TypeUnite.Chars))
+				{
 				logiqueDuJeu.obtenirJoueurDontCEstLeTour().modifierTresorie(
 						-TypeUnite.Chars.getCoutCreation());
 				mettreAJourLaCarte();
-			}
+				}
 			return;
 		}
 

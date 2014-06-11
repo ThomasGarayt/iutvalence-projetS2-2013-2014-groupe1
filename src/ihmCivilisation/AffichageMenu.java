@@ -52,7 +52,7 @@ public class AffichageMenu extends JPanel {
 	 * Cr�e un menu.
 	 * 
 	 * @param unite
-	 *            L'unit� qui est selectionne.
+	 *            L'unite qui est selectionne.
 	 * @param joueur
 	 *            Le joueur dont c'est le tour.
 	 * @param ecouteurBouton

@@ -72,7 +72,7 @@ public class Recap extends JPanel {
 		this.add(new JLabel(" Nb attaques : "));
 		this.add(new JLabel(Integer.toString(unite.obtenirNombreAttaqueParTour())));
 		
-		this.add(new JLabel(" Portée : "));
+		this.add(new JLabel(" Portee : "));
 		this.add(new JLabel(Integer.toString(unite.obtenirPorte())));
 	}
 
@@ -89,7 +89,7 @@ public class Recap extends JPanel {
 		this.add(new JLabel(" " + Integer.toString(ville.obtenirNiveau())));
 
 		if (ville.obtenirJoueurProprietaire() != null) {
-			this.add(new JLabel(" Propriétaire : "));
+			this.add(new JLabel(" Proprietaire : "));
 			this.add(new JLabel(" "
 					+ ville.obtenirJoueurProprietaire().obtenirNom()));
 		} 
