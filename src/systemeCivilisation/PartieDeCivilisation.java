@@ -137,7 +137,7 @@ public class PartieDeCivilisation {
 	 * @param typeDeLUnite
 	 *            Le type de l'unite ajoutee
 	 * 
-	 * @return true si l'unite a �t� ajoute, false sinon
+	 * @return true si l'unite a ete ajoute, false sinon
 	 */
 	public boolean ajouterUneUnite(Joueur joueurConstructeur,
 			Position positionDeLunite, TypeUnite typeDeLUnite) {
@@ -160,7 +160,7 @@ public class PartieDeCivilisation {
 		Carte carteDuMonde = new Carte();
 
 		// Armee de depart du Joueur Bleu
-		carteDuMonde.ajouterUneUniteALaCase(new Position(13, 12), new Unite(
+		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
 				TypeUnite.Soldats, this.joueurs[0]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(12, 13), new Unite(
 				TypeUnite.Soldats, this.joueurs[0]));
@@ -189,19 +189,16 @@ public class PartieDeCivilisation {
 	 */
 	public void finirLeTour() {
 
-		if (testFinPartie()) {
-			JOptionPane.showMessageDialog(null, "Bien joue a "
-					+ this.obtenirJoueurDontCEstLeTour().obtenirNom(),
-					"Fin de partie", JOptionPane.INFORMATION_MESSAGE);
-		}
-
 		reinitialiserUnite();
 		miseAJourTresorerieFinTour();
 
+		
 		if (this.joueurDontCEstLeTour < NOMBRE_DE_JOUEUR - 1)
 			this.joueurDontCEstLeTour++;
 		else
 			this.joueurDontCEstLeTour = 0;
+		
+		
 	}
 
 	private void reinitialiserUnite() {

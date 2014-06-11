@@ -18,6 +18,7 @@ public class FenetreCivilisation {
 
 	private JSplitPane splitPane;
 	private AffichageMenu menu;
+	private JFrame fenetre;
 
 	/**
 	 * Initialisation de la fenetre de jeu.
@@ -33,7 +34,7 @@ public class FenetreCivilisation {
 			ActionListener ecouteurBouton) {
 		
 		
-		JFrame fenetre = new JFrame("Civilisation II");
+		fenetre = new JFrame("Civilisation II");
 		fenetre.setSize(700, 600);
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		fenetre.setResizable(false);
@@ -124,6 +125,11 @@ public class FenetreCivilisation {
 		this.menu = new AffichageMenu(joueur, ecouteurBouton);
 		this.splitPane.setLeftComponent(menu);
 		this.splitPane.setDividerLocation(TAILLE_MENU);
+	}
+	
+	public void fermerApplication()
+	{
+		fenetre.dispose();
 	}
 
 }

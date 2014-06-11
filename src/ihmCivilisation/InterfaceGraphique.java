@@ -56,6 +56,12 @@ public class InterfaceGraphique implements Runnable, ActionListener {
 
 		// Bouton FinirTour
 		if (source.getName() == "FinirTour") {
+			
+			if (logiqueDuJeu.testFinPartie()) {
+				JOptionPane.showMessageDialog(null, "Dommage, tu as perdu la partie !",
+						"Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+				fenetreDeJeu.fermerApplication();
+			}
 			finirLeTour();
 			joueurCourant = logiqueDuJeu.obtenirJoueurDontCEstLeTour();
 			positionDeLaVilleSelectionner = null;
