@@ -1,4 +1,7 @@
-package systemeCivilisation;
+package gestionCarte;
+
+import gestionUnite.Unite;
+import gestionUnite.Ville;
 
 /**
  * @author Romain Une carte qui contient des cases.
@@ -34,21 +37,9 @@ public class Carte {
 	 *            La position de la case.
 	 * @return Vrai si la case ne contient pas d'unite, faux sinon.
 	 */
-	public boolean laCaseNecontientPasDUnite(Position positionDeLaCase) {
-		return !(this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY]
+	public boolean laCaseContientUneUnite(Position positionDeLaCase) {
+		return (this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY]
 				.aUneUnite());
-	}
-
-	/**
-	 * Permet de savoir si une case contient une ville a partir d'une position.
-	 * 
-	 * @param positionDeLaCase
-	 *            La position de la case.
-	 * @return Vrai si la case ne contient pas de ville, faux sinon.
-	 */
-	public boolean laCaseNeContientPasDeVille(Position positionDeLaCase) {
-		return !(this.cases[positionDeLaCase.positionX][positionDeLaCase.positionY]
-				.aUneVille());
 	}
 
 	/**
@@ -85,15 +76,40 @@ public class Carte {
 	 */
 	public void ajouterUneUniteALaCase(Position positionDeLUnite,
 			Unite uniteAAjouter) {
-		this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
-				.ajouterUnite(uniteAAjouter);
+		if (uniteAAjouter.obtenirJoueur().obtenirTresorerie() >= uniteAAjouter
+				.obtenirCoutCreation()) {
+			uniteAAjouter.obtenirJoueur().modifierTresorie(-uniteAAjouter
+				.obtenirCoutCreation());
+			this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
+					.ajouterUnite(uniteAAjouter);
+		}
+	}
+
+	/**
+	 * Deux unites qui s'attaquent.
+	 * 
+	 * @param positionUniteAttaquante
+	 *            la position de l'unite attaquante.
+	 * @param positionUniteDefenseur
+	 *            La position de l'unite defenseur.
+	 */
+	public void attaquerDesUnite(Position positionUniteAttaquante,
+			Position positionUniteDefenseur) {
+		if (positionUniteAttaquante.distance(positionUniteDefenseur) <= this
+				.obtenirLUniteDeLaCase(positionUniteAttaquante).obtenirPorte()) {
+			this.obtenirLUniteDeLaCase(positionUniteAttaquante).attaquer(
+					this.obtenirLUniteDeLaCase(positionUniteDefenseur));
+			if (!this.obtenirLUniteDeLaCase(positionUniteDefenseur)
+					.estVivante())
+				supprimerUneUnite(positionUniteDefenseur);
+		}
 	}
 
 	/**
 	 * Permet de supprimer une unite.
 	 * 
 	 * @param positionDeLUnite
-	 *            La posiiton de l'unite que l'on souhaite supprimer.
+	 *            La position de l'unite que l'on souhaite supprimer.
 	 */
 	public void supprimerUneUnite(Position positionDeLUnite) {
 		this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
@@ -112,11 +128,18 @@ public class Carte {
 			Position positionDArriver) {
 		Unite uniteADeplacer = this.cases[positionDeDepart.positionX][positionDeDepart.positionY]
 				.obtenirUnite();
+		int coutPointsDeMouvement = positionDeDepart.distance(positionDArriver);
 
-		this.cases[positionDArriver.positionX][positionDArriver.positionY]
-				.ajouterUnite(uniteADeplacer);
-		this.cases[positionDeDepart.positionX][positionDeDepart.positionY]
-				.supprimerUnite();
+		if (uniteADeplacer.obtenirPointDeMouvements() >= coutPointsDeMouvement) {
+			this.cases[positionDArriver.positionX][positionDArriver.positionY]
+					.ajouterUnite(uniteADeplacer);
+			this.cases[positionDeDepart.positionX][positionDeDepart.positionY]
+					.supprimerUnite();
+			uniteADeplacer.mettreAJourPointDeMouvements(coutPointsDeMouvement);
+			if (this.laCaseContientUneVille(positionDArriver))
+				this.obtenirLaVilleDeLaCase(positionDArriver)
+						.changerProprietaire(uniteADeplacer.obtenirJoueur());
+		}
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package ihmCivilisation;
+package gestionGraphique;
 
 import java.awt.event.ActionListener;
 

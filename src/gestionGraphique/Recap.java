@@ -1,13 +1,13 @@
-package ihmCivilisation;
+package gestionGraphique;
+
+import gestionUnite.Nation;
+import gestionUnite.Unite;
+import gestionUnite.Ville;
 
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import systemeCivilisation.Joueur;
-import systemeCivilisation.Unite;
-import systemeCivilisation.Ville;
 
 /**
  * @author Romain
@@ -33,7 +33,7 @@ public class Recap extends JPanel {
 	 * Recapitulatif d'un joueur
 	 * @param joueur Le joueur dont on veux obtenir le recapitulatif.
 	 */
-	public Recap(Joueur joueur)
+	public Recap(Nation joueur)
 	{
 		super();
 

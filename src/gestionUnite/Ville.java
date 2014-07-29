@@ -1,4 +1,4 @@
-package systemeCivilisation;
+package gestionUnite;
 
 /**
  * @author Romain Une ville qui ï¿½ un niveau et une position.
@@ -13,7 +13,7 @@ public class Ville {
 	/**
 	 * Le joueur qui possède la ville
 	 */
-	private Joueur proprietaire;
+	private Nation proprietaire;
 
 	/**
 	 * Creer une ville de niveau 1 et sans proprietaire.
@@ -29,7 +29,7 @@ public class Ville {
 	 * @param joueur
 	 *            Le joueur qui ameliore la ville et a qui on va enlever de l'or
 	 */
-	public void ameliorer(Joueur joueur) {
+	public void ameliorer(Nation joueur) {
 		if (joueur.obtenirTresorerie() >= this.coutNiveauUp()) {
 			joueur.modifierTresorie(-this.coutNiveauUp());
 			this.niveau++;
@@ -59,7 +59,7 @@ public class Ville {
 	 * 
 	 * @return proprietaire Le joueur auquel la ville appartient
 	 */
-	public Joueur obtenirJoueurProprietaire() {
+	public Nation obtenirJoueurProprietaire() {
 		return this.proprietaire;
 	}
 
@@ -69,7 +69,7 @@ public class Ville {
 	 * @param joueurProprietaire
 	 *            Le nouveau joueur qui possede la ville
 	 */
-	public void changerProprietaire(Joueur joueurProprietaire) {
+	public void changerProprietaire(Nation joueurProprietaire) {
 		this.proprietaire = joueurProprietaire;
 	}
 }

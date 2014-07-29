@@ -1,4 +1,9 @@
-package ihmCivilisation;
+package gestionGraphique;
+
+import gestionUnite.Nation;
+import gestionUnite.TypeUnite;
+import gestionUnite.Unite;
+import gestionUnite.Ville;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -7,11 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import systemeCivilisation.Joueur;
-import systemeCivilisation.TypeUnite;
-import systemeCivilisation.Unite;
-import systemeCivilisation.Ville;
 
 /**
  * @author Romain Affiche le menu passe en parametre dans un JPanel.
@@ -28,7 +28,7 @@ public class AffichageMenu extends JPanel {
 	 * @param ecouteurBouton
 	 *            L'auditeur des boutons du menu.
 	 */
-	public AffichageMenu(Joueur joueur, ActionListener ecouteurBouton) {
+	public AffichageMenu(Nation joueur, ActionListener ecouteurBouton) {
 		super();
 
 		this.setLayout(new GridLayout(6, 1));
@@ -49,7 +49,7 @@ public class AffichageMenu extends JPanel {
 	}
 
 	/**
-	 * Cr�e un menu.
+	 * Cree un menu.
 	 * 
 	 * @param unite
 	 *            L'unite qui est selectionne.
@@ -58,7 +58,7 @@ public class AffichageMenu extends JPanel {
 	 * @param ecouteurBouton
 	 *            L'auditeur des boutons du menu.
 	 */
-	public AffichageMenu(Unite unite, Joueur joueur,
+	public AffichageMenu(Unite unite, Nation joueur,
 			ActionListener ecouteurBouton) {
 		super();
 
@@ -93,7 +93,7 @@ public class AffichageMenu extends JPanel {
 	}
 
 	/**
-	 * Cr�e un menu.
+	 * Cree un menu.
 	 * 
 	 * @param ville
 	 *            La ville qui est selectionne.
@@ -102,7 +102,7 @@ public class AffichageMenu extends JPanel {
 	 * @param ecouteurBouton
 	 *            L'auditeur des boutons du menu.
 	 */
-	public AffichageMenu(Ville ville, Joueur joueur,
+	public AffichageMenu(Ville ville, Nation joueur,
 			ActionListener ecouteurBouton) {
 		super();
 

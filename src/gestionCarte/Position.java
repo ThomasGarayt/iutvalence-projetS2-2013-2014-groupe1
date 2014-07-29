@@ -1,4 +1,5 @@
-package systemeCivilisation;
+package gestionCarte;
+
 /**
  * @author Romain Une position sur une grille en deux dimensions.
  */
@@ -44,25 +45,38 @@ public class Position {
 	public int getY() {
 		return this.positionY;
 	}
-	
+
 	/**
 	 * Obtenir le delta X de deux position.
-	 * @param z La deuxieme position.
+	 * 
+	 * @param z
+	 *            La deuxieme position.
 	 * @return Le delta x.
 	 */
-	public int deltaX(Position z)
-	{
+	public int deltaX(Position z) {
 		return Math.abs((this.getX() - z.getX()));
 	}
-	
+
 	/**
 	 * Obtenir le delta Y de deux position.
-	 * @param z La deuxieme position.
+	 * 
+	 * @param z
+	 *            La deuxieme position.
 	 * @return Le delta Y.
 	 */
-	public int deltaY(Position z)
-	{
+	public int deltaY(Position z) {
 		return Math.abs((this.getY() - z.getY()));
+	}
+
+	/**
+	 * La distance entre la position et celle passee en parametre.
+	 * 
+	 * @param pos
+	 *            La position a laquelle mesurer la distance
+	 * @return La distance entre deux position.
+	 */
+	public int distance(Position pos) {
+		return this.deltaX(pos) + this.deltaY(pos);
 	}
 
 	@Override
@@ -80,6 +94,11 @@ public class Position {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "(" + this.positionY + "," + this.positionY + ")";
+
+	}
+
 }

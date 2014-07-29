@@ -1,4 +1,4 @@
-package systemeCivilisation;
+package gestionUnite;
 
 /**
  * @author Romain Les types d'unite disponible dans le jeu.

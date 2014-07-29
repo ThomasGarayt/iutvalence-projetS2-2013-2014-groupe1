@@ -1,14 +1,14 @@
-package ihmCivilisation;
+package gestionGraphique;
+
+import gestionCarte.Carte;
+import gestionCarte.Position;
+import gestionUnite.TypeUnite;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import systemeCivilisation.Carte;
-import systemeCivilisation.Position;
-import systemeCivilisation.TypeUnite;
 
 /**
  * @author Romain Affiche la carte passe en parametre dans un JPanel.
@@ -40,10 +40,10 @@ public class AffichageCarte extends JPanel {
 
 				positionActuel = new Position(caseCouranteX, caseCouranteY);
 
-				if (carte.laCaseNecontientPasDUnite(positionActuel)) {
+				if (!carte.laCaseContientUneUnite(positionActuel)) {
 
 					// La case ne contient rien.
-					if (carte.laCaseNeContientPasDeVille(positionActuel)) {
+					if (!carte.laCaseContientUneVille(positionActuel)) {
 						boutonCourant = new BoutonCarte(caseCouranteX,
 								caseCouranteY, new ImageIcon(
 										"Images/pelouse.jpeg"), auditeurBoutons);
@@ -73,10 +73,10 @@ public class AffichageCarte extends JPanel {
 
 		if (carte.obtenirLUniteDeLaCase(position).obtenirTypeUnite() == TypeUnite.Soldats)
 			return new ImageIcon(carte.obtenirLUniteDeLaCase(position)
-					.obtenirJoueur().obtenirLesetDimagesDuJoueur()
+					.obtenirJoueur().obtenirLesetDimagesDeLaNation()
 					.obtenirLImageDuSoldat());
 		return new ImageIcon(carte.obtenirLUniteDeLaCase(position)
-				.obtenirJoueur().obtenirLesetDimagesDuJoueur()
+				.obtenirJoueur().obtenirLesetDimagesDeLaNation()
 				.obtenirLImageDuChar());
 	}
 
