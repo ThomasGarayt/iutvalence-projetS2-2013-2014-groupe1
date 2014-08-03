@@ -34,11 +34,16 @@ public class Carte {
 		cases = new Case[NB_CASES_X][NB_CASES_Y];
 		for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++)
 			for (int caseCouranteY = 0; caseCouranteY < NB_CASES_Y; caseCouranteY++)
-				this.cases[caseCouranteX][caseCouranteY] = new Case();
+				if (caseCouranteX % 2 == 0 && caseCouranteY % 4 == 1)
+					this.cases[caseCouranteX][caseCouranteY] = new Case(Terrain.Montagne);
+				else if (caseCouranteX % 2 == 0 && caseCouranteY % 4 == 2)
+					this.cases[caseCouranteX][caseCouranteY] = new Case(Terrain.Ocean);
+				else
+					this.cases[caseCouranteX][caseCouranteY] = new Case();
 	}
 
 	/**
-	 * Permet de tester si les unite peuvent trzverser la case.
+	 * Permet de tester si les unite peuvent traverser la case.
 	 * 
 	 * @param positionDeLaCase
 	 *            La position de la case a tester.
@@ -47,6 +52,18 @@ public class Carte {
 	public boolean laCaseEstAccessible(Position positionDeLaCase) {
 		return this.cases[positionDeLaCase.getX()][positionDeLaCase.getY()]
 				.estAccessible();
+	}
+
+	/**
+	 * Permet d'obtenir le type de terrain d'une case.
+	 * 
+	 * @param positionDeLaCase
+	 *            La position de la case.
+	 * @return Le type de terrain de la case.
+	 */
+	public Terrain obtenirTerrain(Position positionDeLaCase) {
+		return this.cases[positionDeLaCase.getX()][positionDeLaCase.getY()]
+				.obtenirTerrain();
 	}
 
 	/**
@@ -133,6 +150,21 @@ public class Carte {
 	public void supprimerUneUnite(Position positionDeLUnite) {
 		this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
 				.supprimerUnite();
+	}
+
+	/**
+	 * @param positionDeDepart
+	 *            La position de depart.
+	 * @param positionDArriver
+	 *            La position d'arrivee.
+	 * @return Le chemin menant a la case demandee.
+	 * @throws CheminImpossibleException
+	 *             Le chemin est impossible.
+	 */
+	public Chemin obtenirUnChemin(Position positionDeDepart,
+			Position positionDArriver) throws CheminImpossibleException {
+		return detectionDesChemins.obtenirUnChemin(this, positionDeDepart,
+				positionDArriver);
 	}
 
 	/**

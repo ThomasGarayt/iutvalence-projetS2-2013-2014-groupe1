@@ -1,11 +1,9 @@
 package fr.projet.java.logiqueDuJeu;
 
-import java.util.ArrayList;
-
+import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
 import fr.projet.java.gestionGraphique.FinDuTourException;
-import fr.projet.java.gestionUnite.Chemin;
 import fr.projet.java.gestionUnite.Nation;
 import fr.projet.java.gestionUnite.SetDImages;
 import fr.projet.java.gestionUnite.TypeUnite;
@@ -51,9 +49,14 @@ public class PartieDeCivilisation {
 	 */
 	public void jouer() {
 		while (true) {
-			affichage.mettreAJourLaCarte(carte);
 			this.tour += 1;
-			jouerUnTour(joueurs[this.tour % joueurs.length], nations[this.tour % joueurs.length]);
+
+			affichage.mettreAJourLesUnites(carte);
+			affichage.mettreAJourLeTerrain(carte);
+			affichage.mettreAJourLeMenu(nations[this.tour % joueurs.length]);
+
+			jouerUnTour(joueurs[this.tour % joueurs.length], nations[this.tour
+					% joueurs.length]);
 			finirLeTour(nations[this.tour % joueurs.length]);
 			System.out.println("Fin du tour " + this.tour);
 		}
@@ -76,19 +79,9 @@ public class PartieDeCivilisation {
 		while (true) {
 			try {
 				
-				//TODO Suppr
-				ArrayList<Position> position = new ArrayList<Position>();
-				position.add(new Position(4,4));
-				position.add(new Position(5,4));
-				position.add(new Position(5,5));
-				position.add(new Position(5,6));
-				position.add(new Position(5,7));
-				Chemin chemin = new Chemin(position);
-				affichage.afficherUnChemin(chemin);
-				//----------
-				
+				affichage.afficherUnChemin(null, 0);
 				positionChoisi = joueur.selectionnerPosition();
-				
+
 				System.out.println("Tu as choisi une position : "
 						+ positionChoisi);
 				if (carte.laCaseContientUneUnite(positionChoisi)) {
@@ -96,16 +89,18 @@ public class PartieDeCivilisation {
 					unite = carte.obtenirLUniteDeLaCase(positionChoisi);
 
 					affichage.mettreAJourLeMenu(unite, nation);
-					
+
 					switch (joueur.selectionnerActionUnite()) {
 					case Ameliorer:
-						if (unite.obtenirJoueur() != nation) break;
+						if (unite.obtenirJoueur() != nation)
+							break;
 						System.out.println("Tu as amélioré l'unité.");
 						unite.ameliorerUnite();
 						break;
 					case Deplacer:
 						deuxiemePositionChoisie = joueur.selectionnerPosition();
-						if (unite.obtenirJoueur() != nation) break;
+						if (unite.obtenirJoueur() != nation)
+							break;
 						if (carte
 								.laCaseContientUneUnite(deuxiemePositionChoisie)) {
 							if (deuxiemePositionChoisie.equals(positionChoisi))
@@ -115,14 +110,27 @@ public class PartieDeCivilisation {
 									deuxiemePositionChoisie);
 						}
 						else {
-							System.out.println("Tu as déplacé l'unité.");
-							carte.deplacerUneUnite(positionChoisi,
-									deuxiemePositionChoisie);
+							try {
+								affichage.afficherUnChemin(carte
+										.obtenirUnChemin(positionChoisi,
+												deuxiemePositionChoisie), unite.obtenirPointDeMouvements());
+							}
+							catch (CheminImpossibleException e) {
+							}
+							
+							if (joueur.selectionnerPosition().equals(
+									deuxiemePositionChoisie)) {
+								System.out.println("Tu as déplacé l'unité.");
+								carte.deplacerUneUnite(positionChoisi,
+										deuxiemePositionChoisie);
+							}
+							affichage.mettreAJourLeTerrain(carte);
 						}
 						break;
 					case Deselectionner:
 						System.out.println("Tu as déselectionné l'unité.");
 					}
+					affichage.mettreAJourLeMenu(nation);
 				}
 				else if (carte.laCaseContientUneVille(positionChoisi)) {
 					System.out.println("C'est une ville.");
@@ -150,7 +158,7 @@ public class PartieDeCivilisation {
 				else {
 					affichage.mettreAJourLeMenu(nation);
 				}
-				affichage.mettreAJourLaCarte(carte);
+				affichage.mettreAJourLesUnites(carte);
 			}
 			catch (FinDuTourException e) {
 				break;

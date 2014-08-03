@@ -120,4 +120,12 @@ public class Case {
 		return this.ville;
 	}
 
+	/**
+	 * Fonction permettant d'obtenir le terrain d'une case
+	 * 
+	 * @return terrain Le terrain de la case.
+	 */
+	public Terrain obtenirTerrain() {
+		return this.terrain;
+	}
 }

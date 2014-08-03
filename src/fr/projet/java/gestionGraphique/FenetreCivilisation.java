@@ -118,8 +118,21 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 	}
 
 	@Override
-	public void mettreAJourLaCarte(Carte carte) {
-		this.carteDuMonde.mettreAJour(carte);
+	public void mettreAJourLesUnites(Carte carte) {
+		if (this.carteDuMonde == null) {
+			this.carteDuMonde = new AffichageCarte(carte, this);
+			this.splitPane.setRightComponent(carteDuMonde);
+		}
+		this.carteDuMonde.mettreAJourUnite(carte);
+	}
+	
+	@Override
+	public void mettreAJourLeTerrain(Carte carte) {
+		if (this.carteDuMonde == null) {
+			this.carteDuMonde = new AffichageCarte(carte, this);
+			this.splitPane.setRightComponent(carteDuMonde);
+		}
+		this.carteDuMonde.mettreAJourVille(carte);
 	}
 
 	@Override
@@ -147,8 +160,8 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 	}
 
 	@Override
-	public void afficherUnChemin(Chemin cheminAAfficher) {
-		this.carteDuMonde.afficherUnChemin(cheminAAfficher);
+	public void afficherUnChemin(Chemin cheminAAfficher, int nombreDePM) {
+		this.carteDuMonde.afficherUnChemin(cheminAAfficher, nombreDePM);
 	}
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -175,7 +188,6 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 		}
 		// Un bouton de la carte
 		else {
-			System.out.println("Position");
 			this.positionChoisie = new Position(
 					((BoutonCarte) source).obtenirX(),
 					((BoutonCarte) source).obtenirY());

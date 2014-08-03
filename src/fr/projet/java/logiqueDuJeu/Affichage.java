@@ -13,13 +13,21 @@ import fr.projet.java.gestionUnite.Ville;
 public interface Affichage {
 
 	/**
-	 * Met a jour la carte
+	 * Met a jour les unites.
 	 * 
 	 * @param carte
-	 *            La carte a afficher
+	 *            La carte a afficher.
 	 */
-	public void mettreAJourLaCarte(Carte carte);
-
+	public void mettreAJourLesUnites(Carte carte);
+	
+	/**
+	 * Met a jour le terrain ( les villes aussi).
+	 * 
+	 * @param carte
+	 *            La carte a afficher.
+	 */
+	public void mettreAJourLeTerrain(Carte carte);
+	
 	/**
 	 * Met a jour le menu avec une unite.
 	 * 
@@ -51,6 +59,7 @@ public interface Affichage {
 	/**
 	 * Met a jour la carte avec un chemin a afficher.
 	 * @param cheminAAfficher Le chemin a afficher.
+	 * @param nombreDePM Le nombre de point de mouvement de l'unite.
 	 */
-	public void afficherUnChemin(Chemin cheminAAfficher);
+	public void afficherUnChemin(Chemin cheminAAfficher, int nombreDePM);
 }

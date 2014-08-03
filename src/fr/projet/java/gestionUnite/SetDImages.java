@@ -9,18 +9,20 @@ public enum SetDImages {
 	/**
 	 * Des images d'unites rouge.
 	 */
-	imagesRouges("Images/Char_rouge.png", "Images/Soldat_rouge.png"),
+	imagesRouges("Images/Unite/Char_rouge.png", "Images/Unite/Soldat_rouge.png", "Images/Ville/ville_rouge.png"),
 	/**
 	 * Des images d'unites bleu.
 	 */
-	imagesBleu("Images/Char_bleu.png", "Images/Soldat_bleu.png");
+	imagesBleu("Images/Unite/Char_bleu.png", "Images/Unite/Soldat_bleu.png", "Images/Ville/ville_bleu.png");
 	
 	private String imageDuChar;
 	private String imageDuSoldat;
+	private String imageDeLaVille;
 
-	private SetDImages(String imageDuChar, String imageDuSoldat) {
+	private SetDImages(String imageDuChar, String imageDuSoldat, String imageDeLaVille) {
 		this.imageDuChar = imageDuChar;
 		this.imageDuSoldat = imageDuSoldat;
+		this.imageDeLaVille = imageDeLaVille;
 	}
 	
 	/** Permet d'obtenir l'image du char.
@@ -37,5 +39,14 @@ public enum SetDImages {
 	 */
 	public String obtenirLImageDuSoldat() {
 		return this.imageDuSoldat;
+	}
+	
+	/**
+	 * Permet d'obtenir l'image de la ville.
+	 * 
+	 * @return L'image de la ville.
+	 */
+	public String obtenirLImageDeLaVille() {
+		return this.imageDeLaVille;
 	}
 }
