@@ -13,7 +13,11 @@ public enum SetDImages {
 	/**
 	 * Des images d'unites bleu.
 	 */
-	imagesBleu("Images/Unite/Char_bleu.png", "Images/Unite/Soldat_bleu.png", "Images/Ville/ville_bleu.png");
+	imagesBleu("Images/Unite/Char_bleu.png", "Images/Unite/Soldat_bleu.png", "Images/Ville/ville_bleu.png"),
+	/**
+	 * Des images d'unites orange.
+	 */
+	imagesOrange("Images/Unite/Char_orange.png", "Images/Unite/Soldat_orange.png", "Images/Ville/ville_orange.png");
 	
 	private String imageDuChar;
 	private String imageDuSoldat;
