@@ -2,12 +2,15 @@ package fr.projet.java.menu;
 
 import java.io.File;
 
+import fr.projet.java.gestionGraphique.SetDImages;
+
 /**
  * @author Romain Les informations permettant de creer une partie.
  * 
  */
 public class InfoPreferencePartie {
-	private String nomJ1, nomJ2, nationJ1, nationJ2, carte;
+	private String nomJ1, nomJ2, carte;
+	private SetDImages nationJ1, nationJ2;
 
 	/**
 	 * Creation d'un objet rassemblant les informations de creations de partie.
@@ -23,8 +26,8 @@ public class InfoPreferencePartie {
 	 * @param carte
 	 *            La carte.
 	 */
-	public InfoPreferencePartie(String nomJ1, String nomJ2, String nationJ1,
-			String nationJ2, String carte) {
+	public InfoPreferencePartie(String nomJ1, String nomJ2,
+			SetDImages nationJ1, SetDImages nationJ2, String carte) {
 		this.nomJ1 = nomJ1;
 		this.nomJ2 = nomJ2;
 		this.nationJ1 = nationJ1;
@@ -63,8 +66,8 @@ public class InfoPreferencePartie {
 	 * @return Un tableau contenant les couleurs des nations associer au
 	 *         joueurs.
 	 */
-	public String[] obtenirNationsAssocierAuJoueur() {
-		String[] nomDesJoueurs = new String[2];
+	public SetDImages[] obtenirNationsAssocierAuJoueur() {
+		SetDImages[] nomDesJoueurs = new SetDImages[2];
 		nomDesJoueurs[0] = this.nationJ1;
 		nomDesJoueurs[1] = this.nationJ2;
 		return nomDesJoueurs;

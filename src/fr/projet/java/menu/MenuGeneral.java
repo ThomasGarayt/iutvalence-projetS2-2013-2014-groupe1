@@ -17,7 +17,7 @@ public class MenuGeneral implements Runnable, ActionListener {
 	private JFrame fenetre;
 	private JPanel panel = new JPanel();
 	private JButton boutonJouer = new JButton("Nouvelle Partie");
-	private JButton bouton2 = new JButton("Mon bouton");
+	private JButton boutonQuitter = new JButton("Quitter");
 	private InfoPreferencePartie infoPreferencePartie;
 	private volatile boolean preferenceChoisi;
 
@@ -43,17 +43,23 @@ public class MenuGeneral implements Runnable, ActionListener {
 		fenetre = new JFrame();
 
 		panel.add(boutonJouer);
-		panel.add(bouton2);
+		panel.add(boutonQuitter);
 
 		Box box = Box.createVerticalBox();
 		box.add(boutonJouer);
-		box.add(bouton2);
+		box.add(boutonQuitter);
 
 		fenetre.setContentPane(box);
 		fenetre.setSize(700, 600);
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		fenetre.setResizable(false);
 
+		boutonQuitter.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		boutonJouer.addActionListener(this);
 
 		fenetre.setVisible(true);

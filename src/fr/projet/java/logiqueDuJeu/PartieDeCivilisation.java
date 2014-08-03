@@ -53,8 +53,9 @@ public class PartieDeCivilisation {
 	 */
 	public void jouer() {
 		while (true) {
-			this.tour += 1;
 
+			this.tour += 1;
+			
 			affichage.mettreAJourLesUnites(carte);
 			affichage.mettreAJourLeTerrain(carte);
 			affichage.mettreAJourLeMenu(nations[this.tour % joueurs.length]);
@@ -83,7 +84,7 @@ public class PartieDeCivilisation {
 		// Tant que le tour n'est pas terminer par le joueur.
 		while (true) {
 			try {
-				// On affiche reinitialise les chemins.
+				// On reinitialise les chemins.
 				affichage.afficherUnChemin(null, 0);
 				// Le joueur choisie une position.
 				positionChoisi = joueur.selectionnerPosition();

@@ -27,8 +27,9 @@ public class Lanceur {
 		MenuGeneral menu = new MenuGeneral();
 		SwingUtilities.invokeLater(menu);
 		InfoPreferencePartie preferencePartie = menu.obtenirInfoPartie();
+		if (preferencePartie == null) return;
 		String[] nomsDesJoueurs = preferencePartie.obtenirNomsDesJoueurs();
-		String[] nationsDesJoueurs = preferencePartie
+		SetDImages[] nationsDesJoueurs = preferencePartie
 				.obtenirNationsAssocierAuJoueur();
 
 		// Creation de la fenetre de Civilisation et association avec les
@@ -41,12 +42,8 @@ public class Lanceur {
 		// Association des nations avec les joueurs.
 		Nation[] nations = new Nation[nomsDesJoueurs.length];
 		for (int joueurCourant = 0; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
-			if (nationsDesJoueurs[joueurCourant] == "Bleu")
 				nations[joueurCourant] = new Nation(
-						nomsDesJoueurs[joueurCourant], SetDImages.imagesBleu);
-			else if (nationsDesJoueurs[joueurCourant] == "Rouge")
-				nations[joueurCourant] = new Nation(
-						nomsDesJoueurs[joueurCourant], SetDImages.imagesRouges);
+						nomsDesJoueurs[joueurCourant], nationsDesJoueurs[joueurCourant]);
 
 		// Recuperation du fichier de la carte.
 		File fichierCarte = preferencePartie.obtenirFichierCarte();
