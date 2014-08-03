@@ -1,6 +1,9 @@
 package fr.projet.java.gestionCarte;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionUnite.Chemin;
@@ -15,12 +18,12 @@ public class Carte {
 	/**
 	 * Le nombre de case en x de la carte.
 	 */
-	public static final int NB_CASES_X = 15;
+	public static int NB_CASES_X;
 
 	/**
 	 * Le nombre de case en x de la carte.
 	 */
-	public static final int NB_CASES_Y = 15;
+	public static int NB_CASES_Y;
 
 	private Case[][] cases;
 
@@ -28,18 +31,47 @@ public class Carte {
 
 	/**
 	 * Une nouvelle carte vide.
+	 * 
+	 * @param fichierCarte
+	 *            Le fichier de creation de la carte.
 	 */
-	public Carte() {
+	public Carte(File fichierCarte) {
+
+		Scanner scanner;
+		try {
+			scanner = new Scanner(fichierCarte);
+
+			NB_CASES_X = scanner.nextInt();
+			NB_CASES_Y = scanner.nextInt();
+			System.out.println(NB_CASES_X + "::" + NB_CASES_Y);
+			scanner.nextLine();
+
+			cases = new Case[NB_CASES_X][NB_CASES_Y];
+
+			// On boucle sur chaque champ detecté
+			while (scanner.hasNextLine()) {
+				for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++) {
+					String line = scanner.nextLine();
+					System.out.println(line);
+
+					for (int caseCouranteY = 0; caseCouranteY < NB_CASES_Y; caseCouranteY++) {
+						if (line.charAt(caseCouranteY) == 'p')
+							this.cases[caseCouranteX][caseCouranteY] = new Case(
+									Terrain.Plaine);
+						else if (line.charAt(caseCouranteY) == 'o')
+							this.cases[caseCouranteX][caseCouranteY] = new Case(
+									Terrain.Ocean);
+					}
+				}
+			}
+
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		this.detectionDesChemins = new DetectionDesChemins();
-		cases = new Case[NB_CASES_X][NB_CASES_Y];
-		for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++)
-			for (int caseCouranteY = 0; caseCouranteY < NB_CASES_Y; caseCouranteY++)
-				if (caseCouranteX % 2 == 0 && caseCouranteY % 4 == 1)
-					this.cases[caseCouranteX][caseCouranteY] = new Case(Terrain.Montagne);
-				else if (caseCouranteX % 2 == 0 && caseCouranteY % 4 == 2)
-					this.cases[caseCouranteX][caseCouranteY] = new Case(Terrain.Ocean);
-				else
-					this.cases[caseCouranteX][caseCouranteY] = new Case();
 	}
 
 	/**
@@ -200,8 +232,7 @@ public class Carte {
 					this.obtenirLaVilleDeLaCase(positionDArriver)
 							.changerProprietaire(uniteADeplacer.obtenirJoueur());
 			}
-		}
-		catch (CheminImpossibleException e) {
+		} catch (CheminImpossibleException e) {
 			System.err.println("Erreur chemin.");
 		}
 

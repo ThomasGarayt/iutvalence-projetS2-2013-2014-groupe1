@@ -1,5 +1,7 @@
 package fr.projet.java.logiqueDuJeu;
 
+import java.io.File;
+
 import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
@@ -76,91 +78,128 @@ public class PartieDeCivilisation {
 		Ville ville;
 		Unite unite;
 
+		// Tant que le tour n'est pas terminer par le joueur.
 		while (true) {
 			try {
-				
+				// On affiche reinitialise les chemins.
 				affichage.afficherUnChemin(null, 0);
+				// Le joueur choisie une position.
 				positionChoisi = joueur.selectionnerPosition();
 
 				System.out.println("Tu as choisi une position : "
 						+ positionChoisi);
+				// Si la position correspond a une unite.
 				if (carte.laCaseContientUneUnite(positionChoisi)) {
 					System.out.println("C'est une unité.");
 					unite = carte.obtenirLUniteDeLaCase(positionChoisi);
-
+					
+					// On met a jour le menu.
 					affichage.mettreAJourLeMenu(unite, nation);
-
+					
+					// Le joueur selectionne une action a realiser avec l'unite.
 					switch (joueur.selectionnerActionUnite()) {
+					// Le joueur ameliore l'unite.
 					case Ameliorer:
 						if (unite.obtenirJoueur() != nation)
 							break;
 						System.out.println("Tu as amélioré l'unité.");
 						unite.ameliorerUnite();
 						break;
+					// Le joueur deplace l'unite ou attaque une autre unite.
 					case Deplacer:
+						// Le joueur selectionne une autre position.
 						deuxiemePositionChoisie = joueur.selectionnerPosition();
+						// Si l'unite n'appartient pas au joueur on interdit toutes actions.
 						if (unite.obtenirJoueur() != nation)
 							break;
+						// Si une deuxieme unite est selectionner, c'est une attaque.
 						if (carte
 								.laCaseContientUneUnite(deuxiemePositionChoisie)) {
+							// Si c'est la meme position c'est une deselection.
 							if (deuxiemePositionChoisie.equals(positionChoisi))
 								break;
 							System.out.println("Tu as attaqué une unité.");
 							carte.attaquerDesUnite(positionChoisi,
 									deuxiemePositionChoisie);
-						}
-						else {
-							try {
-								affichage.afficherUnChemin(carte
-										.obtenirUnChemin(positionChoisi,
-												deuxiemePositionChoisie), unite.obtenirPointDeMouvements());
+						// Sinon c'est un deplacement.
+						} else {
+							Position var2 = deuxiemePositionChoisie;
+							Position var1;
+							// Tant que la position n'est pas choisie definitivement.
+							while (true) {
+								// On affiche le chemin.
+								try {
+									affichage.afficherUnChemin(null, 0);
+									affichage.afficherUnChemin(carte
+											.obtenirUnChemin(positionChoisi,
+													var2),
+											unite.obtenirPointDeMouvements());
+								} catch (CheminImpossibleException e) {
+								}
+								// Le joueur selectionne une autre position.
+								var1 = joueur.selectionnerPosition();
+								// Si c'est la meme que la precedente c'est une validation.
+								if (var1.equals(var2)) {
+									System.out
+											.println("Tu as déplacé l'unité.");
+									carte.deplacerUneUnite(positionChoisi,
+											var2);
+									affichage.mettreAJourLeTerrain(carte);
+									break;
+								// Si c'est la position de l'unite c'est une annulation.
+								}
+								else if (var1.equals(positionChoisi))
+									break;
+								var2 = var1;
 							}
-							catch (CheminImpossibleException e) {
-							}
-							
-							if (joueur.selectionnerPosition().equals(
-									deuxiemePositionChoisie)) {
-								System.out.println("Tu as déplacé l'unité.");
-								carte.deplacerUneUnite(positionChoisi,
-										deuxiemePositionChoisie);
-							}
-							affichage.mettreAJourLeTerrain(carte);
 						}
 						break;
+					// Le joueur appuie sur une case ou un bouton menant a la deselection.
 					case Deselectionner:
 						System.out.println("Tu as déselectionné l'unité.");
+						break;
+					default:
+						break;
 					}
 					affichage.mettreAJourLeMenu(nation);
-				}
-				else if (carte.laCaseContientUneVille(positionChoisi)) {
+				// Si la case contient une ville.
+				} else if (carte.laCaseContientUneVille(positionChoisi)) {
 					System.out.println("C'est une ville.");
 					ville = carte.obtenirLaVilleDeLaCase(positionChoisi);
-
+					
+					// On met a jour le menu.
 					affichage.mettreAJourLeMenu(ville, nation);
-
+					
+					// Le joueur choisie une action. 
 					switch (joueur.selectionnerActionVille()) {
+					// Si il ameliore la ville.
 					case Ameliorer:
 						System.out.println("Tu as amélioré la ville.");
 						ville.ameliorer(nation);
 						break;
+					// S'il creer une unite.
+					//TODO Copier la ligne pour les chars en ajoutant une ActionVille.
 					case CreerUnite:
 						System.out.println("Tu as crée une unité.");
 						carte.ajouterUneUniteALaCase(positionChoisi, new Unite(
 								TypeUnite.Soldats, nation));
 						break;
+					// Si il deselectionne la ville.
 					case Deselectionner:
 						affichage.mettreAJourLeMenu(nation);
 						System.out.println("Tu as désélectionné la ville.");
+						break;
+					default:
+						break;
 					}
 					affichage.mettreAJourLeMenu(nation);
-
-				}
-				else {
+				// Si rien n'a ete selectionner.
+				} else {
 					affichage.mettreAJourLeMenu(nation);
 				}
 				affichage.mettreAJourLesUnites(carte);
-			}
-			catch (FinDuTourException e) {
+			// En cas de fin du tour.
+			} catch (FinDuTourException e) {
 				break;
 			}
 		}
@@ -211,7 +250,7 @@ public class PartieDeCivilisation {
 	 * @return carteDuMonde La carte de jeu
 	 */
 	private Carte creationDeLaCarte() {
-		Carte carteDuMonde = new Carte();
+		Carte carteDuMonde = new Carte(new File("cartes/carte1"));
 
 		// Armee de depart du Joueur Bleu
 		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
