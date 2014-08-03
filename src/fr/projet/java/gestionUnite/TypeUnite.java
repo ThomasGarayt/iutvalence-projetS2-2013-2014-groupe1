@@ -96,5 +96,10 @@ public enum TypeUnite {
 		this.nombreAttaqueParTour = nombreAttaqueParTour;
 		this.coutCreation = coutCreation;
 	}
+	
+	@Override
+	public String toString(){
+		return ( this.name() + " (" + Integer.toString(this.coutCreation) + ")" );
+	}
 
 }

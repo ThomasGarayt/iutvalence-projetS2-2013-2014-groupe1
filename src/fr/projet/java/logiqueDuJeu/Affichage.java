@@ -3,6 +3,7 @@ package fr.projet.java.logiqueDuJeu;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionUnite.Chemin;
 import fr.projet.java.gestionUnite.Nation;
+import fr.projet.java.gestionUnite.TypeUnite;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
 
@@ -19,7 +20,7 @@ public interface Affichage {
 	 *            La carte a afficher.
 	 */
 	public void mettreAJourLesUnites(Carte carte);
-	
+
 	/**
 	 * Met a jour le terrain ( les villes aussi).
 	 * 
@@ -27,7 +28,7 @@ public interface Affichage {
 	 *            La carte a afficher.
 	 */
 	public void mettreAJourLeTerrain(Carte carte);
-	
+
 	/**
 	 * Met a jour le menu avec une unite.
 	 * 
@@ -55,11 +56,21 @@ public interface Affichage {
 	 *            Le joueur courant
 	 */
 	public void mettreAJourLeMenu(Nation joueur);
-	
+
 	/**
 	 * Met a jour la carte avec un chemin a afficher.
-	 * @param cheminAAfficher Le chemin a afficher.
-	 * @param nombreDePM Le nombre de point de mouvement de l'unite.
+	 * 
+	 * @param cheminAAfficher
+	 *            Le chemin a afficher.
+	 * @param nombreDePM
+	 *            Le nombre de point de mouvement de l'unite.
 	 */
 	public void afficherUnChemin(Chemin cheminAAfficher, int nombreDePM);
+
+	/**
+	 * Renvoi le type d'unite choisie dans le menu.
+	 * 
+	 * @return Le type d'unite choisi dans le menu.
+	 */
+	public TypeUnite obtenirLeTypeDUniteSelectionne();
 }

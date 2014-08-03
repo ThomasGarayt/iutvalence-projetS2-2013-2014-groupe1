@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 /**
  * @author Romain IA qui utilise l'algorithme de detection de chemin par vague.
- *         On affecte un coefficient ˆ chaque case puis on parcourt le chemin en
+ *         On affecte un coefficient a chaque case puis on parcourt le chemin en
  *         sens inverse en trouvant les case adjacentes les moins coefficiente.
  */
 public class DetectionDesChemins {

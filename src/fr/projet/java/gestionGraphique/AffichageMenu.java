@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,6 +20,8 @@ import javax.swing.JPanel;
 public class AffichageMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+
+	private JComboBox choixDeLUnite;
 
 	/**
 	 * Cr�e un menu.
@@ -71,19 +74,18 @@ public class AffichageMenu extends JPanel {
 
 		this.add(new JLabel(" "));
 		this.add(new JLabel(" "));
-		
-		if (joueur == unite.obtenirJoueur()) {
-		JButton ameliorerUnite = new JButton("Ameliorer au niveau "
-				+ (unite.obtenirNiveau() + 1) + " : "
-				+ Integer.toString(unite.coutNiveauUp()));
-		ameliorerUnite.setName("AmeliorerUnite");
-		ameliorerUnite.addActionListener(ecouteurBouton);
 
-		this.add(ameliorerUnite);
+		if (joueur == unite.obtenirJoueur()) {
+			JButton ameliorerUnite = new JButton("Ameliorer au niveau "
+					+ (unite.obtenirNiveau() + 1) + " : "
+					+ Integer.toString(unite.coutNiveauUp()));
+			ameliorerUnite.setName("AmeliorerUnite");
+			ameliorerUnite.addActionListener(ecouteurBouton);
+
+			this.add(ameliorerUnite);
 		}
-		
-		else
-		{
+
+		else {
 			this.add(new JLabel(""));
 		}
 		JButton finirTour = new JButton("Finir le tour");
@@ -114,31 +116,25 @@ public class AffichageMenu extends JPanel {
 		this.add(new Recap(ville));
 
 		if (joueur == ville.obtenirJoueurProprietaire()) {
-			JButton creerUnite = new JButton("Creer un Soldat : " 
-					+ TypeUnite.Soldats.getCoutCreation());
-			creerUnite.setName("CreerSoldat");
+			JButton creerUnite = new JButton("Creer une unite");
+			creerUnite.setName("CreerUnite");
 			creerUnite.addActionListener(ecouteurBouton);
-			
-			JButton creerChar = new JButton("Creer un Char : " 
-					+ TypeUnite.Chars.getCoutCreation());
-			creerChar.setName("CreerChar");
-			creerChar.addActionListener(ecouteurBouton);
-			
-			
+
 			JButton ameliorerVille = new JButton("Ameliorer au niveau "
 					+ (ville.obtenirNiveau() + 1) + " : "
 					+ Integer.toString(ville.coutNiveauUp()));
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 
+			this.choixDeLUnite = new JComboBox(TypeUnite.values());
+			
+			this.add(this.choixDeLUnite);
 			this.add(creerUnite);
-			this.add(creerChar);
 			this.add(ameliorerVille);
 
-		} 
-		
-		else 
-		{
+		}
+
+		else {
 			this.add(new JLabel(""));
 			this.add(new JLabel(""));
 			this.add(new JLabel(""));
@@ -148,5 +144,14 @@ public class AffichageMenu extends JPanel {
 		finirTour.addActionListener(ecouteurBouton);
 
 		this.add(finirTour);
+	}
+
+	/**
+	 * Renvoi le type d'unite choisie dans la comboBox.
+	 * 
+	 * @return Le type d'unite courant de la combo box.
+	 */
+	public TypeUnite obtenirTypeUnite() {
+		return (TypeUnite) choixDeLUnite.getSelectedItem();
 	}
 }

@@ -41,6 +41,7 @@ public class Carte {
 		try {
 			scanner = new Scanner(fichierCarte);
 
+			// On recupere le nombre de ligne et de colonne.
 			NB_CASES_X = scanner.nextInt();
 			NB_CASES_Y = scanner.nextInt();
 			System.out.println(NB_CASES_X + "::" + NB_CASES_Y);
@@ -48,8 +49,7 @@ public class Carte {
 
 			cases = new Case[NB_CASES_X][NB_CASES_Y];
 
-			// On boucle sur chaque champ detecté
-			while (scanner.hasNextLine()) {
+			// On creer la carte.
 				for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++) {
 					String line = scanner.nextLine();
 					System.out.println(line);
@@ -61,13 +61,14 @@ public class Carte {
 						else if (line.charAt(caseCouranteY) == 'o')
 							this.cases[caseCouranteX][caseCouranteY] = new Case(
 									Terrain.Ocean);
+						else if (line.charAt(caseCouranteY) == 'm')
+							this.cases[caseCouranteX][caseCouranteY] = new Case(
+									Terrain.Montagne);
 					}
 				}
-			}
 
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

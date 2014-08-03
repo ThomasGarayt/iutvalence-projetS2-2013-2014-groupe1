@@ -4,6 +4,7 @@ import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
 import fr.projet.java.gestionUnite.Chemin;
 import fr.projet.java.gestionUnite.Nation;
+import fr.projet.java.gestionUnite.TypeUnite;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
 import fr.projet.java.logiqueDuJeu.ActionUnite;
@@ -45,7 +46,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 	/**
 	 * Initialisation de la fenetre de jeu.
 	 */
-	public void initialiserFenetreCivilisation() {
+	private void initialiserFenetreCivilisation() {
 
 		fenetre = new JFrame("Civilisation II");
 		fenetre.setSize(700, 600);
@@ -75,8 +76,13 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 	}
 
 	@Override
+	public TypeUnite obtenirLeTypeDUniteSelectionne() {
+		return menu.obtenirTypeUnite();
+	}
+
+	@Override
 	public Position selectionnerPosition() throws FinDuTourException {
-		while ( !laPositionEstChoisie && !finDuTour)
+		while (!laPositionEstChoisie && !finDuTour)
 			;
 		if (finDuTour) {
 			finDuTour = false;
@@ -88,7 +94,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 
 	@Override
 	public ActionVille selectionnerActionVille() throws FinDuTourException {
-		while ( !lActionVilleEstChoisie && !laPositionEstChoisie && !finDuTour)
+		while (!lActionVilleEstChoisie && !laPositionEstChoisie && !finDuTour)
 			;
 		if (finDuTour) {
 			finDuTour = false;
@@ -104,7 +110,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 
 	@Override
 	public ActionUnite selectionnerActionUnite() throws FinDuTourException {
-		while ( !lActionUniteEstChoisie && !laPositionEstChoisie && !finDuTour)
+		while (!lActionUniteEstChoisie && !laPositionEstChoisie && !finDuTour)
 			;
 		if (finDuTour) {
 			finDuTour = false;
@@ -125,7 +131,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 		}
 		this.carteDuMonde.mettreAJourUnite(carte);
 	}
-	
+
 	@Override
 	public void mettreAJourLeTerrain(Carte carte) {
 		if (this.carteDuMonde == null) {
@@ -163,6 +169,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 	public void afficherUnChemin(Chemin cheminAAfficher, int nombreDePM) {
 		this.carteDuMonde.afficherUnChemin(cheminAAfficher, nombreDePM);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		System.out.println("Event !");
@@ -177,7 +184,7 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 			this.lActionVilleEstChoisie = true;
 		}
 		// Bouton crée une unité
-		else if (source.getName() == "CreerSoldat") {
+		else if (source.getName() == "CreerUnite") {
 			this.actionVilleChoisie = ActionVille.CreerUnite;
 			this.lActionVilleEstChoisie = true;
 		}
@@ -195,13 +202,13 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 		}
 
 	}
-	
+
 	@Override
 	public void run() {
 		lActionUniteEstChoisie = false;
 		lActionVilleEstChoisie = false;
 		laPositionEstChoisie = false;
-		
+
 		initialiserFenetreCivilisation();
 	}
 

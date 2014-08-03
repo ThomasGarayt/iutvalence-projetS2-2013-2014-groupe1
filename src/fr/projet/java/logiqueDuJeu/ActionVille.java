@@ -3,7 +3,7 @@ package fr.projet.java.logiqueDuJeu;
 
 /**
  * @author Romain
- * Les action possible d'un joueur lorsqu'il selectionne une ville 
+ * Les action possible d'un joueur lorsqu'il selectionne une ville. 
  */
 public enum ActionVille {
 	/**

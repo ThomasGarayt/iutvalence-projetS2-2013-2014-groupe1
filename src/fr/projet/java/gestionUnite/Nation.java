@@ -1,5 +1,7 @@
 package fr.projet.java.gestionUnite;
 
+import fr.projet.java.gestionGraphique.SetDImages;
+
 /**
  * @author Romain Une nation commandé par un joueur.
  * 
