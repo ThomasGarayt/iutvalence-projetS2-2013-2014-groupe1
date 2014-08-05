@@ -30,7 +30,7 @@ public class AffichageCarteChemin extends JPanel {
 		for (int caseCouranteX = 0; caseCouranteX < Carte.NB_CASES_X; caseCouranteX++)
 			for (int caseCouranteY = 0; caseCouranteY < Carte.NB_CASES_Y; caseCouranteY++)
 				this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
-						caseCouranteX, caseCouranteY, null, auditeurBoutons);
+						caseCouranteX, caseCouranteY, new ImageIcon(), auditeurBoutons);
 
 		GridLayout gridLayout = new GridLayout(Carte.NB_CASES_X,
 				Carte.NB_CASES_Y);
