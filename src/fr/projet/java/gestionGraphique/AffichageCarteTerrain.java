@@ -18,17 +18,44 @@ public class AffichageCarteTerrain extends JPanel {
 
 	/**
 	 * Creer et affiche la carte des terrain et des villes.
-	 * @param carte La carte a afficher.
-	 * @param auditeurBoutons L'actionListener des boutons de la carte.
+	 * 
+	 * @param carte
+	 *            La carte a afficher.
+	 * @param auditeurBoutons
+	 *            L'actionListener des boutons de la carte.
 	 */
 	public AffichageCarteTerrain(Carte carte, ActionListener auditeurBoutons) {
 
 		carteDeBouton = new BoutonCarte[Carte.NB_CASES_X][Carte.NB_CASES_Y];
 
 		for (int caseCouranteX = 0; caseCouranteX < Carte.NB_CASES_X; caseCouranteX++)
-			for (int caseCouranteY = 0; caseCouranteY < Carte.NB_CASES_Y; caseCouranteY++)
-				this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
-						caseCouranteX, caseCouranteY, null, auditeurBoutons);
+			for (int caseCouranteY = 0; caseCouranteY < Carte.NB_CASES_Y; caseCouranteY++) {
+				Position positionActuel = new Position(caseCouranteX,
+						caseCouranteY);
+				if (carte.laCaseContientUneVille(positionActuel)) {
+					if (carte.obtenirLaVilleDeLaCase(positionActuel)
+							.obtenirJoueurProprietaire() != null)
+						this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
+								caseCouranteX, caseCouranteY,
+								new ImageIcon(carte
+										.obtenirLaVilleDeLaCase(positionActuel)
+										.obtenirJoueurProprietaire()
+										.obtenirLesetDimagesDeLaNation()
+										.obtenirLImageDeLaVille()),
+								auditeurBoutons);
+					else
+						this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
+								caseCouranteX, caseCouranteY, new ImageIcon(
+										"Images/Ville/ville_libre.png"),
+								auditeurBoutons);
+				}
+				else
+					this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
+							caseCouranteX, caseCouranteY,
+							new ImageIcon("Images/"
+									+ carte.obtenirTerrain(positionActuel)
+									+ ".jpeg"), auditeurBoutons);
+			}
 
 		GridLayout gridLayout = new GridLayout(Carte.NB_CASES_X,
 				Carte.NB_CASES_Y);
@@ -45,7 +72,9 @@ public class AffichageCarteTerrain extends JPanel {
 
 	/**
 	 * Met a jour la carte.
-	 * @param carte La carte.
+	 * 
+	 * @param carte
+	 *            La carte.
 	 */
 	public void mettreAJour(Carte carte) {
 		Position positionActuel;

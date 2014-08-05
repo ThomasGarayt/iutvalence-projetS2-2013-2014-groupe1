@@ -1,5 +1,7 @@
 package fr.projet.java.gestionGraphique;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
@@ -15,6 +17,7 @@ public class BoutonCarte extends JButton {
 
 
 	private static final long serialVersionUID = 1L;
+	private Image image;
 	private int x;
 	private int y;
 
@@ -33,10 +36,11 @@ public class BoutonCarte extends JButton {
 	public BoutonCarte(int x, int y, ImageIcon image,
 			ActionListener auditeurBoutons) {
 		super(image);
+		this.image = image.getImage();
 		this.setFocusPainted(false);
 		this.setBorderPainted(false);
 		this.setOpaque(false);
-		this.setContentAreaFilled(false);
+		this.setContentAreaFilled(true);
 		this.x = x;
 		this.y = y;
 
@@ -60,4 +64,11 @@ public class BoutonCarte extends JButton {
 	public int obtenirY() {
 		return y;
 	}
+	
+    @Override
+	protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (this.image == null) return;
+        g.drawImage(this.image, 0, 0, getWidth(), getHeight(), this);
+    }
 }

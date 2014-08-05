@@ -23,12 +23,12 @@ import fr.projet.java.gestionGraphique.SetDImages;
  * 
  */
 public class DialogPreferencePartie extends JDialog {
-	InfoPreferencePartie zInfo;
-	JComboBox<SetDImages> nationJoueur1;
-	JComboBox<String> carte;
-	JTextField nomJoueur1;
-	JComboBox<SetDImages> nationJoueur2;
-	JTextField nomJoueur2;
+	private InfoPreferencePartie zInfo;
+	private JComboBox nationJoueur1;
+	private JComboBox carte;
+	private JTextField nomJoueur1;
+	private JComboBox nationJoueur2;
+	private JTextField nomJoueur2;
 
 	/**
 	 * Creation de la boite de dialogue.
@@ -79,7 +79,7 @@ public class DialogPreferencePartie extends JDialog {
 		panelNationJoueur1.setPreferredSize(new Dimension(220, 60));
 		panelNationJoueur1.setBorder(BorderFactory
 				.createTitledBorder("Nation du joueur 1 :"));
-		nationJoueur1 = new JComboBox<SetDImages>(SetDImages.values());
+		nationJoueur1 = new JComboBox(SetDImages.values());
 		JLabel sexeLabel = new JLabel("Couleur :");
 		panelNationJoueur1.add(sexeLabel);
 		panelNationJoueur1.add(nationJoueur1);
@@ -103,7 +103,7 @@ public class DialogPreferencePartie extends JDialog {
 		panelNationJoueur2.setPreferredSize(new Dimension(220, 60));
 		panelNationJoueur2.setBorder(BorderFactory
 				.createTitledBorder("Nation du joueur 2 :"));
-		nationJoueur2 = new JComboBox<SetDImages>(SetDImages.values());
+		nationJoueur2 = new JComboBox(SetDImages.values());
 		JLabel sexeLabel2 = new JLabel("Couleur :");
 		panelNationJoueur2.add(sexeLabel2);
 		panelNationJoueur2.add(nationJoueur2);
@@ -115,7 +115,7 @@ public class DialogPreferencePartie extends JDialog {
 		panelCarte.setBorder(BorderFactory
 				.createTitledBorder("La carte du monde"));
 
-		carte = new JComboBox<String>();
+		carte = new JComboBox();
 		File repertoire = new File("Cartes");
 		String[] listefichiers;
 		int i;

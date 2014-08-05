@@ -21,7 +21,7 @@ public class AffichageMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JComboBox<TypeUnite> choixDeLUnite;
+	private JComboBox choixDeLUnite;
 
 	/**
 	 * Cr�e un menu.
@@ -126,7 +126,7 @@ public class AffichageMenu extends JPanel {
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 
-			this.choixDeLUnite = new JComboBox<TypeUnite>(TypeUnite.values());
+			this.choixDeLUnite = new JComboBox(TypeUnite.values());
 			
 			this.add(this.choixDeLUnite);
 			this.add(creerUnite);
