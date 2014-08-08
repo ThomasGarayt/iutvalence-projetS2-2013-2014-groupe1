@@ -61,7 +61,7 @@ public class DetectionDesChemins {
 			throw new CheminImpossibleException();
 
 		// Creation de le carte des coefficients.
-		while (!carteRemplie()) {
+		while (!carteRemplie(coefficientActuel)) {
 
 			// Mise a zero de positionACoefficiente
 			positionACoefficiente = new ArrayList<Position>();
@@ -87,38 +87,42 @@ public class DetectionDesChemins {
 				Position position = iteratorDePositionACoefficiente.next();
 				remplirCase(position, coefficientActuel);
 			}
-
-			// Si toutes les cases ne sont pas remplie = possibilité de perdre
-			// le chemin.
-			if ((positionDeCoeffActuel.size() == 0)
-					&& (coefficientActuel > 100))
-				throw new CheminImpossibleException();
-
 		}
 
+		boolean cheminModifier = true;
 		// Creation du chemin.
 		while (!positionCheminActuel.equals(positionDepart)) {
 			// Ajout de la position au chemin
 			cheminDefinitif.add(0, positionCheminActuel);
 
-			// Determinisation de la position adjacente la moins coefficienté.
+			// Determinisation de la position adjacente la moins coefficiente.
 			positionAdjacente = carte.casesAdjacentes(positionCheminActuel);
+
+			// Si il n'y a pas de coefficient dans les cases adjacentes le
+			// chemin est impossible.
+			if (positionAdjacente.size() == 0 || !cheminModifier)
+				throw new CheminImpossibleException();
+
+			cheminModifier = false;
+			
 			Iterator<Position> iteratorDePositionAdjacente = positionAdjacente
 					.iterator();
 
 			while (iteratorDePositionAdjacente.hasNext()) {
 				positionATesterPourCoefficient = iteratorDePositionAdjacente
 						.next();
-				// Vérifie si le coefficient est plus petit.
-				if (carteCoefficient[positionATesterPourCoefficient.getX()][positionATesterPourCoefficient
-						.getY()] != OCCUPEE
-						&& carteCoefficient[positionATesterPourCoefficient
-								.getX()][positionATesterPourCoefficient.getY()] < coefficientDeReference) {
+				// Verifie si le coefficient est plus petit.
+				Integer coefficientDeLaCarteATester = carteCoefficient[positionATesterPourCoefficient
+						.getX()][positionATesterPourCoefficient.getY()];
+				if (coefficientDeLaCarteATester != null
+						&& coefficientDeLaCarteATester != OCCUPEE
+						&& coefficientDeLaCarteATester < coefficientDeReference) {
 					positionCheminActuel = new Position(
 							positionATesterPourCoefficient.getX(),
 							positionATesterPourCoefficient.getY());
 					coefficientDeReference = carteCoefficient[positionATesterPourCoefficient
 							.getX()][positionATesterPourCoefficient.getY()];
+					cheminModifier = true;
 				}
 
 			}
@@ -130,10 +134,11 @@ public class DetectionDesChemins {
 		return chemin;
 	}
 
-	private boolean carteRemplie() {
+	private boolean carteRemplie(int coefficientCourant) {
 		for (int x = 0; x < Carte.NB_CASES_X; x++)
 			for (int y = 0; y < Carte.NB_CASES_Y; y++)
-				if ((carteCoefficient[x][y] == null))
+				if ((carteCoefficient[x][y] != null)
+						&& (carteCoefficient[x][y] >= coefficientCourant))
 					return false;
 		return true;
 	}

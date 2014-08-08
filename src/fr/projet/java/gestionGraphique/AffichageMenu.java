@@ -21,10 +21,11 @@ public class AffichageMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("rawtypes")
 	private JComboBox choixDeLUnite;
 
 	/**
-	 * Cr�e un menu.
+	 * Cree un menu.
 	 * 
 	 * @param joueur
 	 *            Le joueur dont c'est le tour.
@@ -104,6 +105,7 @@ public class AffichageMenu extends JPanel {
 	 * @param ecouteurBouton
 	 *            L'auditeur des boutons du menu.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AffichageMenu(Ville ville, Nation joueur,
 			ActionListener ecouteurBouton) {
 		super();
@@ -126,7 +128,7 @@ public class AffichageMenu extends JPanel {
 			ameliorerVille.setName("AmeliorerVille");
 			ameliorerVille.addActionListener(ecouteurBouton);
 
-			this.choixDeLUnite = new JComboBox(TypeUnite.values());
+			this.choixDeLUnite = new JComboBox(TypeUnite.values());;
 			
 			this.add(this.choixDeLUnite);
 			this.add(creerUnite);

@@ -69,7 +69,7 @@ public class AffichageCarteChemin extends JPanel {
 				cheminAAfficher.getPosition(1));
 
 		this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-				.setIcon(new ImageIcon("Images/chemin/bleu/fin/fin"
+				.setImage(new ImageIcon("Images/chemin/bleu/fin/fin"
 						+ directionPrecedente + ".png"));
 
 		for (int i = 1; i < cheminAAfficher.getTaille() - 1; i++) {
@@ -89,23 +89,23 @@ public class AffichageCarteChemin extends JPanel {
 				case Bas:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
 							.getY()]
-							.setIcon(new ImageIcon("Images/chemin/"
+							.setImage(new ImageIcon("Images/chemin/"
 									+ couleurChemin
 									+ "/ligne/ligneDroiteVerticale.png"));
 					break;
 				case Gauche:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageBasDroite.png"));
 					break;
 				case Droite:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageBasGauche.png"));
 					break;
 				default:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/erreur/erreurChemin.png"));
 					break;
 				}
@@ -115,24 +115,24 @@ public class AffichageCarteChemin extends JPanel {
 				case Haut:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
 							.getY()]
-							.setIcon(new ImageIcon("Images/chemin/"
+							.setImage(new ImageIcon("Images/chemin/"
 									+ couleurChemin
 									+ "/ligne/ligneDroiteVerticale.png"));
 					break;
 				case Gauche:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageHautDroite"
 							+ ".png"));
 					break;
 				case Droite:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
-							+ couleurChemin + "/virage/virageHaurDroite.png"));
+							.getY()].setImage(new ImageIcon("Images/chemin/"
+							+ couleurChemin + "/virage/virageHautGauche.png"));
 					break;
 				default:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/erreur/erreurChemin.png"));
 					break;
 				}
@@ -141,23 +141,23 @@ public class AffichageCarteChemin extends JPanel {
 				switch (directionPrecedente) {
 				case Bas:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageHautGauche.png"));
 					break;
 				case Haut:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageHautGauche.png"));
 					break;
 				case Gauche:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin
 							+ "/ligne/ligneDroiteHorizontale.png"));
 					break;
 				default:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/erreur/erreurChemin.png"));
 					break;
 				}
@@ -166,30 +166,30 @@ public class AffichageCarteChemin extends JPanel {
 				switch (directionPrecedente) {
 				case Bas:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageHautDroite.png"));
 					break;
 				case Haut:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/virage/virageBasDroite.png"));
 					break;
 				case Droite:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin
 							+ "/ligne/ligneDroiteHorizontale.png"));
 					break;
 				default:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
-							.getY()].setIcon(new ImageIcon("Images/chemin/"
+							.getY()].setImage(new ImageIcon("Images/chemin/"
 							+ couleurChemin + "/erreur/erreurChemin.png"));
 					break;
 				}
 				break;
 			default:
 				this.carteDeBouton[positionCourante.getX()][positionCourante
-						.getY()].setIcon(new ImageIcon("Images/chemin/"
+						.getY()].setImage(new ImageIcon("Images/chemin/"
 						+ couleurChemin + "/erreur/erreurChemin.png"));
 				break;
 			}
@@ -207,27 +207,27 @@ public class AffichageCarteChemin extends JPanel {
 		switch (directionPrecedente) {
 		case Bas:
 			this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-					.setIcon(new ImageIcon("Images/chemin/" + couleurChemin
+					.setImage(new ImageIcon("Images/chemin/" + couleurChemin
 							+ "/fin/finHaut.png"));
 			break;
 		case Gauche:
 			this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-					.setIcon(new ImageIcon("Images/chemin/" + couleurChemin
+					.setImage(new ImageIcon("Images/chemin/" + couleurChemin
 							+ "/fin/finDroite.png"));
 			break;
 		case Droite:
 			this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-					.setIcon(new ImageIcon("Images/chemin/" + couleurChemin
+					.setImage(new ImageIcon("Images/chemin/" + couleurChemin
 							+ "/fin/finGauche.png"));
 			break;
 		case Haut:
 			this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-					.setIcon(new ImageIcon("Images/chemin/" + couleurChemin
+					.setImage(new ImageIcon("Images/chemin/" + couleurChemin
 							+ "/fin/finBas.png"));
 			break;
 		default:
 			this.carteDeBouton[positionCourante.getX()][positionCourante.getY()]
-					.setIcon(new ImageIcon("Images/chemin/" + couleurChemin
+					.setImage(new ImageIcon("Images/chemin/" + couleurChemin
 							+ "/erreur/erreurChemin.png"));
 			break;
 		}
@@ -237,7 +237,7 @@ public class AffichageCarteChemin extends JPanel {
 		for (int caseCouranteX = 0; caseCouranteX < Carte.NB_CASES_X; caseCouranteX++)
 			for (int caseCouranteY = 0; caseCouranteY < Carte.NB_CASES_Y; caseCouranteY++) {
 				this.carteDeBouton[caseCouranteX][caseCouranteY]
-						.setIcon(new ImageIcon(""));
+						.setImage(new ImageIcon(""));
 			}
 
 	}

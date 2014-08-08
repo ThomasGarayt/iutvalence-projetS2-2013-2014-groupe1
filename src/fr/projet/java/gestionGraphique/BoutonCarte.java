@@ -40,7 +40,7 @@ public class BoutonCarte extends JButton {
 		this.setFocusPainted(false);
 		this.setBorderPainted(false);
 		this.setOpaque(false);
-		this.setContentAreaFilled(true);
+		this.setContentAreaFilled(false);
 		this.x = x;
 		this.y = y;
 
@@ -63,6 +63,14 @@ public class BoutonCarte extends JButton {
 	 */
 	public int obtenirY() {
 		return y;
+	}
+	
+	/**
+	 * @param image 
+	 * 
+	 */
+	public void setImage(ImageIcon image){
+		this.image = image.getImage();
 	}
 	
     @Override

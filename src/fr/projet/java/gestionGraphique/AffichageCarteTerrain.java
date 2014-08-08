@@ -30,31 +30,9 @@ public class AffichageCarteTerrain extends JPanel {
 
 		for (int caseCouranteX = 0; caseCouranteX < Carte.NB_CASES_X; caseCouranteX++)
 			for (int caseCouranteY = 0; caseCouranteY < Carte.NB_CASES_Y; caseCouranteY++) {
-				Position positionActuel = new Position(caseCouranteX,
-						caseCouranteY);
-				if (carte.laCaseContientUneVille(positionActuel)) {
-					if (carte.obtenirLaVilleDeLaCase(positionActuel)
-							.obtenirJoueurProprietaire() != null)
-						this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
-								caseCouranteX, caseCouranteY,
-								new ImageIcon(carte
-										.obtenirLaVilleDeLaCase(positionActuel)
-										.obtenirJoueurProprietaire()
-										.obtenirLesetDimagesDeLaNation()
-										.obtenirLImageDeLaVille()),
-								auditeurBoutons);
-					else
-						this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
-								caseCouranteX, caseCouranteY, new ImageIcon(
-										"Images/Ville/ville_libre.png"),
-								auditeurBoutons);
-				}
-				else
-					this.carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
-							caseCouranteX, caseCouranteY,
-							new ImageIcon("Images/"
-									+ carte.obtenirTerrain(positionActuel)
-									+ ".jpeg"), auditeurBoutons);
+				carteDeBouton[caseCouranteX][caseCouranteY] = new BoutonCarte(
+						caseCouranteX, caseCouranteX, new ImageIcon(),
+						auditeurBoutons);
 			}
 
 		GridLayout gridLayout = new GridLayout(Carte.NB_CASES_X,
@@ -86,19 +64,18 @@ public class AffichageCarteTerrain extends JPanel {
 					if (carte.obtenirLaVilleDeLaCase(positionActuel)
 							.obtenirJoueurProprietaire() != null)
 						this.carteDeBouton[caseCouranteX][caseCouranteY]
-								.setIcon(new ImageIcon(carte
+								.setImage(new ImageIcon(carte
 										.obtenirLaVilleDeLaCase(positionActuel)
 										.obtenirJoueurProprietaire()
 										.obtenirLesetDimagesDeLaNation()
 										.obtenirLImageDeLaVille()));
 					else
 						this.carteDeBouton[caseCouranteX][caseCouranteY]
-								.setIcon(new ImageIcon(
+								.setImage(new ImageIcon(
 										"Images/Ville/ville_libre.png"));
-				}
-				else
+				} else
 					this.carteDeBouton[caseCouranteX][caseCouranteY]
-							.setIcon(new ImageIcon("Images/"
+							.setImage(new ImageIcon("Images/"
 									+ carte.obtenirTerrain(positionActuel)
 									+ ".jpeg"));
 			}

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionUnite.Chemin;
+import fr.projet.java.gestionUnite.Nation;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
 
@@ -50,22 +51,22 @@ public class Carte {
 			cases = new Case[NB_CASES_X][NB_CASES_Y];
 
 			// On creer la carte.
-				for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++) {
-					String line = scanner.nextLine();
-					System.out.println(line);
+			for (int caseCouranteX = 0; caseCouranteX < NB_CASES_X; caseCouranteX++) {
+				String line = scanner.nextLine();
+				System.out.println(line);
 
-					for (int caseCouranteY = 0; caseCouranteY < NB_CASES_Y; caseCouranteY++) {
-						if (line.charAt(caseCouranteY) == 'p')
-							this.cases[caseCouranteX][caseCouranteY] = new Case(
-									Terrain.Plaine);
-						else if (line.charAt(caseCouranteY) == 'o')
-							this.cases[caseCouranteX][caseCouranteY] = new Case(
-									Terrain.Ocean);
-						else if (line.charAt(caseCouranteY) == 'm')
-							this.cases[caseCouranteX][caseCouranteY] = new Case(
-									Terrain.Montagne);
-					}
+				for (int caseCouranteY = 0; caseCouranteY < NB_CASES_Y; caseCouranteY++) {
+					if (line.charAt(caseCouranteY) == 'p')
+						this.cases[caseCouranteX][caseCouranteY] = new Case(
+								Terrain.Plaine);
+					else if (line.charAt(caseCouranteY) == 'o')
+						this.cases[caseCouranteX][caseCouranteY] = new Case(
+								Terrain.Ocean);
+					else if (line.charAt(caseCouranteY) == 'm')
+						this.cases[caseCouranteX][caseCouranteY] = new Case(
+								Terrain.Montagne);
 				}
+			}
 
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -303,5 +304,32 @@ public class Carte {
 					position.getY() + 1));
 
 		return positionAdjacente;
+	}
+
+	/**
+	 * Si une unite ou une ville appartenant a une nation existe sur la carte
+	 * 
+	 * @param nation
+	 *            La nation.
+	 * @return Vrai si la nation possede une ville ou une unite.
+	 */
+	public boolean nationExiste(Nation nation) {
+		Position position;
+		for (int positionX = 0; positionX < NB_CASES_X; positionX++)
+			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
+				position = new Position(positionX, positionY);
+				if (this.laCaseContientUneUnite(position))
+					if (obtenirLUniteDeLaCase(position).obtenirJoueur().equals(
+							nation))
+						return true;
+				if (this.laCaseContientUneVille(position))
+					if (this.obtenirLaVilleDeLaCase(position)
+							.obtenirJoueurProprietaire() == null)
+						;
+					else if (this.obtenirLaVilleDeLaCase(position)
+							.obtenirJoueurProprietaire().equals(nation))
+						return true;
+			}
+		return false;
 	}
 }

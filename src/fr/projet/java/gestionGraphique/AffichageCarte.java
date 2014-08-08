@@ -29,15 +29,16 @@ public class AffichageCarte extends JPanel {
 		super();
 
 		this.setLayout(new OverlayLayout(this));
-		affichageCarteTerrain = new AffichageCarteTerrain(carte, auditeurBoutons);
+		affichageCarteTerrain = new AffichageCarteTerrain(carte,
+				auditeurBoutons);
 		affichageCarteTerrain.setOpaque(false);
-		
+
 		affichageCarteChemin = new AffichageCarteChemin(auditeurBoutons);
 		affichageCarteChemin.setOpaque(false);
-		
+
 		affichageCarteUnite = new AffichageCarteUnite(carte, auditeurBoutons);
 		affichageCarteUnite.setOpaque(false);
-		
+
 		this.add(affichageCarteUnite);
 		this.add(affichageCarteChemin);
 		this.add(affichageCarteTerrain);
@@ -46,27 +47,37 @@ public class AffichageCarte extends JPanel {
 
 	/**
 	 * Met a jour la carte des unites.
-	 * @param carte  La carte.
+	 * 
+	 * @param carte
+	 *            La carte.
 	 */
 	public void mettreAJourUnite(Carte carte) {
 		this.affichageCarteUnite.mettreAJour(carte);
+		this.affichageCarteUnite.repaint();
 	}
-	
+
 	/**
 	 * Met a jour la carte du terrain.
-	 * @param carte La Carte.
+	 * 
+	 * @param carte
+	 *            La Carte.
 	 */
 	public void mettreAJourVille(Carte carte) {
 		this.affichageCarteTerrain.mettreAJour(carte);
+		this.affichageCarteTerrain.repaint();
 	}
 
 	/**
 	 * Met a jour la carte des chemins.
-	 * @param cheminAAfficher Le chemin a afficher.
-	 * @param nombreDePM Le nombre de point de mouvement ( aprés le chemin devient rouge ).
+	 * 
+	 * @param cheminAAfficher
+	 *            Le chemin a afficher.
+	 * @param nombreDePM
+	 *            Le nombre de point de mouvement ( apres le chemin devient
+	 *            rouge ).
 	 */
 	public void afficherUnChemin(Chemin cheminAAfficher, int nombreDePM) {
 		this.affichageCarteChemin.afficherUnChemin(cheminAAfficher, nombreDePM);
-		
+		this.affichageCarteChemin.repaint();
 	}
 }

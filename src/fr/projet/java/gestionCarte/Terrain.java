@@ -25,7 +25,7 @@ public enum Terrain {
 	}
 
 	/**
-	 * L'accessibilit de la case au unite.
+	 * L'accessibilite de la case au unite.
 	 * 
 	 * @return Vrai si les unite peuvent marcher sur cette carte.
 	 */

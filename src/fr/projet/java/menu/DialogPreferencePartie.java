@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,7 +24,7 @@ import fr.projet.java.gestionGraphique.SetDImages;
  * 
  */
 public class DialogPreferencePartie extends JDialog {
-	private InfoPreferencePartie zInfo;
+	private InfoPreferencePartie info;
 	private JComboBox nationJoueur1;
 	private JComboBox carte;
 	private JTextField nomJoueur1;
@@ -54,9 +55,9 @@ public class DialogPreferencePartie extends JDialog {
 	 * 
 	 * @return Les options choisi par le joueur.
 	 */
-	public InfoPreferencePartie showZDialog() {
+	public InfoPreferencePartie showDialog() {
 		this.setVisible(true);
-		return this.zInfo;
+		return this.info;
 	}
 
 	private void initComponent() {
@@ -80,8 +81,8 @@ public class DialogPreferencePartie extends JDialog {
 		panelNationJoueur1.setBorder(BorderFactory
 				.createTitledBorder("Nation du joueur 1 :"));
 		nationJoueur1 = new JComboBox(SetDImages.values());
-		JLabel sexeLabel = new JLabel("Couleur :");
-		panelNationJoueur1.add(sexeLabel);
+		JLabel labelNationJoueur1 = new JLabel("Couleur :");
+		panelNationJoueur1.add(labelNationJoueur1);
 		panelNationJoueur1.add(nationJoueur1);
 
 		// Joueur 2
@@ -104,8 +105,8 @@ public class DialogPreferencePartie extends JDialog {
 		panelNationJoueur2.setBorder(BorderFactory
 				.createTitledBorder("Nation du joueur 2 :"));
 		nationJoueur2 = new JComboBox(SetDImages.values());
-		JLabel sexeLabel2 = new JLabel("Couleur :");
-		panelNationJoueur2.add(sexeLabel2);
+		JLabel labelNationJoueur2 = new JLabel("Couleur :");
+		panelNationJoueur2.add(labelNationJoueur2);
 		panelNationJoueur2.add(nationJoueur2);
 
 		// La carte
@@ -142,7 +143,7 @@ public class DialogPreferencePartie extends JDialog {
 		okBouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				zInfo = new InfoPreferencePartie(nomJoueur1.getText(),
+				info = new InfoPreferencePartie(nomJoueur1.getText(),
 						nomJoueur2.getText(), (SetDImages) nationJoueur1
 								.getSelectedItem(), (SetDImages) nationJoueur2
 								.getSelectedItem(), (String) carte

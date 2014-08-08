@@ -1,5 +1,6 @@
 package fr.projet.java.menu;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,14 +43,18 @@ public class MenuGeneral implements Runnable, ActionListener {
 
 		fenetre = new JFrame();
 
-		panel.add(boutonJouer);
-		panel.add(boutonQuitter);
+		boutonJouer.setPreferredSize(new Dimension(60, 50));
+		boutonQuitter.setPreferredSize(new Dimension(60, 50));
 
 		Box box = Box.createVerticalBox();
 		box.add(boutonJouer);
+		box.add(new JButton("Parametre"));
 		box.add(boutonQuitter);
 
-		fenetre.setContentPane(box);
+		panel.add(box);
+
+		fenetre.setContentPane(panel);
+		// fenetre.add(box);
 		fenetre.setSize(700, 600);
 		fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		fenetre.setResizable(false);
@@ -63,13 +68,14 @@ public class MenuGeneral implements Runnable, ActionListener {
 		boutonJouer.addActionListener(this);
 
 		fenetre.setVisible(true);
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		DialogPreferencePartie zd = new DialogPreferencePartie(null,
-				"Preference de la partie", true);
-		infoPreferencePartie = zd.showZDialog();
+		DialogPreferencePartie boiteDeDialogue = new DialogPreferencePartie(
+				fenetre, "Preference de la partie", true);
+		infoPreferencePartie = boiteDeDialogue.showDialog();
 		this.preferenceChoisi = true;
 	}
 

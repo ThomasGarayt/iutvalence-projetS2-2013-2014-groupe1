@@ -23,6 +23,8 @@ public class AffichageCarteUnite extends JPanel {
 	 * @param auditeurBoutons L'action listeneur des boutons de la carte.
 	 */
 	public AffichageCarteUnite(Carte carte, ActionListener auditeurBoutons) {
+		this.setOpaque(false);
+
 		carteDeBouton = new BoutonCarte[Carte.NB_CASES_X][Carte.NB_CASES_Y];
 
 		for (int caseCouranteX = 0; caseCouranteX < Carte.NB_CASES_X; caseCouranteX++)
@@ -57,12 +59,12 @@ public class AffichageCarteUnite extends JPanel {
 				// La case contient une unite.
 				if (carte.laCaseContientUneUnite(positionActuel)) {
 					this.carteDeBouton[caseCouranteX][caseCouranteY]
-							.setIcon(obtenirLImageDeLUnite(positionActuel,
+							.setImage(obtenirLImageDeLUnite(positionActuel,
 									carte));
 				}
 				else {
 					this.carteDeBouton[caseCouranteX][caseCouranteY]
-							.setIcon(new ImageIcon(""));
+							.setImage(new ImageIcon(""));
 				}
 
 			}

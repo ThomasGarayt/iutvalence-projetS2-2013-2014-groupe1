@@ -12,7 +12,7 @@ import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
 
 /**
- * @author Romain Décrie la partie logique du déroulement de la partie.
+ * @author Romain Decrie la partie logique du deroulement de la partie.
  * 
  */
 public class PartieDeCivilisation {
@@ -23,6 +23,7 @@ public class PartieDeCivilisation {
 
 	private int tour = 0;
 	private Nation[] nations;
+	private boolean[] nationsDisparue;
 
 	/**
 	 * Creer une nouvelle partie de civilisation.
@@ -43,6 +44,10 @@ public class PartieDeCivilisation {
 		this.joueurs = joueurs;
 		this.nations = nations;
 
+		this.nationsDisparue = new boolean[nations.length];
+		for (int nationCourante = 0; nationCourante < nations.length; nationCourante++)
+			this.nationsDisparue[nationCourante] = false;
+
 		this.carte = creationDeLaCarte(fichierCarte);
 
 		this.tour = 0;
@@ -52,19 +57,32 @@ public class PartieDeCivilisation {
 	 * Jouer la partie.
 	 */
 	public void jouer() {
-		while (true) {
+		while (nombreDeNationSurLaCarte() > 1) {
 
 			this.tour += 1;
-			
-			affichage.mettreAJourLesUnites(carte);
-			affichage.mettreAJourLeTerrain(carte);
-			affichage.mettreAJourLeMenu(nations[this.tour % joueurs.length]);
 
-			jouerUnTour(joueurs[this.tour % joueurs.length], nations[this.tour
-					% joueurs.length]);
-			finirLeTour(nations[this.tour % joueurs.length]);
-			System.out.println("Fin du tour " + this.tour);
+			if (!nationsDisparue[this.tour % joueurs.length]) {
+				affichage.mettreAJourLesUnites(carte);
+				affichage.mettreAJourLeTerrain(carte);
+				affichage
+						.mettreAJourLeMenu(nations[this.tour % joueurs.length]);
+
+				jouerUnTour(joueurs[this.tour % joueurs.length],
+						nations[this.tour % joueurs.length]);
+				finirLeTour(nations[this.tour % joueurs.length]);
+				System.out.println("Fin du tour " + this.tour);
+			}
 		}
+		System.out.println("Fin de la partie.");
+	}
+
+	private int nombreDeNationSurLaCarte() {
+		int nombreDeNation = 0;
+		for (int nationCourante = 0; nationCourante < joueurs.length; nationCourante++) {
+			if (!this.nationsDisparue[nationCourante])
+				nombreDeNation++;
+		}
+		return nombreDeNation;
 	}
 
 	/**
@@ -80,7 +98,7 @@ public class PartieDeCivilisation {
 		Position deuxiemePositionChoisie;
 		Ville ville;
 		Unite unite;
-		
+
 		// Tant que le tour n'est pas terminer par le joueur.
 		while (true) {
 			try {
@@ -169,7 +187,7 @@ public class PartieDeCivilisation {
 						break;
 					}
 					affichage.mettreAJourLeMenu(nation);
-				// Si la case contient une ville.
+					// Si la case contient une ville.
 				} else if (carte.laCaseContientUneVille(positionChoisi)) {
 					System.out.println("C'est une ville.");
 					ville = carte.obtenirLaVilleDeLaCase(positionChoisi);
@@ -185,12 +203,11 @@ public class PartieDeCivilisation {
 						ville.ameliorer(nation);
 						break;
 					// S'il creer une unite.
-					// TODO Copier la ligne pour les chars en ajoutant une
-					// ActionVille.
 					case CreerUnite:
 						System.out.println("Tu as crée une unité.");
 						carte.ajouterUneUniteALaCase(positionChoisi, new Unite(
-								affichage.obtenirLeTypeDUniteSelectionne(), nation));
+								affichage.obtenirLeTypeDUniteSelectionne(),
+								nation));
 						break;
 					// Si il deselectionne la ville.
 					case Deselectionner:
@@ -216,6 +233,14 @@ public class PartieDeCivilisation {
 	private void finirLeTour(Nation nation) {
 		reinitialiserUnite(nation);
 		miseAJourTresorerieFinTour(nation);
+		miseAJourNationDisparue();
+	}
+
+	private void miseAJourNationDisparue() {
+		for(int nationCourante = 0; nationCourante < joueurs.length; nationCourante++)
+			if (!carte.nationExiste(nations[nationCourante]))
+				this.nationsDisparue[nationCourante] = true;
+		
 	}
 
 	private void reinitialiserUnite(Nation nation) {
