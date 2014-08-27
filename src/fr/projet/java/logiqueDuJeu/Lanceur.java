@@ -2,6 +2,7 @@ package fr.projet.java.logiqueDuJeu;
 
 import java.io.File;
 
+import fr.projet.java.IntelligenceArtificiel.IAPrincipale;
 import fr.projet.java.gestionGraphique.FenetreCivilisation;
 import fr.projet.java.gestionGraphique.SetDImages;
 import fr.projet.java.gestionUnite.Nation;
@@ -35,7 +36,7 @@ public class Lanceur {
 		// Creation de la fenetre de Civilisation et association avec les
 		// joueurs.
 		FenetreCivilisation fenetreCivilisation = new FenetreCivilisation();
-		FenetreCivilisation[] joueurs = new FenetreCivilisation[nomsDesJoueurs.length];
+		Joueur[] joueurs = new Joueur[nomsDesJoueurs.length];
 		for (int joueurCourant = 0; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
 			joueurs[joueurCourant] = fenetreCivilisation;
 
@@ -44,6 +45,9 @@ public class Lanceur {
 		for (int joueurCourant = 0; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
 				nations[joueurCourant] = new Nation(
 						nomsDesJoueurs[joueurCourant], nationsDesJoueurs[joueurCourant]);
+		
+		// Creation d'un joueur IA.
+		joueurs[0] = new IAPrincipale(nations[0]);
 
 		// Recuperation du fichier de la carte.
 		File fichierCarte = preferencePartie.obtenirFichierCarte();

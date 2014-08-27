@@ -3,7 +3,9 @@ package fr.projet.java.gestionCarte;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.Vector;
 
 import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionUnite.Chemin;
@@ -30,6 +32,28 @@ public class Carte {
 
 	private DetectionDesChemins detectionDesChemins;
 
+	private Vector<Unite> unitesDeLaCarte;
+
+	/**
+	 * Obtenir l'ensemble des unites presente sur la carte.
+	 * 
+	 * @return Un tableau d'unite.
+	 */
+	public Vector<Unite> obtenirUnitesDeLaCarte() {
+		return this.unitesDeLaCarte;
+	}
+
+	/**
+	 * Obtenir l'emsemble des villes presente sur la carte.
+	 * 
+	 * @return Un tableau de ville.
+	 */
+	public Vector<Ville> obtenirVillesDeLaCarte() {
+		return this.villesDeLaCarte;
+	}
+
+	private Vector<Ville> villesDeLaCarte;
+
 	/**
 	 * Une nouvelle carte vide.
 	 * 
@@ -37,6 +61,8 @@ public class Carte {
 	 *            Le fichier de creation de la carte.
 	 */
 	public Carte(File fichierCarte) {
+		unitesDeLaCarte = new Vector<Unite>();
+		villesDeLaCarte = new Vector<Ville>();
 
 		Scanner scanner;
 		try {
@@ -150,6 +176,7 @@ public class Carte {
 				.obtenirCoutCreation()) {
 			uniteAAjouter.obtenirJoueur().modifierTresorie(
 					-uniteAAjouter.obtenirCoutCreation());
+			this.unitesDeLaCarte.add(uniteAAjouter);
 			this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
 					.ajouterUnite(uniteAAjouter);
 		}
@@ -182,6 +209,9 @@ public class Carte {
 	 *            La position de l'unite que l'on souhaite supprimer.
 	 */
 	public void supprimerUneUnite(Position positionDeLUnite) {
+		this.unitesDeLaCarte
+				.remove(this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
+						.obtenirUnite());
 		this.cases[positionDeLUnite.positionX][positionDeLUnite.positionY]
 				.supprimerUnite();
 	}
@@ -249,6 +279,7 @@ public class Carte {
 	 *            La ville que l'on souaite ajouter.
 	 */
 	public void ajouterUneVille(Position positionDeLaVille, Ville villeAAjouter) {
+		this.villesDeLaCarte.add(villeAAjouter);
 		this.cases[positionDeLaVille.positionX][positionDeLaVille.positionY]
 				.ajouterVille(villeAAjouter);
 	}
@@ -272,7 +303,7 @@ public class Carte {
 	 *            La position a tester
 	 * @return Vrai si la position est inaccessible, faux sinon.
 	 */
-	public boolean estOccupee(Position positionArrive) {
+	public boolean estAccessible(Position positionArrive) {
 		if (laCaseContientUneUnite(positionArrive))
 			return true;
 		if (!laCaseEstAccessible(positionArrive))
@@ -332,4 +363,92 @@ public class Carte {
 			}
 		return false;
 	}
+
+	/**
+	 * Trouver la position d'une unite sur la carte.
+	 * 
+	 * @param unite
+	 *            L'unite a chercher.
+	 * @return La position de l'unite, null si non trouve.
+	 */
+	public Position trouverUnite(Unite unite) {
+		for (int positionX = 0; positionX < NB_CASES_X; positionX++)
+			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
+				Position position = new Position(positionX, positionY);
+				if (this.laCaseContientUneUnite(position))
+					if (this.obtenirLUniteDeLaCase(position).equals(unite))
+						return position;
+			}
+		return null;
+	}
+
+	/**
+	 * Trouver la position d'une ville sur la carte.
+	 * 
+	 * @param ville
+	 *            La ville a chercher.
+	 * @return La position de la ville, null si non trouve.
+	 */
+	public Position trouverVille(Ville ville) {
+		for (int positionX = 0; positionX < NB_CASES_X; positionX++)
+			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
+				Position position = new Position(positionX, positionY);
+				if (this.laCaseContientUneVille(position))
+					if (this.obtenirLaVilleDeLaCase(position).equals(ville))
+						return position;
+			}
+		return null;
+	}
+
+	/**
+	 * Compare la distance de toutes les villes sur la carte avec une position.
+	 * 
+	 * @param origine
+	 *            La position de reference.
+	 * @return Un tableau de position des villes trier de la plus faible
+	 *         distance a la plus eleve.
+	 */
+	// TODO Trier Les villes.
+	public Vector<ComparaisonDistance> distanceVille(Position origine) {
+		Position position;
+		Vector<ComparaisonDistance> distanceVille = new Vector<ComparaisonDistance>();
+		for (int positionX = 0; positionX < NB_CASES_X; positionX++)
+			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
+				position = new Position(positionX, positionY);
+				if (this.laCaseContientUneVille(position))
+					try {
+						distanceVille.add(new ComparaisonDistance(position,
+								this.obtenirUnChemin(origine, position)
+										.getTaille()));
+						;
+					} catch (CheminImpossibleException e) {
+					}
+			}
+		Collections.sort(distanceVille);
+		return distanceVille;
+	}
+
+	/**
+	 * Compare la distance de toutes les unites sur la carte avec une position.
+	 * 
+	 * @param origine
+	 *            La position de reference.
+	 * @return Un tableau de position des unites trier de la plus faible
+	 *         distance a la plus eleve.
+	 */
+	// TODO Les chemins sont ignore car on vise une unite !
+	public Vector<ComparaisonDistance> distanceUnite(Position origine) {
+		Position position;
+		Vector<ComparaisonDistance> distanceUnite = new Vector<ComparaisonDistance>();
+		for (int positionX = 0; positionX < NB_CASES_X; positionX++)
+			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
+				position = new Position(positionX, positionY);
+				if (this.laCaseContientUneUnite(position))
+					distanceUnite.add(new ComparaisonDistance(position,
+							origine.distance(position)));
+			}
+		Collections.sort(distanceUnite);
+		return distanceUnite;
+	}
+
 }

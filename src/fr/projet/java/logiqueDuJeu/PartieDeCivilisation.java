@@ -1,15 +1,17 @@
 package fr.projet.java.logiqueDuJeu;
 
 import java.io.File;
+import java.util.Arrays;
 
 import fr.projet.java.exception.CheminImpossibleException;
+import fr.projet.java.exception.FinDuTourException;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
-import fr.projet.java.gestionGraphique.FinDuTourException;
 import fr.projet.java.gestionUnite.Nation;
 import fr.projet.java.gestionUnite.TypeUnite;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
+import fr.projet.java.IntelligenceArtificiel.IAPrincipale;
 
 /**
  * @author Romain Decrie la partie logique du deroulement de la partie.
@@ -45,10 +47,10 @@ public class PartieDeCivilisation {
 		this.nations = nations;
 
 		this.nationsDisparue = new boolean[nations.length];
-		for (int nationCourante = 0; nationCourante < nations.length; nationCourante++)
-			this.nationsDisparue[nationCourante] = false;
+		Arrays.fill(nationsDisparue, false);
 
 		this.carte = creationDeLaCarte(fichierCarte);
+		((IAPrincipale) this.joueurs[0]).associerLaCarte(this.carte);
 
 		this.tour = 0;
 	}
@@ -111,7 +113,7 @@ public class PartieDeCivilisation {
 						+ positionChoisi);
 				// Si la position correspond a une unite.
 				if (carte.laCaseContientUneUnite(positionChoisi)) {
-					System.out.println("C'est une unitŽ.");
+					System.out.println("C'est une unite.");
 					unite = carte.obtenirLUniteDeLaCase(positionChoisi);
 
 					// On met a jour le menu.
@@ -123,7 +125,7 @@ public class PartieDeCivilisation {
 					case Ameliorer:
 						if (unite.obtenirJoueur() != nation)
 							break;
-						System.out.println("Tu as amŽliorŽ l'unitŽ.");
+						System.out.println("Tu as ameliore l'unite.");
 						unite.ameliorerUnite();
 						break;
 					// Le joueur deplace l'unite ou attaque une autre unite.
@@ -141,7 +143,7 @@ public class PartieDeCivilisation {
 							// Si c'est la meme position c'est une deselection.
 							if (deuxiemePositionChoisie.equals(positionChoisi))
 								break;
-							System.out.println("Tu as attaquŽ une unitŽ.");
+							System.out.println("Tu as attaque une unite.");
 							carte.attaquerDesUnite(positionChoisi,
 									deuxiemePositionChoisie);
 							// Sinon c'est un deplacement.
@@ -166,7 +168,7 @@ public class PartieDeCivilisation {
 								// validation.
 								if (var1.equals(var2)) {
 									System.out
-											.println("Tu as dŽplacŽ l'unitŽ.");
+											.println("Tu as deplace l'unite.");
 									carte.deplacerUneUnite(positionChoisi, var2);
 									affichage.mettreAJourLeTerrain(carte);
 									break;
@@ -181,7 +183,7 @@ public class PartieDeCivilisation {
 					// Le joueur appuie sur une case ou un bouton menant a la
 					// deselection.
 					case Deselectionner:
-						System.out.println("Tu as dŽselectionnŽ l'unitŽ.");
+						System.out.println("Tu as deselectionne l'unite.");
 						break;
 					default:
 						break;
@@ -199,20 +201,20 @@ public class PartieDeCivilisation {
 					switch (joueur.selectionnerActionVille()) {
 					// Si il ameliore la ville.
 					case Ameliorer:
-						System.out.println("Tu as amŽliorŽ la ville.");
+						System.out.println("Tu as ameliore la ville.");
 						ville.ameliorer(nation);
 						break;
 					// S'il creer une unite.
 					case CreerUnite:
-						System.out.println("Tu as crŽe une unitŽ.");
+						System.out.println("Tu as cree une unite.");
 						carte.ajouterUneUniteALaCase(positionChoisi, new Unite(
-								affichage.obtenirLeTypeDUniteSelectionne(),
+								joueur.obtenirLeTypeDUniteSelectionne(),
 								nation));
 						break;
 					// Si il deselectionne la ville.
 					case Deselectionner:
 						affichage.mettreAJourLeMenu(nation);
-						System.out.println("Tu as dŽsŽlectionnŽ la ville.");
+						System.out.println("Tu as deselectionne la ville.");
 						break;
 					default:
 						break;

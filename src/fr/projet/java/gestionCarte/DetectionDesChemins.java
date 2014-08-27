@@ -15,6 +15,8 @@ public class DetectionDesChemins {
 
 	private static final Integer OCCUPEE = -1;
 	private Integer[][] carteCoefficient;
+	
+	private boolean parametreUniteInaccessible = true;
 
 	/**
 	 * Le constructeur initialise la carte des coefficient.
@@ -23,6 +25,15 @@ public class DetectionDesChemins {
 		this.carteCoefficient = new Integer[Carte.NB_CASES_X][Carte.NB_CASES_Y];
 	}
 
+	/**
+	 * Change les parametre d'accessibilite des chemins au unite.
+	 * Par defaut les unites ne peuvent pas être traversees.
+	 * @param lesUnitesSontInaccessibles Si vrai les unites peuvent être traverse par un chemin.
+	 */
+	public void changerParametreUnite(boolean lesUnitesSontInaccessibles) {
+		this.parametreUniteInaccessible = lesUnitesSontInaccessibles;
+	}
+	
 	/**
 	 * Obtenir un chemin d'une position a une autre.
 	 * 
@@ -57,7 +68,7 @@ public class DetectionDesChemins {
 		placerObstacle(carte);
 
 		carteCoefficient[positionDepart.positionX][positionDepart.getY()] = 0;
-		if (carte.estOccupee(positionArrive))
+		if (carte.estAccessible(positionArrive))
 			throw new CheminImpossibleException();
 
 		// Creation de le carte des coefficients.
@@ -104,7 +115,7 @@ public class DetectionDesChemins {
 				throw new CheminImpossibleException();
 
 			cheminModifier = false;
-			
+
 			Iterator<Position> iteratorDePositionAdjacente = positionAdjacente
 					.iterator();
 
@@ -168,7 +179,9 @@ public class DetectionDesChemins {
 		for (int x = 0; x < Carte.NB_CASES_X; x++)
 			for (int y = 0; y < Carte.NB_CASES_Y; y++) {
 				Position position = new Position(x, y);
-				if (carte.estOccupee(position))
+				if ((this.parametreUniteInaccessible && carte
+						.laCaseContientUneUnite(position))
+						|| !carte.laCaseEstAccessible(position))
 					this.carteCoefficient[x][y] = OCCUPEE;
 			}
 

@@ -1,5 +1,6 @@
 package fr.projet.java.gestionGraphique;
 
+import fr.projet.java.exception.FinDuTourException;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
 import fr.projet.java.gestionUnite.Chemin;
@@ -178,17 +179,17 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 		if (source.getName() == "FinirTour") {
 			this.finDuTour = true;
 		}
-		// Bouton améliorer la ville
+		// Bouton ameliorer la ville
 		else if (source.getName() == "AmeliorerVille") {
 			this.actionVilleChoisie = ActionVille.Ameliorer;
 			this.lActionVilleEstChoisie = true;
 		}
-		// Bouton crée une unité
+		// Bouton cree une unite
 		else if (source.getName() == "CreerUnite") {
 			this.actionVilleChoisie = ActionVille.CreerUnite;
 			this.lActionVilleEstChoisie = true;
 		}
-		// Bouton améliorer une unité
+		// Bouton ameliorer une unite
 		else if (source.getName() == "AmeliorerUnite") {
 			this.actionUniteChoisie = ActionUnite.Ameliorer;
 			this.lActionUniteEstChoisie = true;

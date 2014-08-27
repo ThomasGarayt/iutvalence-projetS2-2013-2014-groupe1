@@ -23,6 +23,7 @@ import fr.projet.java.gestionGraphique.SetDImages;
  * @author Romain
  * 
  */
+@SuppressWarnings("rawtypes")
 public class DialogPreferencePartie extends JDialog {
 	private InfoPreferencePartie info;
 	private JComboBox nationJoueur1;
@@ -60,6 +61,7 @@ public class DialogPreferencePartie extends JDialog {
 		return this.info;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initComponent() {
 		// Joueur 1
 		// Le nom du joueur 1

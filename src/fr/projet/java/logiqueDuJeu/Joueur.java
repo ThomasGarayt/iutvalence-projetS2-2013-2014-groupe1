@@ -1,7 +1,8 @@
 package fr.projet.java.logiqueDuJeu;
 
+import fr.projet.java.exception.FinDuTourException;
 import fr.projet.java.gestionCarte.Position;
-import fr.projet.java.gestionGraphique.FinDuTourException;
+import fr.projet.java.gestionUnite.TypeUnite;
 
 /**
  * @author Romain Regroupe les fonction de saisie des joueurs.
@@ -34,5 +35,12 @@ public interface Joueur {
 	 *             Le joueur termine son tour.
 	 */
 	ActionUnite selectionnerActionUnite() throws FinDuTourException;
+	
+	/**
+	 * Renvoi le type d'unite choisie dans le menu.
+	 * 
+	 * @return Le type d'unite choisi dans le menu.
+	 */
+	public TypeUnite obtenirLeTypeDUniteSelectionne();
 
 }

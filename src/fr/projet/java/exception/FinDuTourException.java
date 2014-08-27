@@ -1,4 +1,4 @@
-package fr.projet.java.gestionGraphique;
+package fr.projet.java.exception;
 
 /**
  * @author Romain

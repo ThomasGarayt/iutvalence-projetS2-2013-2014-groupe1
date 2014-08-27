@@ -35,7 +35,7 @@ public class Chemin {
 	}
 
 	/**
-	 * Pour obtenir une position particuliére du chemin.
+	 * Pour obtenir une position particuliere du chemin.
 	 * 
 	 * @param position
 	 *            Le numero de la position a obtenir.
