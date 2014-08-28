@@ -49,7 +49,7 @@ public class PartieDeCivilisation {
 		this.nationsDisparue = new boolean[nations.length];
 		Arrays.fill(nationsDisparue, false);
 
-		this.carte = creationDeLaCarte(fichierCarte);
+		this.carte = creationDeLaCarte(fichierCarte, nations);
 		((IAPrincipale) this.joueurs[0]).associerLaCarte(this.carte);
 
 		this.tour = 0;
@@ -284,22 +284,23 @@ public class PartieDeCivilisation {
 	 * 
 	 * @return carteDuMonde La carte de jeu
 	 */
-	private Carte creationDeLaCarte(File fichierCarte) {
-		Carte carteDuMonde = new Carte(fichierCarte);
+	private Carte creationDeLaCarte(File fichierCarte, Nation[] nations) {
+		Carte carteDuMonde = new Carte(fichierCarte, nations);
 
 		// Armee de depart du Joueur Bleu
-		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
+		/*carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
 				TypeUnite.Soldats, this.nations[0]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(12, 13), new Unite(
-				TypeUnite.Soldats, this.nations[0]));
+				TypeUnite.Soldats, this.nations[0]));*/
 
 		// Armee de depart du Joueur Rouge
-		carteDuMonde.ajouterUneUniteALaCase(new Position(1, 2), new Unite(
+		/*carteDuMonde.ajouterUneUniteALaCase(new Position(1, 2), new Unite(
 				TypeUnite.Soldats, this.nations[1]));
 		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 1), new Unite(
-				TypeUnite.Soldats, this.nations[1]));
+				TypeUnite.Soldats, this.nations[1]));*/
 
 		// Placement des villes
+		/*
 		carteDuMonde.ajouterUneVille(new Position(13, 13), new Ville());
 		carteDuMonde.ajouterUneVille(new Position(1, 1), new Ville());
 
@@ -308,7 +309,7 @@ public class PartieDeCivilisation {
 
 		carteDuMonde.ajouterUneVille(new Position(12, 1), new Ville());
 		carteDuMonde.ajouterUneVille(new Position(2, 13), new Ville());
-
+		*/
 		return carteDuMonde;
 	}
 }

@@ -10,6 +10,7 @@ import java.util.Vector;
 import fr.projet.java.exception.CheminImpossibleException;
 import fr.projet.java.gestionUnite.Chemin;
 import fr.projet.java.gestionUnite.Nation;
+import fr.projet.java.gestionUnite.TypeUnite;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
 
@@ -60,7 +61,7 @@ public class Carte {
 	 * @param fichierCarte
 	 *            Le fichier de creation de la carte.
 	 */
-	public Carte(File fichierCarte) {
+	public Carte(File fichierCarte, Nation[] joueurs) {
 		unitesDeLaCarte = new Vector<Unite>();
 		villesDeLaCarte = new Vector<Ville>();
 
@@ -91,6 +92,26 @@ public class Carte {
 					else if (line.charAt(caseCouranteY) == 'm')
 						this.cases[caseCouranteX][caseCouranteY] = new Case(
 								Terrain.Montagne);
+					else if (line.charAt(caseCouranteY) == 'V') {
+						this.cases[caseCouranteX][caseCouranteY] = new Case(
+								Terrain.Plaine);
+						this.ajouterUneVille(new Position(caseCouranteX,
+								caseCouranteY), new Ville());
+					} else if (Character.isDigit(line.charAt(caseCouranteY))) {
+						this.cases[caseCouranteX][caseCouranteY] = new Case(
+								Terrain.Plaine);
+						if (Character.getNumericValue(line
+								.charAt(caseCouranteY)) <= joueurs.length) {
+							this.ajouterUneVille(new Position(caseCouranteX,
+									caseCouranteY), new Ville());
+							this.ajouterUneUniteALaCase(
+									new Position(caseCouranteX, caseCouranteY),
+									new Unite(
+											TypeUnite.Soldats,
+											joueurs[Character.getNumericValue(line
+													.charAt(caseCouranteY)) - 1]));
+						}
+					}
 				}
 			}
 
@@ -408,7 +429,6 @@ public class Carte {
 	 * @return Un tableau de position des villes trier de la plus faible
 	 *         distance a la plus eleve.
 	 */
-	// TODO Trier Les villes.
 	public Vector<ComparaisonDistance> distanceVille(Position origine) {
 		Position position;
 		Vector<ComparaisonDistance> distanceVille = new Vector<ComparaisonDistance>();
@@ -444,8 +464,8 @@ public class Carte {
 			for (int positionY = 0; positionY < NB_CASES_X; positionY++) {
 				position = new Position(positionX, positionY);
 				if (this.laCaseContientUneUnite(position))
-					distanceUnite.add(new ComparaisonDistance(position,
-							origine.distance(position)));
+					distanceUnite.add(new ComparaisonDistance(position, origine
+							.distance(position)));
 			}
 		Collections.sort(distanceUnite);
 		return distanceUnite;

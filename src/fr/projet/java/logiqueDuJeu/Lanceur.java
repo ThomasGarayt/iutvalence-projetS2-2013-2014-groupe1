@@ -28,7 +28,8 @@ public class Lanceur {
 		MenuGeneral menu = new MenuGeneral();
 		SwingUtilities.invokeLater(menu);
 		InfoPreferencePartie preferencePartie = menu.obtenirInfoPartie();
-		if (preferencePartie == null) return;
+		if (preferencePartie == null)
+			return;
 		String[] nomsDesJoueurs = preferencePartie.obtenirNomsDesJoueurs();
 		SetDImages[] nationsDesJoueurs = preferencePartie
 				.obtenirNationsAssocierAuJoueur();
@@ -42,10 +43,12 @@ public class Lanceur {
 
 		// Association des nations avec les joueurs.
 		Nation[] nations = new Nation[nomsDesJoueurs.length];
-		for (int joueurCourant = 0; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
-				nations[joueurCourant] = new Nation(
-						nomsDesJoueurs[joueurCourant], nationsDesJoueurs[joueurCourant]);
-		
+		for (int joueurCourant = 1; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
+			nations[joueurCourant] = new Nation(nomsDesJoueurs[joueurCourant - 1],
+					nationsDesJoueurs[joueurCourant - 1]);
+		nations[0] = new Nation(nomsDesJoueurs[nomsDesJoueurs.length - 1],
+				nationsDesJoueurs[nationsDesJoueurs.length - 1]);
+
 		// Creation d'un joueur IA.
 		joueurs[0] = new IAPrincipale(nations[0]);
 
@@ -62,7 +65,7 @@ public class Lanceur {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		// Lancement de la partie.
 		nouvellePartie.jouer();
 	}

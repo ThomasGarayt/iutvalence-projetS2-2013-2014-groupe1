@@ -17,9 +17,9 @@ import fr.projet.java.logiqueDuJeu.*;
  */
 public class IAPrincipale implements Joueur {
 
-	private static final int NOMBRE_UNITE_MAX = 2;
+	private static final int NOMBRE_UNITE_MAX = 5;
 
-	private ChoixIA choix;
+	private ActionIA actionEnCour;
 
 	private Carte carte;
 	private Nation nation;
@@ -130,14 +130,14 @@ public class IAPrincipale implements Joueur {
 						.getCoutCreation()
 						&& !(this.carte.laCaseContientUneUnite(positionVille))
 						&& this.unitesDeLaNation.size() <= NOMBRE_UNITE_MAX) {
-					this.choix = new ChoixIA(ActionIA.construireUnite,
+					this.actionEnCour = new ActionIA(TypeActionIA.construireUnite,
 							positionVille, null);
 					this.villesTeste[i] = true;
 					return;
 				}
 				// Sinon on ne fait rien.
 				else if (!this.carte.laCaseContientUneUnite(positionVille)) {
-					this.choix = new ChoixIA(ActionIA.neRienFaireVille,
+					this.actionEnCour = new ActionIA(TypeActionIA.neRienFaireVille,
 							positionVille, null);
 					this.villesTeste[i] = true;
 					return;
@@ -165,29 +165,7 @@ public class IAPrincipale implements Joueur {
 				Position positionUnite = this.carte.trouverUnite(unite);
 				Position positionDeplacement = positionUnite;
 
-				// On regarde les unites ennemis les plus proche.
-				Vector<ComparaisonDistance> distanceUnite = this.carte
-						.distanceUnite(positionUnite);
-				Iterator<ComparaisonDistance> iterateurUnite = distanceUnite
-						.iterator();
-				while (iterateurUnite.hasNext()) {
-					ComparaisonDistance comparaisonDistance = (ComparaisonDistance) iterateurUnite
-							.next();
-					if (comparaisonDistance.getDistance() > unite
-							.obtenirPorte()
-							|| (this.carte.obtenirLUniteDeLaCase(
-									comparaisonDistance.getPosition())
-									.obtenirJoueur().equals(this.nation)))
-						;
-					else if (unite.obtenirNombreAttaqueParTour() > 0) {
-						//this.unitesTeste[i] = true;
-						this.choix = new ChoixIA(ActionIA.attaquerUnite,
-								positionUnite,
-								comparaisonDistance.getPosition());
-						return;
-					} else
-						;
-				}
+				if (attaquerEstPossible(unite, positionUnite)) return;
 
 				// On regarde les villes les plus proche.
 				Vector<ComparaisonDistance> distanceVille = this.carte
@@ -223,11 +201,11 @@ public class IAPrincipale implements Joueur {
 
 				// On ne fait rien, toutes les villes accessible sont a l'IA.
 				if (positionUnite == positionDeplacement)
-					this.choix = new ChoixIA(ActionIA.neRienFaireUnite,
+					this.actionEnCour = new ActionIA(TypeActionIA.neRienFaireUnite,
 							positionUnite, null);
 				// On se rapproche d'une ville.
 				else
-					this.choix = new ChoixIA(ActionIA.deplacerUnite,
+					this.actionEnCour = new ActionIA(TypeActionIA.deplacerUnite,
 							positionUnite, positionDeplacement);
 
 				// L'unite a ete teste.
@@ -238,6 +216,32 @@ public class IAPrincipale implements Joueur {
 		// Si on c'est occupee de toutes les villes et de toutes les unites, on
 		// declare la fin du tour
 		declarerLaFinDuTour();
+	}
+
+	private boolean attaquerEstPossible(Unite unite, Position positionUnite) {
+		// On regarde les unites ennemis les plus proche.
+		Vector<ComparaisonDistance> distanceUnite = this.carte
+				.distanceUnite(positionUnite);
+		Iterator<ComparaisonDistance> iterateurUnite = distanceUnite
+				.iterator();
+		while (iterateurUnite.hasNext()) {
+			ComparaisonDistance comparaisonDistance = (ComparaisonDistance) iterateurUnite
+					.next();
+			if (comparaisonDistance.getDistance() > unite
+					.obtenirPorte()
+					|| (this.carte.obtenirLUniteDeLaCase(
+							comparaisonDistance.getPosition())
+							.obtenirJoueur().equals(this.nation)))
+				;
+			else if (unite.obtenirNombreAttaqueParTour() > 0) {
+				this.actionEnCour = new ActionIA(TypeActionIA.attaquerUnite,
+						positionUnite,
+						comparaisonDistance.getPosition());
+				return true;
+			} else
+				;
+		}
+		return false;
 	}
 
 	/**
@@ -253,12 +257,12 @@ public class IAPrincipale implements Joueur {
 
 	@Override
 	public ActionUnite selectionnerActionUnite() throws FinDuTourException {
-		return (ActionUnite) this.choix.retourAction();
+		return (ActionUnite) this.actionEnCour.retourAction();
 	}
 
 	@Override
 	public ActionVille selectionnerActionVille() throws FinDuTourException {
-		return (ActionVille) this.choix.retourAction();
+		return (ActionVille) this.actionEnCour.retourAction();
 	}
 
 	@Override
@@ -267,9 +271,9 @@ public class IAPrincipale implements Joueur {
 			this.premiereActionDuTour = false;
 			this.actualiserLesResources();
 		}
-		if (this.choix == null || this.choix.actionTermine())
+		if (this.actionEnCour == null || this.actionEnCour.actionTermine())
 			choixDeLaProchaineAction();
-		return (Position) this.choix.retourAction();
+		return (Position) this.actionEnCour.retourAction();
 	}
 
 	@Override
