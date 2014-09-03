@@ -15,7 +15,6 @@ import javax.swing.JButton;
  */
 public class BoutonCarte extends JButton {
 
-
 	private static final long serialVersionUID = 1L;
 	private Image image;
 	private int x;
@@ -64,19 +63,22 @@ public class BoutonCarte extends JButton {
 	public int obtenirY() {
 		return y;
 	}
-	
+
 	/**
-	 * @param image 
+	 * Obtenir l'image du bouton.
 	 * 
+	 * @param image
+	 *            L'image du bouton
 	 */
-	public void setImage(ImageIcon image){
+	public void setImage(ImageIcon image) {
 		this.image = image.getImage();
 	}
-	
-    @Override
+
+	@Override
 	protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (this.image == null) return;
-        g.drawImage(this.image, 0, 0, getWidth(), getHeight(), this);
-    }
+		super.paintComponent(g);
+		if (this.image == null)
+			return;
+		g.drawImage(this.image, 0, 0, getWidth(), getHeight(), this);
+	}
 }

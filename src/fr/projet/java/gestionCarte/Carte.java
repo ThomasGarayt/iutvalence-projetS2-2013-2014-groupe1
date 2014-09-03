@@ -60,8 +60,9 @@ public class Carte {
 	 * 
 	 * @param fichierCarte
 	 *            Le fichier de creation de la carte.
+	 * @param nations Le tableau des nations afin de placer le depart des joueurs.
 	 */
-	public Carte(File fichierCarte, Nation[] joueurs) {
+	public Carte(File fichierCarte, Nation[] nations) {
 		unitesDeLaCarte = new Vector<Unite>();
 		villesDeLaCarte = new Vector<Ville>();
 
@@ -101,14 +102,14 @@ public class Carte {
 						this.cases[caseCouranteX][caseCouranteY] = new Case(
 								Terrain.Plaine);
 						if (Character.getNumericValue(line
-								.charAt(caseCouranteY)) <= joueurs.length) {
+								.charAt(caseCouranteY)) <= nations.length) {
 							this.ajouterUneVille(new Position(caseCouranteX,
 									caseCouranteY), new Ville());
 							this.ajouterUneUniteALaCase(
 									new Position(caseCouranteX, caseCouranteY),
 									new Unite(
 											TypeUnite.Soldats,
-											joueurs[Character.getNumericValue(line
+											nations[Character.getNumericValue(line
 													.charAt(caseCouranteY)) - 1]));
 						}
 					}

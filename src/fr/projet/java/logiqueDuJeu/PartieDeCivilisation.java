@@ -8,10 +8,8 @@ import fr.projet.java.exception.FinDuTourException;
 import fr.projet.java.gestionCarte.Carte;
 import fr.projet.java.gestionCarte.Position;
 import fr.projet.java.gestionUnite.Nation;
-import fr.projet.java.gestionUnite.TypeUnite;
 import fr.projet.java.gestionUnite.Unite;
 import fr.projet.java.gestionUnite.Ville;
-import fr.projet.java.IntelligenceArtificiel.IAPrincipale;
 
 /**
  * @author Romain Decrie la partie logique du deroulement de la partie.
@@ -50,8 +48,10 @@ public class PartieDeCivilisation {
 		Arrays.fill(nationsDisparue, false);
 
 		this.carte = creationDeLaCarte(fichierCarte, nations);
-		((IAPrincipale) this.joueurs[0]).associerLaCarte(this.carte);
 
+		//TODO Changer le deux.
+		for (int i = 0; i < joueurs.length; i++)
+			this.joueurs[i].donnerLaCarte(carte);
 		this.tour = 0;
 	}
 
@@ -147,7 +147,8 @@ public class PartieDeCivilisation {
 							carte.attaquerDesUnite(positionChoisi,
 									deuxiemePositionChoisie);
 							// Sinon c'est un deplacement.
-						} else {
+						}
+						else {
 							Position var2 = deuxiemePositionChoisie;
 							Position var1;
 							// Tant que la position n'est pas choisie
@@ -160,7 +161,8 @@ public class PartieDeCivilisation {
 											.obtenirUnChemin(positionChoisi,
 													var2), unite
 											.obtenirPointDeMouvements());
-								} catch (CheminImpossibleException e) {
+								}
+								catch (CheminImpossibleException e) {
 								}
 								// Le joueur selectionne une autre position.
 								var1 = joueur.selectionnerPosition();
@@ -174,7 +176,8 @@ public class PartieDeCivilisation {
 									break;
 									// Si c'est la position de l'unite c'est une
 									// annulation.
-								} else if (var1.equals(positionChoisi))
+								}
+								else if (var1.equals(positionChoisi))
 									break;
 								var2 = var1;
 							}
@@ -190,7 +193,8 @@ public class PartieDeCivilisation {
 					}
 					affichage.mettreAJourLeMenu(nation);
 					// Si la case contient une ville.
-				} else if (carte.laCaseContientUneVille(positionChoisi)) {
+				}
+				else if (carte.laCaseContientUneVille(positionChoisi)) {
 					System.out.println("C'est une ville.");
 					ville = carte.obtenirLaVilleDeLaCase(positionChoisi);
 
@@ -207,9 +211,11 @@ public class PartieDeCivilisation {
 					// S'il creer une unite.
 					case CreerUnite:
 						System.out.println("Tu as cree une unite.");
-						carte.ajouterUneUniteALaCase(positionChoisi, new Unite(
-								joueur.obtenirLeTypeDUniteSelectionne(),
-								nation));
+						carte.ajouterUneUniteALaCase(
+								positionChoisi,
+								new Unite(joueur
+										.obtenirLeTypeDUniteSelectionne(),
+										nation));
 						break;
 					// Si il deselectionne la ville.
 					case Deselectionner:
@@ -221,12 +227,14 @@ public class PartieDeCivilisation {
 					}
 					affichage.mettreAJourLeMenu(nation);
 					// Si rien n'a ete selectionner.
-				} else {
+				}
+				else {
 					affichage.mettreAJourLeMenu(nation);
 				}
 				affichage.mettreAJourLesUnites(carte);
 				// En cas de fin du tour.
-			} catch (FinDuTourException e) {
+			}
+			catch (FinDuTourException e) {
 				break;
 			}
 		}
@@ -239,10 +247,10 @@ public class PartieDeCivilisation {
 	}
 
 	private void miseAJourNationDisparue() {
-		for(int nationCourante = 0; nationCourante < joueurs.length; nationCourante++)
+		for (int nationCourante = 0; nationCourante < joueurs.length; nationCourante++)
 			if (!carte.nationExiste(nations[nationCourante]))
 				this.nationsDisparue[nationCourante] = true;
-		
+
 	}
 
 	private void reinitialiserUnite(Nation nation) {
@@ -286,30 +294,6 @@ public class PartieDeCivilisation {
 	 */
 	private Carte creationDeLaCarte(File fichierCarte, Nation[] nations) {
 		Carte carteDuMonde = new Carte(fichierCarte, nations);
-
-		// Armee de depart du Joueur Bleu
-		/*carteDuMonde.ajouterUneUniteALaCase(new Position(2, 3), new Unite(
-				TypeUnite.Soldats, this.nations[0]));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(12, 13), new Unite(
-				TypeUnite.Soldats, this.nations[0]));*/
-
-		// Armee de depart du Joueur Rouge
-		/*carteDuMonde.ajouterUneUniteALaCase(new Position(1, 2), new Unite(
-				TypeUnite.Soldats, this.nations[1]));
-		carteDuMonde.ajouterUneUniteALaCase(new Position(2, 1), new Unite(
-				TypeUnite.Soldats, this.nations[1]));*/
-
-		// Placement des villes
-		/*
-		carteDuMonde.ajouterUneVille(new Position(13, 13), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(1, 1), new Ville());
-
-		carteDuMonde.ajouterUneVille(new Position(6, 5), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(8, 8), new Ville());
-
-		carteDuMonde.ajouterUneVille(new Position(12, 1), new Ville());
-		carteDuMonde.ajouterUneVille(new Position(2, 13), new Ville());
-		*/
 		return carteDuMonde;
 	}
 }

@@ -9,6 +9,7 @@ import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -26,11 +27,10 @@ import fr.projet.java.gestionGraphique.SetDImages;
 @SuppressWarnings("rawtypes")
 public class DialogPreferencePartie extends JDialog {
 	private InfoPreferencePartie info;
-	private JComboBox nationJoueur1;
-	private JComboBox carte;
-	private JTextField nomJoueur1;
-	private JComboBox nationJoueur2;
-	private JTextField nomJoueur2;
+	protected InfosJoueur[] infosJoueurs;
+	protected PanelJoueur[] recupInfoJoueur;
+	protected File fichierCarte;
+	protected JComboBox carte;
 
 	/**
 	 * Creation de la boite de dialogue.
@@ -44,14 +44,20 @@ public class DialogPreferencePartie extends JDialog {
 	 */
 	public DialogPreferencePartie(JFrame parent, String title, boolean modal) {
 		super(parent, title, modal);
-		this.setSize(550, 270);
+		this.setSize(1000, 405);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+		this.infosJoueurs = new InfosJoueur[9];
+		this.recupInfoJoueur = new PanelJoueur[9];
+		for (int j = 0; j < recupInfoJoueur.length; j++)
+			recupInfoJoueur[j] = new PanelJoueur(Integer.toString(j + 1));
+
 		this.initComponent();
 	}
 
-	/** 
+	/**
 	 * Affiche le dialogue de choix des options de la partie.
 	 * 
 	 * @return Les options choisi par le joueur.
@@ -63,53 +69,6 @@ public class DialogPreferencePartie extends JDialog {
 
 	@SuppressWarnings("unchecked")
 	private void initComponent() {
-		// Joueur 1
-		// Le nom du joueur 1
-		JPanel panelNomJoueur1 = new JPanel();
-		panelNomJoueur1.setBackground(Color.white);
-		panelNomJoueur1.setPreferredSize(new Dimension(220, 60));
-		nomJoueur1 = new JTextField();
-		nomJoueur1.setPreferredSize(new Dimension(100, 25));
-		panelNomJoueur1.setBorder(BorderFactory
-				.createTitledBorder("Nom du joueur 1 :"));
-		JLabel nomLabel = new JLabel("Saisir un nom :");
-		panelNomJoueur1.add(nomLabel);
-		panelNomJoueur1.add(nomJoueur1);
-
-		// La nation du joueur 1
-		JPanel panelNationJoueur1 = new JPanel();
-		panelNationJoueur1.setBackground(Color.white);
-		panelNationJoueur1.setPreferredSize(new Dimension(220, 60));
-		panelNationJoueur1.setBorder(BorderFactory
-				.createTitledBorder("Nation du joueur 1 :"));
-		nationJoueur1 = new JComboBox(SetDImages.values());
-		JLabel labelNationJoueur1 = new JLabel("Couleur :");
-		panelNationJoueur1.add(labelNationJoueur1);
-		panelNationJoueur1.add(nationJoueur1);
-
-		// Joueur 2
-		// Le nom du joueur 2
-		JPanel panelNomJoueur2 = new JPanel();
-		panelNomJoueur2.setBackground(Color.white);
-		panelNomJoueur2.setPreferredSize(new Dimension(220, 60));
-		nomJoueur2 = new JTextField();
-		nomJoueur2.setPreferredSize(new Dimension(100, 25));
-		panelNomJoueur2.setBorder(BorderFactory
-				.createTitledBorder("Nom du joueur 2 :"));
-		JLabel nomLabel2 = new JLabel("Saisir un nom :");
-		panelNomJoueur2.add(nomLabel2);
-		panelNomJoueur2.add(nomJoueur2);
-
-		// La nation du joueur 2
-		JPanel panelNationJoueur2 = new JPanel();
-		panelNationJoueur2.setBackground(Color.white);
-		panelNationJoueur2.setPreferredSize(new Dimension(220, 60));
-		panelNationJoueur2.setBorder(BorderFactory
-				.createTitledBorder("Nation du joueur 2 :"));
-		nationJoueur2 = new JComboBox(SetDImages.values());
-		JLabel labelNationJoueur2 = new JLabel("Couleur :");
-		panelNationJoueur2.add(labelNationJoueur2);
-		panelNationJoueur2.add(nationJoueur2);
 
 		// La carte
 		JPanel panelCarte = new JPanel();
@@ -130,13 +89,11 @@ public class DialogPreferencePartie extends JDialog {
 		panelCarte.add(labelCarte);
 		panelCarte.add(carte);
 
-		// Initialisation du contenu.
 		JPanel content = new JPanel();
 		content.setBackground(Color.white);
-		content.add(panelNomJoueur1);
-		content.add(panelNationJoueur1);
-		content.add(panelNomJoueur2);
-		content.add(panelNationJoueur2);
+
+		for (int j = 0; j < recupInfoJoueur.length; j++)
+			content.add(recupInfoJoueur[j]);
 		content.add(panelCarte);
 
 		JPanel control = new JPanel();
@@ -145,11 +102,16 @@ public class DialogPreferencePartie extends JDialog {
 		okBouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				info = new InfoPreferencePartie(nomJoueur1.getText(),
-						nomJoueur2.getText(), (SetDImages) nationJoueur1
-								.getSelectedItem(), (SetDImages) nationJoueur2
-								.getSelectedItem(), (String) carte
-								.getSelectedItem());
+				int i = 0;
+				for (int j = 0; j < infosJoueurs.length; j++) {
+					if (recupInfoJoueur[j].estRempli()) {
+						infosJoueurs[i] = recupInfoJoueur[j]
+								.obtenirLesInfosJoueur();
+						i++;
+					}
+				}
+				fichierCarte = new File("Cartes/" + (String) carte.getSelectedItem());
+				info = new InfoPreferencePartie(infosJoueurs, fichierCarte);
 				setVisible(false);
 			}
 		});

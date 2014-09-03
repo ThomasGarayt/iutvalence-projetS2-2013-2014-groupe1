@@ -213,4 +213,8 @@ public class FenetreCivilisation implements Runnable, ActionListener,
 		initialiserFenetreCivilisation();
 	}
 
+	@Override
+	public void donnerLaCarte(Carte carte) {
+	}
+
 }

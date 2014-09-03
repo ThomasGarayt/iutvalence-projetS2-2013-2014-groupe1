@@ -147,7 +147,7 @@ public class AffichageCarteChemin extends JPanel {
 				case Haut:
 					this.carteDeBouton[positionCourante.getX()][positionCourante
 							.getY()].setImage(new ImageIcon("Images/chemin/"
-							+ couleurChemin + "/virage/virageHautGauche.png"));
+							+ couleurChemin + "/virage/virageBasGauche.png"));
 					break;
 				case Gauche:
 					this.carteDeBouton[positionCourante.getX()][positionCourante

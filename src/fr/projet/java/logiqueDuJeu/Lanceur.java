@@ -6,6 +6,7 @@ import fr.projet.java.IntelligenceArtificiel.IAPrincipale;
 import fr.projet.java.gestionGraphique.FenetreCivilisation;
 import fr.projet.java.gestionGraphique.SetDImages;
 import fr.projet.java.gestionUnite.Nation;
+import fr.projet.java.menu.InfosJoueur;
 import fr.projet.java.menu.MenuGeneral;
 import fr.projet.java.menu.InfoPreferencePartie;
 
@@ -28,30 +29,27 @@ public class Lanceur {
 		MenuGeneral menu = new MenuGeneral();
 		SwingUtilities.invokeLater(menu);
 		InfoPreferencePartie preferencePartie = menu.obtenirInfoPartie();
-		if (preferencePartie == null)
-			return;
-		String[] nomsDesJoueurs = preferencePartie.obtenirNomsDesJoueurs();
-		SetDImages[] nationsDesJoueurs = preferencePartie
-				.obtenirNationsAssocierAuJoueur();
-
-		// Creation de la fenetre de Civilisation et association avec les
-		// joueurs.
+		InfosJoueur[] infoJoueurs = preferencePartie.obtenirInfoJoueur();
+		
 		FenetreCivilisation fenetreCivilisation = new FenetreCivilisation();
-		Joueur[] joueurs = new Joueur[nomsDesJoueurs.length];
-		for (int joueurCourant = 0; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
-			joueurs[joueurCourant] = fenetreCivilisation;
-
-		// Association des nations avec les joueurs.
-		Nation[] nations = new Nation[nomsDesJoueurs.length];
-		for (int joueurCourant = 1; joueurCourant < nomsDesJoueurs.length; joueurCourant++)
-			nations[joueurCourant] = new Nation(nomsDesJoueurs[joueurCourant - 1],
-					nationsDesJoueurs[joueurCourant - 1]);
-		nations[0] = new Nation(nomsDesJoueurs[nomsDesJoueurs.length - 1],
-				nationsDesJoueurs[nationsDesJoueurs.length - 1]);
-
-		// Creation d'un joueur IA.
-		joueurs[0] = new IAPrincipale(nations[0]);
-
+		
+		int x =0;
+		while (infoJoueurs[x] != null) {
+			x++;
+		}
+		Nation[] nations = new Nation[infoJoueurs.length];
+		for (int i = 0; i < x; i++) {
+			nations[i] = new Nation(infoJoueurs[i].getNom(), infoJoueurs[i].getNation());
+		}
+		
+		Joueur[] joueurs = new Joueur[infoJoueurs.length];
+		for (int i = 0; i < x; i++) {
+			if (infoJoueurs[i].getEstUneIA())
+				joueurs[i] = new IAPrincipale(nations[i]);
+			else
+				joueurs[i] = fenetreCivilisation; 
+		}
+		
 		// Recuperation du fichier de la carte.
 		File fichierCarte = preferencePartie.obtenirFichierCarte();
 
@@ -69,5 +67,4 @@ public class Lanceur {
 		// Lancement de la partie.
 		nouvellePartie.jouer();
 	}
-
 }

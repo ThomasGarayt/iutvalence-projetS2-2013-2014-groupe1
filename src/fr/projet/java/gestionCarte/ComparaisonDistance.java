@@ -6,8 +6,8 @@ package fr.projet.java.gestionCarte;
  */
 public class ComparaisonDistance implements Comparable<ComparaisonDistance> {
 
-	Position position;
-	Integer distance;
+	private Position position;
+	private Integer distance;
 
 	/**
 	 * Nouvelle distance

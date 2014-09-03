@@ -94,13 +94,8 @@ public class IAPrincipale implements Joueur {
 		Arrays.fill(villesTeste, false);
 	}
 
-	/**
-	 * Associer la carte a l'IA.
-	 * 
-	 * @param carte
-	 *            La carte du jeu.
-	 */
-	public void associerLaCarte(Carte carte) {
+	@Override
+	public void donnerLaCarte(Carte carte) {
 		this.carte = carte;
 	}
 
@@ -160,7 +155,7 @@ public class IAPrincipale implements Joueur {
 			// Et on s'en occupe.
 			if (i < this.unitesTeste.length) {
 				// On recupere la position de l'unite
-				ComparaisonDistance type;
+				ComparaisonDistance comparaisonDistanceVille;
 				Unite unite = this.unitesDeLaNation.get(i);
 				Position positionUnite = this.carte.trouverUnite(unite);
 				Position positionDeplacement = positionUnite;
@@ -170,19 +165,19 @@ public class IAPrincipale implements Joueur {
 				// On regarde les villes les plus proche.
 				Vector<ComparaisonDistance> distanceVille = this.carte
 						.distanceVille(positionUnite);
-				Iterator<ComparaisonDistance> it = distanceVille.iterator();
-				while (it.hasNext()) {
-					type = (ComparaisonDistance) it.next();
+				Iterator<ComparaisonDistance> iterateurVille = distanceVille.iterator();
+				while (iterateurVille.hasNext()) {
+					comparaisonDistanceVille = iterateurVille.next();
 					// On prend la ville la plus proche, si elle appartient a
 					// l'IA
 					// on regarde la suivante.
-					if (this.carte.obtenirLaVilleDeLaCase(type.getPosition())
+					if (this.carte.obtenirLaVilleDeLaCase(comparaisonDistanceVille.getPosition())
 							.obtenirJoueurProprietaire() != this.nation) {
 						try {
 							// Si elle n'appartient pas a l'IA, on s'en
 							// approche.
 							Chemin chemin = this.carte.obtenirUnChemin(
-									positionUnite, type.getPosition());
+									positionUnite, comparaisonDistanceVille.getPosition());
 
 							int pm;
 							if (chemin.getTaille() > unite
@@ -225,18 +220,18 @@ public class IAPrincipale implements Joueur {
 		Iterator<ComparaisonDistance> iterateurUnite = distanceUnite
 				.iterator();
 		while (iterateurUnite.hasNext()) {
-			ComparaisonDistance comparaisonDistance = (ComparaisonDistance) iterateurUnite
+			ComparaisonDistance comparaisonDistanceUnite = iterateurUnite
 					.next();
-			if (comparaisonDistance.getDistance() > unite
+			if (comparaisonDistanceUnite.getDistance() > unite
 					.obtenirPorte()
 					|| (this.carte.obtenirLUniteDeLaCase(
-							comparaisonDistance.getPosition())
+							comparaisonDistanceUnite.getPosition())
 							.obtenirJoueur().equals(this.nation)))
 				;
 			else if (unite.obtenirNombreAttaqueParTour() > 0) {
 				this.actionEnCour = new ActionIA(TypeActionIA.attaquerUnite,
 						positionUnite,
-						comparaisonDistance.getPosition());
+						comparaisonDistanceUnite.getPosition());
 				return true;
 			} else
 				;

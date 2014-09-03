@@ -3,6 +3,7 @@ package fr.projet.java.menu;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class MenuGeneral implements Runnable, ActionListener {
 	public InfoPreferencePartie obtenirInfoPartie() {
 		while (!preferenceChoisi)
 			;
+		System.out.println("Et choisi !");
 		return infoPreferencePartie;
 	}
 
@@ -43,8 +45,8 @@ public class MenuGeneral implements Runnable, ActionListener {
 
 		fenetre = new JFrame();
 
-		boutonJouer.setPreferredSize(new Dimension(60, 50));
-		boutonQuitter.setPreferredSize(new Dimension(60, 50));
+		//boutonJouer.setPreferredSize(new Dimension(60, 50));
+		//boutonQuitter.setPreferredSize(new Dimension(60, 50));
 
 		Box box = Box.createVerticalBox();
 		box.add(boutonJouer);
